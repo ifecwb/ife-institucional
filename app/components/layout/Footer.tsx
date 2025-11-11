@@ -20,7 +20,7 @@ const navLinks = [
   { label: 'Sobre', href: '/sobre' },
   { label: 'Projetos e Cursos', href: '/projetos-e-cursos' },
   { label: 'Seja Voluntário', href: '/seja-voluntario' },
-  { label: 'Notícias', href: '/noticias' },
+  { label: 'Notícias', href: '/noticias-lista' },
   { label: 'Doar', href: '/doar' },
 ];
 
@@ -119,21 +119,27 @@ export default function Footer() {
             </Typography>
             <Box component="nav" sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               {navLinks.map((link) => (
-                <MuiLink
+                <Link
                   key={link.href}
-                  component={Link}
                   href={link.href}
-                  underline="hover"
-                  sx={{
-                    color: 'grey.300',
-                    fontSize: '0.875rem',
-                    '&:hover': {
-                      color: 'primary.light',
-                    },
+                  style={{
+                    color: 'inherit',
+                    textDecoration: 'none',
                   }}
                 >
-                  {link.label}
-                </MuiLink>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: 'grey.300',
+                      '&:hover': {
+                        color: 'primary.light',
+                        textDecoration: 'underline',
+                      },
+                    }}
+                  >
+                    {link.label}
+                  </Typography>
+                </Link>
               ))}
             </Box>
           </Box>

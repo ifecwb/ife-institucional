@@ -35,7 +35,7 @@ const navItems = [
   { label: 'Sobre', href: '/sobre' },
   { label: 'Projetos e Cursos', href: '/projetos-e-cursos' },
   { label: 'Seja Voluntário', href: '/seja-voluntario' },
-  { label: 'Notícias', href: '/noticias' },
+  { label: 'Notícias', href: '/noticias-lista' },
 ];
 
 interface HeaderProps {
