@@ -69,9 +69,9 @@ export default function AboutSection() {
             sx={{
               position: 'relative',
               height: { xs: 300, md: 400 },
-              borderRadius: 4,
+              borderRadius: 2,
               overflow: 'hidden',
-              boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
             }}
           >
             <Box

@@ -59,16 +59,16 @@ export default function PartnersSection() {
                   justifyContent: 'center',
                   height: 150,
                   bgcolor: 'white',
-                  borderRadius: 3,
+                  borderRadius: 2,
                   p: 3,
-                  transition: 'all 0.3s ease',
+                  transition: 'all 0.2s ease',
                   textDecoration: 'none',
                   border: '1px solid',
                   borderColor: 'divider',
                   '&:hover': {
                     borderColor: 'primary.main',
-                    boxShadow: '0 4px 12px rgba(70, 127, 247, 0.15)',
-                    transform: 'translateY(-4px)',
+                    boxShadow: '0 2px 8px rgba(70, 127, 247, 0.12)',
+                    transform: 'translateY(-2px)',
                   },
                 }}
               >
@@ -82,7 +82,7 @@ export default function PartnersSection() {
                     objectFit: 'contain',
                     filter: 'grayscale(100%)',
                     opacity: 0.7,
-                    transition: 'all 0.3s ease',
+                    transition: 'all 0.2s ease',
                     '&:hover': {
                       filter: 'grayscale(0%)',
                       opacity: 1,

@@ -20,7 +20,7 @@ const navLinks = [
   { label: 'Sobre', href: '/sobre' },
   { label: 'Projetos e Cursos', href: '/projetos-e-cursos' },
   { label: 'Seja Voluntário', href: '/seja-voluntario' },
-  { label: 'Notícias', href: '/noticias-lista' },
+  { label: 'Notícias', href: '/noticias' },
   { label: 'Doar', href: '/doar' },
 ];
 

@@ -21,13 +21,13 @@ export default function WorkshopCard({ workshop, index }: WorkshopCardProps) {
       <Card
         sx={{
           height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-          '&:hover': {
-            transform: 'translateY(-8px)',
-            boxShadow: 6,
-          },
+        display: 'flex',
+        flexDirection: 'column',
+        transition: 'all 0.2s ease',
+        '&:hover': {
+          transform: 'translateY(-2px)',
+          boxShadow: 3,
+        },
         }}
       >
         <CardMedia

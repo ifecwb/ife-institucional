@@ -22,7 +22,7 @@ const navItems = [
   { label: 'Sobre', href: '/sobre' },
   { label: 'Projetos e Cursos', href: '/projetos-e-cursos' },
   { label: 'Seja Voluntário', href: '/seja-voluntario' },
-  { label: 'Notícias', href: '/noticias-lista' },
+  { label: 'Notícias', href: '/noticias' },
 ];
 
 interface MobileMenuProps {
@@ -136,7 +136,10 @@ export default function MobileMenu({ open, onClose }: Readonly<MobileMenuProps>)
               py: 1.5,
               fontWeight: 600,
               fontSize: '1rem',
-              boxShadow: '0 4px 12px rgba(70, 127, 247, 0.3)',
+              boxShadow: 'none',
+              '&:hover': {
+                boxShadow: '0 2px 8px rgba(70, 127, 247, 0.25)',
+              },
             }}
           >
             Doar Agora

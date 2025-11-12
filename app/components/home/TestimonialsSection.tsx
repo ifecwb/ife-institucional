@@ -70,7 +70,7 @@ export default function TestimonialsSection() {
           variant="h2"
           sx={{ textAlign: 'center', mb: 6 }}
         >
-          O Que Dizem Sobre Nós
+          Parcerias
         </PageTitle>
 
         <Box sx={{ px: { xs: 0, md: 2 } }}>

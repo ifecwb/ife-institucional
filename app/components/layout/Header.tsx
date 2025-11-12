@@ -35,7 +35,8 @@ const navItems = [
   { label: 'Sobre', href: '/sobre' },
   { label: 'Projetos e Cursos', href: '/projetos-e-cursos' },
   { label: 'Seja Voluntário', href: '/seja-voluntario' },
-  { label: 'Notícias', href: '/noticias-lista' },
+  { label: 'Notícias', href: '/noticias' },
+  { label: 'Perguntas Frequentes', href: '/faq' },
 ];
 
 interface HeaderProps {
@@ -46,7 +47,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
   const pathname = usePathname();
 
   return (
-    <HideOnScroll>
+    // <HideOnScroll>
       <AppBar
         position="sticky"
         elevation={0}
@@ -160,12 +161,12 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                   px: 3,
                   py: 1,
                   fontWeight: 600,
-                  boxShadow: '0 4px 12px rgba(70, 127, 247, 0.3)',
+                  boxShadow: 'none',
                   '&:hover': {
-                    boxShadow: '0 6px 16px rgba(70, 127, 247, 0.4)',
-                    transform: 'translateY(-2px)',
+                    boxShadow: '0 2px 8px rgba(70, 127, 247, 0.25)',
+                    transform: 'translateY(-1px)',
                   },
-                  transition: 'all 0.3s ease',
+                  transition: 'all 0.2s ease',
                 }}
               >
                 Doar
@@ -187,6 +188,6 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
           </Toolbar>
         </Container>
       </AppBar>
-    </HideOnScroll>
+    // </HideOnScroll>
   );
 }

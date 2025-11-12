@@ -5,6 +5,7 @@ import { Box } from '@mui/material';
 import Header from './Header';
 import MobileMenu from './MobileMenu';
 import Footer from './Footer';
+import FloatingWhatsApp from '../common/FloatingWhatsApp';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -44,6 +45,7 @@ export default function MainLayout({ children }: Readonly<MainLayoutProps>) {
       </Box>
       
       <Footer />
+      <FloatingWhatsApp />
     </Box>
   );
 }

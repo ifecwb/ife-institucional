@@ -316,14 +316,14 @@ export default function DoarPage() {
                     <Typography variant="body1" sx={{ fontWeight: 600 }}>
                       {bankingInfo.cnpj}
                     </Typography>
-                    <Button
+                  </Box>
+                                      <Button
                       size="small"
                       startIcon={<ContentCopy />}
                       onClick={() => handleCopy(bankingInfo.cnpj, 'cnpj')}
                     >
                       {copiedField === 'cnpj' ? 'Copiado!' : 'Copiar'}
                     </Button>
-                  </Box>
                 </Box>
 
                 <Divider />

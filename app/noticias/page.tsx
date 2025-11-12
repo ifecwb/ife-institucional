@@ -1,40 +1,36 @@
-'use client';
-
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import MainLayout from '../components/layout/MainLayout';
-import { Box, Container, Typography, CircularProgress } from '@mui/material';
-
-export default function NoticiasPage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    // Redireciona para o blog Nextra
-    router.push('/noticias');
-  }, [router]);
-
+import Link from 'next/link'
+import { PostCard } from 'nextra-theme-blog'
+import { getPosts, getTags } from './../../posts/get-posts'
+ 
+export const metadata = {
+  title: 'Posts'
+}
+ 
+export default async function PostsPage() {
+  const tags = await getTags()
+  const posts = await getPosts()
+  const allTags = Object.create(null)
+ 
+  for (const tag of tags) {
+    allTags[tag] ??= 0
+    allTags[tag] += 1
+  }
   return (
-    <MainLayout>
-      <Container maxWidth="xl">
-        <Box
-          sx={{
-            py: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '60vh',
-          }}
-        >
-          <CircularProgress size={60} sx={{ mb: 3 }} />
-          <Typography variant="h5" gutterBottom>
-            Carregando notícias...
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            Você está sendo redirecionado para o blog do IFE
-          </Typography>
-        </Box>
-      </Container>
-    </MainLayout>
-  );
+    <div data-pagefind-ignore="all">
+      <h1>{metadata.title}</h1>
+      <div
+        className="not-prose"
+        style={{ display: 'flex', flexWrap: 'wrap', gap: '.5rem' }}
+      >
+        {Object.entries(allTags).map(([tag, count]) => (
+          <Link key={tag} href={`/tags/${tag}`} className="nextra-tag">
+            {tag} ({count})
+          </Link>
+        ))}
+      </div>
+      {posts.map(post => (
+        <PostCard key={post.route} post={post} />
+      ))}
+    </div>
+  )
 }

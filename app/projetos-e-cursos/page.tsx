@@ -65,14 +65,7 @@ export default function ProjetosPage() {
                 viewport={{ once: true }}
                 transition={{ delay: services.indexOf(service) * 0.2 }}
               >
-                <Card
-                  sx={{
-                    height: '100%',
-                    p: 2,
-                    transition: 'transform 0.3s ease',
-                    '&:hover': { transform: 'translateY(-4px)' },
-                  }}
-                >
+                <Card sx={{ height: '100%', p: 2 }}>
                   <CardContent>
                     <Box
                       sx={{

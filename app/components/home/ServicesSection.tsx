@@ -45,7 +45,7 @@ export default function ServicesSection() {
           variant="h2"
           sx={{ textAlign: 'center', mb: 6 }}
         >
-          Nossos Serviços
+          Nossos Projetos e Cursos
         </PageTitle>
 
         <Box
@@ -73,10 +73,11 @@ export default function ServicesSection() {
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  borderRadius: 3,
+                  transition: 'all 0.2s ease',
                   '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: `0 12px 28px ${service.color}40`,
+                    transform: 'translateY(-2px)',
+                    boxShadow: `0 4px 12px ${service.color}30`,
                   },
                 }}
               >
