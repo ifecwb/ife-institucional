@@ -1,13 +1,23 @@
 import Link from 'next/link'
 import { Container, Grid, Card, CardContent, CardMedia, Typography, Chip, Box } from '@mui/material'
-import MainLayout from '../components/layout/MainLayout'
-import PageHero from '../components/common/PageHero'
-import Section from '../components/common/Section'
-import { getPosts, getTags } from './get-posts'
- 
-export const metadata = {
-  title: 'Notícias - Instituto Futuro de Excelência',
-  description: 'Acompanhe as últimas notícias, projetos e histórias de transformação do IFE'
+import MainLayout from '../../components/layout/MainLayout'
+import PageHero from '../../components/common/PageHero'
+import Section from '../../components/common/Section'
+import { getPosts, getTags } from '../../noticias/get-posts'
+import { notFound } from 'next/navigation'
+
+export async function generateStaticParams() {
+    debugger
+  const allTags = await getTags()
+  return [...new Set(allTags)].map(tag => ({ tag }))
+}
+
+export async function generateMetadata(props: any) {
+    const params = await props.params
+    return {
+        title: `Posts com tag "${decodeURIComponent(params.tag)}" - IFE`,
+        description: `Veja todos os posts relacionados a ${decodeURIComponent(params.tag)}`
+    }
 }
 
 function formatDate(dateString: string) {
@@ -18,41 +28,47 @@ function formatDate(dateString: string) {
     day: 'numeric' 
   })
 }
- 
-export default async function NoticiasPage() {
-  const tags = await getTags()
+
+export default async function TagPage(props: any) {
+  const params = await props.params
   const posts = await getPosts()
- 
+  const decodedTag = decodeURIComponent(params.tag)
+  const filteredPosts = posts.filter((post: any) => 
+    post.frontMatter?.tag === decodedTag
+  )
+
+  if (filteredPosts.length === 0) {
+    notFound()
+  }
+
   return (
     <MainLayout>
       <PageHero
-        title="Notícias"
-        subtitle="Acompanhe nossas atividades, projetos e histórias de transformação"
-        imageSrc="https://picsum.photos/1920/400?random=15"
+        title={`Tag: ${decodedTag}`}
+        subtitle={`${filteredPosts.length} ${filteredPosts.length === 1 ? 'post encontrado' : 'posts encontrados'}`}
+        imageSrc="https://picsum.photos/1920/400?random=20"
       />
       
       <Section>
         <Container maxWidth="lg">
-          {tags.length > 0 && (
-            <Box sx={{ mb: 4, display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-              <Typography variant="body2" sx={{ mr: 1, alignSelf: 'center', fontWeight: 600 }}>
-                Tags:
+          <Box sx={{ mb: 4 }}>
+            <Link href="/noticias" style={{ textDecoration: 'none' }}>
+              <Typography 
+                variant="body1" 
+                color="primary"
+                sx={{ 
+                  display: 'inline-flex', 
+                  alignItems: 'center',
+                  '&:hover': { textDecoration: 'underline' }
+                }}
+              >
+                ← Voltar para todas as notícias
               </Typography>
-              {tags.map((tag, i) => (
-                <Link key={ i + tag} href={`/tags/${tag}`} style={{ textDecoration: 'none' }}>
-                  <Chip 
-                    label={tag} 
-                    clickable
-                    size="small"
-                    sx={{ cursor: 'pointer' }}
-                  />
-                </Link>
-              ))}
-            </Box>
-          )}
-          
+            </Link>
+          </Box>
+
           <Grid container spacing={4}>
-            {posts.map((post: any) => (
+            {filteredPosts.map((post: any) => (
               <Grid key={post.route} size={{ xs: 12, md: 6 }}>
                 <Link href={post.route} style={{ textDecoration: 'none' }}>
                   <Card 

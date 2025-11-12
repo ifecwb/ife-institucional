@@ -11,8 +11,7 @@ const nextConfig: NextConfig = {
 };
 
 const withNextra = nextra({
-  defaultShowCopyCode: true,
-  contentDirBasePath: '/posts'
+  defaultShowCopyCode: true
 })
  
 export default withNextra(nextConfig)

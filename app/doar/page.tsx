@@ -317,7 +317,7 @@ export default function DoarPage() {
                       {bankingInfo.cnpj}
                     </Typography>
                   </Box>
-                                      <Button
+                <Button
                       size="small"
                       startIcon={<ContentCopy />}
                       onClick={() => handleCopy(bankingInfo.cnpj, 'cnpj')}
