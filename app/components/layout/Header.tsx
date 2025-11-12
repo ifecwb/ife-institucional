@@ -83,11 +83,17 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                 sx={{
                   height: { xs: 40, md: 48 },
                   width: 'auto',
-                  display: { xs: 'none', sm: 'block' },
                 }}
                 onError={(e) => {
-                  // Fallback se a imagem não existir
+                  // Fallback se a imagem não existir - mostra texto IFE
                   (e.target as HTMLImageElement).style.display = 'none';
+                  const parent = (e.target as HTMLImageElement).parentElement;
+                  if (parent) {
+                    const textElement = parent.querySelector('div');
+                    if (textElement) {
+                      (textElement as HTMLElement).style.display = 'block';
+                    }
+                  }
                 }}
               />
               <Typography
@@ -98,6 +104,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                   color: 'primary.main',
                   fontSize: { xs: '1rem', md: '1.25rem' },
                   whiteSpace: 'nowrap',
+                  display: { xs: 'none', md: 'block' },
                 }}
               >
                 IFE

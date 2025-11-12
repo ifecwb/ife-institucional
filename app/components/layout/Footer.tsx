@@ -14,6 +14,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
+import siteConfig, { gerarLinkEmail, gerarLinkWhatsApp } from '@/config/site.config';
 
 const navLinks = [
   { label: 'Início', href: '/' },
@@ -48,6 +49,7 @@ export default function Footer() {
               md: 'repeat(3, 1fr)',
             },
             gap: 4,
+            textAlign: { xs: 'center', md: 'left' },
           }}
         >
           {/* Coluna 1: Sobre o IFE */}
@@ -61,17 +63,17 @@ export default function Footer() {
                 mb: 2,
               }}
             >
-              Instituto Futuro de Excelência
+              {siteConfig.nome}
             </Typography>
             <Typography variant="body2" sx={{ mb: 2, color: 'grey.300' }}>
               Transformando gerações através do conhecimento — Esportes, Cultura e Educação.
             </Typography>
             
             {/* Redes Sociais */}
-            <Box sx={{ display: 'flex', gap: 1, mt: 2 }}>
+            <Box sx={{ display: 'flex', gap: 1, mt: 2, justifyContent: { xs: 'center', md: 'flex-start' } }}>
               <IconButton
                 component="a"
-                href="https://www.instagram.com/ife.cwb/"
+                href={siteConfig.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -87,7 +89,7 @@ export default function Footer() {
               </IconButton>
               <IconButton
                 component="a"
-                href="https://wa.me/5541999999999"
+                href={gerarLinkWhatsApp('Olá!')}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
@@ -117,7 +119,7 @@ export default function Footer() {
             >
               Links Rápidos
             </Typography>
-            <Box component="nav" sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <Box component="nav" sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: { xs: 'center', md: 'flex-start' } }}>
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -157,19 +159,19 @@ export default function Footer() {
             >
               Contato
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: { xs: 'center', md: 'flex-start' } }}>
               <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'flex-start' }}>
                 <LocationOnIcon />
-                <Typography variant="body2" sx={{ color: 'grey.300' }}>
-                  Rua David Tows 201<br />
-                  Xaxim, Curitiba - PR
-                </Typography>
+                <MuiLink variant="body2" sx={{ color: 'grey.300' }} href={siteConfig.endereco.googleMapsUrl}>
+                  {siteConfig.endereco.rua} - {siteConfig.endereco.numero}<br />
+                  {siteConfig.endereco.bairro}, {siteConfig.endereco.cidade} - {siteConfig.endereco.estado}
+                </MuiLink>
               </Box>
               
               <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
                 <EmailIcon />
                 <MuiLink
-                  href="mailto:contato@ife.org.br"
+                  href={gerarLinkEmail(siteConfig.contato.email)}
                   sx={{
                     color: 'grey.300',
                     fontSize: '0.875rem',
@@ -180,14 +182,14 @@ export default function Footer() {
                     },
                   }}
                 >
-                  contato@ife.org.br
+                  {siteConfig.contato.email}
                 </MuiLink>
               </Box>
               
               <Box sx={{ display: 'flex', gap: 1.5, alignItems: 'center' }}>
                 <WhatsAppIcon />
                 <MuiLink
-                  href="https://wa.me/5541999999999"
+                  href={gerarLinkWhatsApp("Olá!")}
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{
@@ -200,7 +202,7 @@ export default function Footer() {
                     },
                   }}
                 >
-                  (41) 99999-9999
+                  {siteConfig.contato.telefoneWhatsApp}
                 </MuiLink>
               </Box>
             </Box>
@@ -220,7 +222,7 @@ export default function Footer() {
           }}
         >
           <Typography variant="body2" sx={{ color: 'grey.400', textAlign: 'center' }}>
-            © {currentYear} Instituto Futuro de Excelência. Todos os direitos reservados.
+            © {currentYear} {siteConfig.nome}. Todos os direitos reservados.
           </Typography>
           <Typography variant="body2" sx={{ color: 'grey.500', textAlign: 'center' }}>
             Desenvolvido com 💙 para transformar vidas

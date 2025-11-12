@@ -53,7 +53,7 @@ export default function AchievementBadges() {
     <Box
       sx={{
         position: 'relative',
-        mt: { xs: -6, md: -8 },
+        mt: { xs: -2, md: -4 },
         zIndex: 10,
       }}
     >

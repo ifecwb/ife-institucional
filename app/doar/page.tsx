@@ -252,26 +252,26 @@ export default function DoarPage() {
               <Typography variant="body2" color="text.secondary" gutterBottom>
                 Chave PIX ({siteConfig.dadosBancarios.pix.tipo})
               </Typography>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 1,
+              <Typography 
+                variant="h6" 
+                sx={{ 
+                  fontFamily: 'monospace',
                   mb: 2,
+                  wordBreak: 'break-all',
+                  px: 2,
                 }}
               >
-                <Typography variant="h6" sx={{ fontFamily: 'monospace' }}>
-                  {pixKey}
-                </Typography>
-                <Button
-                  size="small"
-                  startIcon={<ContentCopy />}
-                  onClick={() => handleCopy(pixKey, 'pix')}
-                >
-                  {copiedField === 'pix' ? 'Copiado!' : 'Copiar'}
-                </Button>
-              </Box>
+                {pixKey}
+              </Typography>
+              <Button
+                variant="contained"
+                startIcon={<ContentCopy />}
+                onClick={() => handleCopy(pixKey, 'pix')}
+                fullWidth
+                sx={{ mb: 2 }}
+              >
+                {copiedField === 'pix' ? 'Chave PIX Copiada!' : 'Copiar Chave PIX'}
+              </Button>
 
               <Typography variant="body2" color="text.secondary">
                 {siteConfig.dadosBancarios.pix.beneficiario}
@@ -319,21 +319,27 @@ export default function DoarPage() {
                 <Divider />
 
                 <Box>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" color="text.secondary" gutterBottom>
                     CNPJ
                   </Typography>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                      {bankData.cnpj}
-                    </Typography>
-                    <Button
-                      size="small"
-                      startIcon={<ContentCopy />}
-                      onClick={() => handleCopy(bankData.cnpj, 'cnpj')}
-                    >
-                      {copiedField === 'cnpj' ? 'Copiado!' : 'Copiar'}
-                    </Button>
-                  </Box>
+                  <Typography 
+                    variant="body1" 
+                    sx={{ 
+                      fontWeight: 600,
+                      fontFamily: 'monospace',
+                      mb: 2,
+                    }}
+                  >
+                    {bankData.cnpj}
+                  </Typography>
+                  <Button
+                    variant="contained"
+                    startIcon={<ContentCopy />}
+                    onClick={() => handleCopy(bankData.cnpj, 'cnpj')}
+                    fullWidth
+                  >
+                    {copiedField === 'cnpj' ? 'CNPJ Copiado!' : 'Copiar CNPJ'}
+                  </Button>
                 </Box>
 
                 <Divider />

@@ -52,12 +52,14 @@ export default function TestimonialsSection() {
     autoplay: true,
     autoplaySpeed: 6000,
     pauseOnHover: true,
+    arrows: false, // Remove setas no mobile
     responsive: [
       {
         breakpoint: 900,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          arrows: false,
         },
       },
     ],
@@ -87,7 +89,7 @@ export default function TestimonialsSection() {
                     overflow: 'visible',
                   }}
                 >
-                  <Box
+                  {/* <Box
                     sx={{
                       position: 'absolute',
                       top: -20,
@@ -103,14 +105,14 @@ export default function TestimonialsSection() {
                     }}
                   >
                     <FormatQuoteIcon sx={{ color: 'white', fontSize: 28 }} />
-                  </Box>
+                  </Box> */}
 
                   <CardContent
                     sx={{
                       flexGrow: 1,
                       display: 'flex',
                       flexDirection: 'column',
-                      pt: 5,
+                      pt: 3,
                       pb: 3,
                     }}
                   >

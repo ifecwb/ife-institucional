@@ -13,29 +13,29 @@ export const siteConfig = {
   
   // ==================== CONTATO ====================
   contato: {
-    telefone: '(41) 99999-9999',
-    telefoneWhatsApp: '5541999999999', // Formato: código país + DDD + número (sem espaços, hífens ou parênteses)
-    email: 'contato@ifecuritiba.org.br',
-    emailVoluntarios: 'voluntarios@ifecuritiba.org.br',
-    emailDoacoes: 'doacoes@ifecuritiba.org.br',
+    telefone: '(41) 99683-2685',
+    telefoneWhatsApp: '554196832685', // Formato: código país + DDD + número (sem espaços, hífens ou parênteses)
+    email: 'contato@ifecwb.org.br',
+    emailVoluntarios: 'voluntarios@ifecwb.org.br',
+    emailDoacoes: 'doacoes@ifecwb.org.br',
   },
 
   // ==================== ENDEREÇO ====================
   endereco: {
-    rua: 'Rua Exemplo',
-    numero: '1234',
+    rua: 'Rua David Tows',
+    numero: '201',
     complemento: '',
-    bairro: 'Centro',
+    bairro: 'Xaxim',
     cidade: 'Curitiba',
     estado: 'PR',
-    cep: '80000-000',
-    googleMapsUrl: 'https://maps.google.com/?q=IFE+Curitiba',
+    cep: '81830-270',
+    googleMapsUrl: 'https://share.google/f8Uy5bIOvIrtPoF4z',
   },
 
   // ==================== REDES SOCIAIS ====================
   social: {
     facebook: 'https://facebook.com/ifecuritiba',
-    instagram: 'https://instagram.com/ifecuritiba',
+    instagram: 'https://www.instagram.com/ife.cwb/',
     youtube: 'https://youtube.com/@ifecuritiba',
     linkedin: 'https://linkedin.com/company/ifecuritiba',
     twitter: 'https://twitter.com/ifecuritiba',
@@ -166,6 +166,13 @@ export function gerarLinkWhatsApp(mensagem: string): string {
  */
 export function formatarTelefone(telefone: string): string {
   return telefone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
+}
+
+/**
+ * Formata email para link
+ */
+export function gerarLinkEmail(email: string): string {
+  return `mailto:${email}`
 }
 
 /**

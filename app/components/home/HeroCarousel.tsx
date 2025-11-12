@@ -248,12 +248,13 @@ export default function HeroCarousel() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation Arrows */}
+      {/* Navigation Arrows - Hidden on mobile */}
       <IconButton
         onClick={handlePrev}
         sx={{
+          display: { xs: 'none', md: 'flex' },
           position: 'absolute',
-          left: { xs: 8, md: 24 },
+          left: 24,
           top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 3,
@@ -271,8 +272,9 @@ export default function HeroCarousel() {
       <IconButton
         onClick={handleNext}
         sx={{
+          display: { xs: 'none', md: 'flex' },
           position: 'absolute',
-          right: { xs: 8, md: 24 },
+          right: 24,
           top: '50%',
           transform: 'translateY(-50%)',
           zIndex: 3,
