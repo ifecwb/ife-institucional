@@ -2,6 +2,7 @@
 
 import MainLayout from '../components/layout/MainLayout';
 import PageHero from '../components/common/PageHero';
+import Link from 'next/link';
 import {
   Box,
   Container,
@@ -368,6 +369,21 @@ export default function SejaVoluntarioPage() {
           </PageTitle>
 
           <FAQAccordion items={volunteerFAQ} />
+
+          <Box sx={{ mt: 4, textAlign: 'center' }}>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
+              Tem mais dúvidas?
+            </Typography>
+            <Button
+              component={Link}
+              href="/faq"
+              variant="outlined"
+              color="primary"
+              size="large"
+            >
+              Ver todas as perguntas frequentes
+            </Button>
+          </Box>
         </Container>
       </Section>
     </MainLayout>

@@ -2,6 +2,7 @@
 
 import MainLayout from '../components/layout/MainLayout';
 import PageHero from '../components/common/PageHero';
+import Link from 'next/link';
 import {
   Box,
   Container,
@@ -24,9 +25,10 @@ import Section from '../components/common/Section';
 import PageTitle from '../components/common/PageTitle';
 import FAQAccordion from '../components/common/FAQAccordion';
 import { motion } from 'framer-motion';
-import { donationBenefits, donationSteps, donationFAQ, bankingInfo } from '../data/donation';
+import { donationBenefits, donationSteps, donationFAQ } from '../data/donation';
 import { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
+import { siteConfig, gerarLinkWhatsApp } from '@/config/site.config';
 
 const iconMap: Record<string, any> = {
   favorite: Favorite,
@@ -44,8 +46,16 @@ export default function DoarPage() {
     setTimeout(() => setCopiedField(null), 2000);
   };
 
-  // Dados para o QR Code PIX (exemplo - ajustar conforme necessário)
-  const pixQRCodeData = bankingInfo.pixKey;
+  // Usa dados bancários da configuração centralizada
+  const pixKey = siteConfig.dadosBancarios.pix.chave;
+  const bankData = siteConfig.dadosBancarios.contaCorrente;
+  
+  // Mensagem para WhatsApp
+  const mensagemComprovante = siteConfig.whatsappTemplates.doacao({
+    nome: 'Doador',
+    tipo: 'Comprovante de doação'
+  });
+  const linkWhatsApp = gerarLinkWhatsApp(mensagemComprovante);
 
   return (
     <MainLayout>
@@ -236,11 +246,11 @@ export default function DoarPage() {
               </Typography>
 
               <Box sx={{ mb: 3 }}>
-                <QRCodeSVG value={pixQRCodeData} size={200} />
+                <QRCodeSVG value={pixKey} size={200} />
               </Box>
 
               <Typography variant="body2" color="text.secondary" gutterBottom>
-                Chave PIX (CNPJ)
+                Chave PIX ({siteConfig.dadosBancarios.pix.tipo})
               </Typography>
               <Box
                 sx={{
@@ -252,19 +262,19 @@ export default function DoarPage() {
                 }}
               >
                 <Typography variant="h6" sx={{ fontFamily: 'monospace' }}>
-                  {bankingInfo.pixKey}
+                  {pixKey}
                 </Typography>
                 <Button
                   size="small"
                   startIcon={<ContentCopy />}
-                  onClick={() => handleCopy(bankingInfo.pixKey, 'pix')}
+                  onClick={() => handleCopy(pixKey, 'pix')}
                 >
                   {copiedField === 'pix' ? 'Copiado!' : 'Copiar'}
                 </Button>
               </Box>
 
               <Typography variant="body2" color="text.secondary">
-                {bankingInfo.favored}
+                {siteConfig.dadosBancarios.pix.beneficiario}
               </Typography>
             </Paper>
 
@@ -280,7 +290,7 @@ export default function DoarPage() {
                     Banco
                   </Typography>
                   <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                    {bankingInfo.bankName}
+                    {bankData.banco} - {bankData.codigoBanco}
                   </Typography>
                 </Box>
 
@@ -291,7 +301,7 @@ export default function DoarPage() {
                     Agência
                   </Typography>
                   <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                    {bankingInfo.agency}
+                    {bankData.agencia}
                   </Typography>
                 </Box>
 
@@ -299,10 +309,10 @@ export default function DoarPage() {
 
                 <Box>
                   <Typography variant="body2" color="text.secondary">
-                    Conta Corrente
+                    {bankData.tipoConta}
                   </Typography>
                   <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                    {bankingInfo.account}
+                    {bankData.conta}
                   </Typography>
                 </Box>
 
@@ -314,16 +324,16 @@ export default function DoarPage() {
                   </Typography>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                      {bankingInfo.cnpj}
+                      {bankData.cnpj}
                     </Typography>
-                  </Box>
-                <Button
+                    <Button
                       size="small"
                       startIcon={<ContentCopy />}
-                      onClick={() => handleCopy(bankingInfo.cnpj, 'cnpj')}
+                      onClick={() => handleCopy(bankData.cnpj, 'cnpj')}
                     >
                       {copiedField === 'cnpj' ? 'Copiado!' : 'Copiar'}
                     </Button>
+                  </Box>
                 </Box>
 
                 <Divider />
@@ -333,7 +343,7 @@ export default function DoarPage() {
                     Favorecido
                   </Typography>
                   <Typography variant="body1" sx={{ fontWeight: 600 }}>
-                    {bankingInfo.favored}
+                    {bankData.titular}
                   </Typography>
                 </Box>
               </Box>
@@ -347,7 +357,7 @@ export default function DoarPage() {
             <Button
               variant="contained"
               size="large"
-              href="https://wa.me/5541999999999?text=Olá! Acabei de fazer uma doação para o IFE."
+              href={linkWhatsApp}
               target="_blank"
               sx={{ mt: 2 }}
             >
@@ -365,6 +375,21 @@ export default function DoarPage() {
           </PageTitle>
 
           <FAQAccordion items={donationFAQ} />
+
+          <Box sx={{ mt: 4, textAlign: 'center' }}>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
+              Tem mais dúvidas?
+            </Typography>
+            <Button
+              component={Link}
+              href="/faq"
+              variant="outlined"
+              color="primary"
+              size="large"
+            >
+              Ver todas as perguntas frequentes
+            </Button>
+          </Box>
         </Container>
       </Section>
 

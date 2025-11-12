@@ -2,19 +2,17 @@
 
 import { Fab, Tooltip, Zoom } from '@mui/material';
 import { WhatsApp } from '@mui/icons-material';
+import { siteConfig, gerarLinkWhatsApp } from '@/config/site.config';
 
 interface FloatingWhatsAppProps {
-  readonly phoneNumber?: string;
   readonly message?: string;
 }
 
 export default function FloatingWhatsApp({
-  phoneNumber = '5541999999999',
   message = 'Olá! Gostaria de saber mais sobre o Instituto Futuro de Excelência.',
 }: Readonly<FloatingWhatsAppProps>) {
   const handleClick = () => {
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    const whatsappUrl = gerarLinkWhatsApp(message);
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
