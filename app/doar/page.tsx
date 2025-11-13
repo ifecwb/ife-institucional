@@ -245,7 +245,7 @@ export default function DoarPage() {
                 Doar via PIX
               </Typography>
 
-              <Box sx={{ mb: 3 }}>
+              <Box sx={{ mb: 3, display: 'flex', justifyContent: 'center' }}>
                 <QRCodeSVG value={pixKey} size={200} />
               </Box>
 

@@ -45,17 +45,17 @@ export const siteConfig = {
   dadosBancarios: {
     pix: {
       tipo: 'CNPJ',
-      chave: '00.000.000/0001-00',
+      chave: '00020126360014br.gov.bcb.pix0114376958270001775204000053039865802BR5925INSTITUTO FUTURO DE EXCEL6008CURITIBA622605222FckK8BY3bcZCYlxlRvdwi6304CC89',
       beneficiario: 'Instituto Futuro de Excelência',
     },
     contaCorrente: {
-      banco: 'Banco do Brasil',
-      codigoBanco: '001',
-      agencia: '1234-5',
-      conta: '12345-6',
+      banco: '403 - Cora SCFI',
+      codigoBanco: '403',
+      agencia: '0001',
+      conta: '5881639-2',
       tipoConta: 'Conta Corrente',
       titular: 'Instituto Futuro de Excelência',
-      cnpj: '00.000.000/0001-00',
+      cnpj: '37.695.827/0001-77',
     },
     mercadoPago: {
       ativo: true,
