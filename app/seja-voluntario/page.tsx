@@ -74,7 +74,7 @@ export default function SejaVoluntarioPage() {
       <PageHero
         title="Seja Voluntário"
         subtitle="Transforme vidas e faça a diferença na comunidade"
-        imageSrc="https://picsum.photos/1920/600?random=22"
+        imageSrc="/images/aula2.jpeg"
       />
 
       {/* Mini-herói / Introdução */}

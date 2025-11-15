@@ -5,12 +5,8 @@ import {
   Box,
   Container,
   Typography,
-  ImageList,
-  ImageListItem,
   Dialog,
   IconButton,
-  useMediaQuery,
-  useTheme,
 } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Close, NavigateBefore, NavigateNext } from '@mui/icons-material';
@@ -25,59 +21,57 @@ interface Photo {
 const photos: Photo[] = [
   {
     id: 1,
-    src: 'https://picsum.photos/800/600?random=1',
-    alt: 'Aula de judô com crianças',
-    title: 'Aula de Judô',
+    src: '/images/volei1.jpeg',
+    alt: 'Volêi',
+    title: 'Volêi',
   },
   {
     id: 2,
-    src: 'https://picsum.photos/800/600?random=2',
-    alt: 'Apresentação de ballet',
-    title: 'Ballet Clássico',
+    src: '/images/premio.jpeg',
+    alt: 'Medalhas',
+    title: 'Medalhas',
   },
   {
     id: 3,
-    src: 'https://picsum.photos/800/600?random=3',
-    alt: 'Oficina de música',
-    title: 'Oficina de Música',
+    src: '/images/doacao.jpeg',
+    alt: 'Doações de Alimentos',
+    title: 'Doações de Alimentos',
   },
   {
     id: 4,
-    src: 'https://picsum.photos/800/600?random=4',
-    alt: 'Teatro infantil',
-    title: 'Teatro Infantil',
+    src: '/images/futebol.jpeg',
+    alt: 'Futebol',
+    title: 'Futebol',
   },
-  {
-    id: 5,
-    src: 'https://picsum.photos/800/600?random=5',
-    alt: 'Atividade de leitura',
-    title: 'Biblioteca Comunitária',
-  },
-  {
-    id: 6,
-    src: 'https://picsum.photos/800/600?random=6',
-    alt: 'Torneio esportivo',
-    title: 'Torneio Esportivo',
-  },
-  {
-    id: 7,
-    src: 'https://picsum.photos/800/600?random=7',
-    alt: 'Aula de artes',
-    title: 'Artes Visuais',
-  },
-  {
-    id: 8,
-    src: 'https://picsum.photos/800/600?random=8',
-    alt: 'Evento comunitário',
-    title: 'Evento Comunitário',
-  },
+//   {
+//     id: 5,
+//     src: 'https://picsum.photos/800/600?random=5',
+//     alt: 'Atividade de leitura',
+//     title: 'Biblioteca Comunitária',
+//   },
+//   {
+//     id: 6,
+//     src: 'https://picsum.photos/800/600?random=6',
+//     alt: 'Torneio esportivo',
+//     title: 'Torneio Esportivo',
+//   },
+//   {
+//     id: 7,
+//     src: 'https://picsum.photos/800/600?random=7',
+//     alt: 'Aula de artes',
+//     title: 'Artes Visuais',
+//   },
+//   {
+//     id: 8,
+//     src: 'https://picsum.photos/800/600?random=8',
+//     alt: 'Evento comunitário',
+//     title: 'Evento Comunitário',
+//   },
 ];
 
 export default function PhotoGallery() {
   const [open, setOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleOpen = (index: number) => {
     setCurrentIndex(index);
@@ -138,79 +132,87 @@ export default function PhotoGallery() {
           </Typography>
         </motion.div>
 
-        <ImageList
-          variant="masonry"
-          cols={isMobile ? 2 : 4}
-          gap={16}
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: 'repeat(2, 1fr)',
+              sm: 'repeat(3, 1fr)',
+              md: 'repeat(4, 1fr)',
+            },
+            gap: 2,
+          }}
         >
           {photos.map((photo, index) => (
-            <ImageListItem key={photo.id}>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05, duration: 0.4 }}
-                whileHover={{ scale: 1.05 }}
+            <motion.div
+              key={photo.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05, duration: 0.4 }}
+            >
+              <Box
+                onClick={() => handleOpen(index)}
+                sx={{
+                  position: 'relative',
+                  cursor: 'pointer',
+                  borderRadius: 2,
+                  overflow: 'hidden',
+                  height: { xs: 200, sm: 250, md: 280 },
+                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    transform: 'scale(1.02)',
+                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
+                    '& .overlay': {
+                      opacity: 1,
+                    },
+                  },
+                }}
               >
                 <Box
-                  onClick={() => handleOpen(index)}
+                  component="img"
+                  src={photo.src}
+                  alt={photo.alt}
+                  loading="lazy"
                   sx={{
-                    position: 'relative',
-                    cursor: 'pointer',
-                    borderRadius: 2,
-                    overflow: 'hidden',
-                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.15)',
-                      '& .overlay': {
-                        opacity: 1,
-                      },
-                    },
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }}
+                />
+                <Box
+                  className="overlay"
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background:
+                      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)',
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    p: 2,
+                    opacity: 0,
+                    transition: 'opacity 0.3s ease',
                   }}
                 >
-                  <img
-                    src={photo.src}
-                    alt={photo.alt}
-                    loading="lazy"
-                    style={{
-                      display: 'block',
-                      width: '100%',
-                      height: 'auto',
-                    }}
-                  />
-                  <Box
-                    className="overlay"
+                  <Typography
+                    variant="subtitle1"
                     sx={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      background:
-                        'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)',
-                      display: 'flex',
-                      alignItems: 'flex-end',
-                      p: 2,
-                      opacity: 0,
-                      transition: 'opacity 0.3s ease',
+                      color: 'white',
+                      fontWeight: 600,
                     }}
                   >
-                    <Typography
-                      variant="subtitle1"
-                      sx={{
-                        color: 'white',
-                        fontWeight: 600,
-                      }}
-                    >
-                      {photo.title}
-                    </Typography>
-                  </Box>
+                    {photo.title}
+                  </Typography>
                 </Box>
-              </motion.div>
-            </ImageListItem>
+              </Box>
+            </motion.div>
           ))}
-        </ImageList>
+        </Box>
 
         {/* Lightbox Modal */}
         <Dialog

@@ -16,7 +16,7 @@ export default function FAQPage() {
       <PageHero
         title="Perguntas Frequentes"
         subtitle="Tire suas dúvidas sobre como você pode contribuir com o IFE"
-        imageSrc="https://picsum.photos/1920/600?random=24"
+        imageSrc="/images/turma3.jpeg"
       />
 
       {/* Introdução */}

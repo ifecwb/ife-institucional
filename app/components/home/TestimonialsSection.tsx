@@ -47,21 +47,32 @@ export default function TestimonialsSection() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
+    slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 6000,
     pauseOnHover: true,
-    arrows: false, // Remove setas no mobile
+    arrows: false,
+    // Make sure mobile always shows a single item — add multiple breakpoints
     responsive: [
       {
-        breakpoint: 900,
+        // small phones
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: false,
         },
       },
+      {
+        // tablets / small screens
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          arrows: false,
+        },
+      }
     ],
   };
 

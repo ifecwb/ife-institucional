@@ -14,7 +14,7 @@ export default function SobrePage() {
       <PageHero
         title="Sobre o IFE"
         subtitle="Transformando vidas através da educação, esporte e cultura"
-        imageSrc="https://picsum.photos/1920/600?random=20"
+        imageSrc="/images/emprego.jpeg"
       />
 
       {/* Introdução */}

@@ -28,7 +28,7 @@ export default async function NoticiasPage() {
       <PageHero
         title="Notícias"
         subtitle="Acompanhe nossas atividades, projetos e histórias de transformação"
-        imageSrc="https://picsum.photos/1920/400?random=15"
+        imageSrc="/images/biblioteca.jpeg"
       />
       
       <Section>

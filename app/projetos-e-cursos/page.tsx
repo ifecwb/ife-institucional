@@ -18,7 +18,7 @@ export default function ProjetosPage() {
       <PageHero
         title="Projetos e Cursos"
         subtitle="Educação, esporte e cultura transformando vidas"
-        imageSrc="https://picsum.photos/1920/600?random=21"
+        imageSrc="/images/turma3.jpeg"
       />
 
       {/* Introdução */}

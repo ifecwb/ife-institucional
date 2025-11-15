@@ -39,19 +39,18 @@ export default function AboutSection() {
               variant="body1"
               sx={{ mb: 3, fontSize: '1.125rem', lineHeight: 1.8 }}
             >
-              O Instituto Futuro de Excelência (IFE) é uma organização dedicada a transformar
-              vidas através da educação, esporte e cultura. Atuando na comunidade de Xaxim,
-              em Curitiba, oferecemos oportunidades para crianças e jovens desenvolverem
-              seu potencial máximo.
+              O Instituto Futuro de Excelência (IFE)
+              é uma sociedade civil fundada em
+              2020, focada no desenvolvimento integral
+              de crianças e adolescentes através do
+              esporte, cultura e socioeducação.
             </Typography>
 
             <Typography
               variant="body1"
               sx={{ mb: 4, fontSize: '1.125rem', lineHeight: 1.8 }}
             >
-              Nossos programas incluem oficinas de judô, futsal, vôlei, balé, empreendedorismo
-              criativo e informática, proporcionando um ambiente seguro e acolhedor para o
-              crescimento integral de cada participante.
+              Nossos eixos principais de atuação incluem Esporte e Convivência, Socioeducação, e Integração ao Mundo do Trabalho para maiores de 14 anos.
             </Typography>
 
             <CTAButton href="/sobre" variant="outlined">
@@ -76,12 +75,13 @@ export default function AboutSection() {
           >
             <Box
               component="img"
-              src="https://picsum.photos/600/400?random=2"
+              src="/images/certificado.jpeg"
               alt="Instituto Futuro de Excelência"
               sx={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
+                background: 'rgba(0,0,0,0)'
               }}
             />
           </Box>

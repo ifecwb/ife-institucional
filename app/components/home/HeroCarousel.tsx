@@ -24,7 +24,7 @@ const slides: Slide[] = [
     description: 'Há mais de 10 anos levando oportunidades para crianças e adolescentes em situação de vulnerabilidade social.',
     ctaText: 'Conheça Nossos Projetos',
     ctaLink: '/projetos-e-cursos',
-    image: '/images/hero-education.jpg',
+    image: '/images/aula1.jpeg',
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const slides: Slide[] = [
     description: 'Dedique algumas horas do seu tempo e ajude a construir um futuro melhor para nossa comunidade.',
     ctaText: 'Quero Ser Voluntário',
     ctaLink: '/seja-voluntario',
-    image: '/images/hero-volunteer.jpg',
+    image: '/images/aula2.jpeg',
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ const slides: Slide[] = [
     description: 'Oferecemos workshops gratuitos de judô, ballet, música, teatro e muito mais.',
     ctaText: 'Veja Nossos Cursos',
     ctaLink: '/projetos-e-cursos',
-    image: '/images/hero-kids.jpg',
+    image: '/images/aula3.jpeg',
   },
   {
     id: 4,
@@ -51,7 +51,7 @@ const slides: Slide[] = [
     description: 'Ajude-nos a continuar oferecendo educação de qualidade e esperança para quem mais precisa.',
     ctaText: 'Fazer Doação',
     ctaLink: '/doar',
-    image: '/images/hero-donation.jpg',
+    image: '/images/biblioteca.jpeg',
   },
 ];
 
@@ -127,7 +127,7 @@ export default function HeroCarousel() {
             height: '100%',
           }}
         >
-          {/* Background Image Overlay */}
+          {/* Background Image */}
           <Box
             sx={{
               position: 'absolute',
@@ -135,7 +135,23 @@ export default function HeroCarousel() {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundImage: `linear-gradient(135deg, rgba(70, 127, 247, 0.95) 0%, rgba(54, 160, 153, 0.85) 100%)`,
+              backgroundImage: `url(${slides[currentSlide].image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              zIndex: 0,
+            }}
+          />
+
+          {/* Overlay for readability */}
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundImage: `linear-gradient(135deg, rgba(70, 127, 247, 0.85) 0%, rgba(54, 160, 153, 0.75) 100%)`,
               zIndex: 1,
             }}
           />

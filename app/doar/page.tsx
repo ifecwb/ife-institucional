@@ -126,7 +126,7 @@ export default function DoarPage() {
                   viewport={{ once: true }}
                   transition={{ delay: donationBenefits.indexOf(benefit) * 0.1 }}
                 >
-                  <Card sx={{ height: '100%', p: 2 }}>
+                  <Card sx={{ height: '100%', p: 2,textAlign: 'center' }}>
                     <CardContent>
                       <Box
                         sx={{
@@ -138,6 +138,7 @@ export default function DoarPage() {
                           alignItems: 'center',
                           justifyContent: 'center',
                           mb: 3,
+                          mx: 'auto',
                         }}
                       >
                         <IconComponent sx={{ fontSize: 32, color: 'white' }} />
@@ -259,6 +260,7 @@ export default function DoarPage() {
                   mb: 2,
                   wordBreak: 'break-all',
                   px: 2,
+                  fontSize: 11
                 }}
               >
                 {pixKey}

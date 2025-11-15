@@ -45,6 +45,9 @@ interface HeaderProps {
 
 export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
   const pathname = usePathname();
+  
+  // Debug: remova depois de verificar
+  console.log('Current pathname:', pathname);
 
   return (
     // <HideOnScroll>
@@ -78,7 +81,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
             >
               <Box
                 component="img"
-                src="/logo-ife.png"
+                src="/favicon.png"
                 alt="IFE Logo"
                 sx={{
                   height: { xs: 40, md: 48 },
@@ -96,7 +99,27 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                   }
                 }}
               />
-              <Typography
+              <Box
+                component="img"
+                src="/texto-ife.png"
+                alt="IFE Logo"
+                sx={{
+                  height: { xs: 40, md: 48 },
+                  width: 'auto',
+                }}
+                onError={(e) => {
+                  // Fallback se a imagem não existir - mostra texto IFE
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  const parent = (e.target as HTMLImageElement).parentElement;
+                  if (parent) {
+                    const textElement = parent.querySelector('div');
+                    if (textElement) {
+                      (textElement as HTMLElement).style.display = 'block';
+                    }
+                  }
+                }}
+              />
+              {/* <Typography
                 variant="h6"
                 component="div"
                 sx={{
@@ -108,7 +131,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                 }}
               >
                 IFE
-              </Typography>
+              </Typography> */}
             </Link>
 
             {/* Espaçador */}
