@@ -16,7 +16,7 @@ export default function ProjetosPage() {
   return (
     <MainLayout>
       <PageHero
-        title="Projetos e Cursos"
+        title="Projetos e Oficinas"
         subtitle="Educação, esporte e cultura transformando vidas"
         imageSrc="/images/turma3.jpeg"
       />
@@ -197,13 +197,13 @@ export default function ProjetosPage() {
       <Section bgcolor="secondary.main" py={8} sx={{ color: 'white', textAlign: 'center' }}>
         <Container maxWidth="md">
           <Typography variant="h3" gutterBottom sx={{ fontWeight: 700, mb: 3 }}>
-            Inscreva Seu Filho Agora!
+            Inscreva-se Agora!
           </Typography>
           <Typography variant="h6" sx={{ mb: 4, opacity: 0.95 }}>
             Garanta uma vaga nas nossas atividades. As turmas são limitadas!
           </Typography>
           <CTAButton
-            href="https://wa.me/5541999999999?text=Olá! Gostaria de inscrever meu filho nas atividades do IFE."
+            href="https://wa.me/5541999999999?text=Olá! Gostaria de me inscrever nas atividades do IFE."
             size="large"
             external
             sx={{

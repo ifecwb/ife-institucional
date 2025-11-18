@@ -174,7 +174,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                     <Button
                       component={hasSubmenu ? 'button' : Link}
                       href={hasSubmenu ? undefined : item.href}
-                      onMouseEnter={hasSubmenu ? (e) => handleMenuOpen(e, index) : undefined}
+                      onMouseEnter={hasSubmenu ? (e: any) => handleMenuOpen(e, index) : undefined}
                       sx={{
                         color: isActive ? 'primary.main' : 'text.primary',
                         fontWeight: isActive ? 600 : 500,

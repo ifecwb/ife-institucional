@@ -24,6 +24,7 @@ const navLinks = [
   { label: 'Notícias', href: '/noticias' },
   { label: 'Doar', href: '/doar' },
   { label: 'Perguntas Frequentes', href: '/faq' },
+  { label: 'Transparência', href: '/transparencia' },
 ];
 
 export default function Footer() {

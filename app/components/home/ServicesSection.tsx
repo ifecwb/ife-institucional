@@ -1,13 +1,12 @@
 'use client';
 
-import * as React from 'react';
 import { Box, Container, Typography, Card, CardContent } from '@mui/material';
 import { motion } from 'framer-motion';
 import SchoolIcon from '@mui/icons-material/School';
 import SportsIcon from '@mui/icons-material/Sports';
-import PaletteIcon from '@mui/icons-material/Palette';
 import Section from '../common/Section';
 import PageTitle from '../common/PageTitle';
+import { Groups } from '@mui/icons-material';
 
 const services = [
   {
@@ -26,7 +25,7 @@ const services = [
   },
   {
     id: 'trabalho',
-    icon: <PaletteIcon sx={{ fontSize: 48 }} />,
+    icon: <Groups sx={{ fontSize: 48 }} />,
     title: 'Integração ao Mundo do Trabalho',
     description: 'Exclusivo para maiores de 14 anos. Oficinas de sensibilização, orientação, desenvolvimento de habilidades organizacionais, comunicação e projeto de vida.',
     color: '#8F539B',
