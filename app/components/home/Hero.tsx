@@ -4,12 +4,15 @@ import * as React from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import CTAButton from '../common/CTAButton';
+import siteConfig from '@/config/site.config';
 
 /**
  * Seção Hero da página inicial
  * Imagem de fundo + título animado + CTAs
  */
 export default function Hero() {
+  const enderecoCompleto = `${siteConfig.endereco.rua} ${siteConfig.endereco.numero} - ${siteConfig.endereco.bairro}, ${siteConfig.endereco.cidade}`;
+
   return (
     <Box
       sx={{
@@ -60,7 +63,7 @@ export default function Hero() {
               textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
             }}
           >
-            Instituto Futuro de Excelência
+            {siteConfig.nome}
           </Typography>
         </Box>
 
@@ -79,7 +82,7 @@ export default function Hero() {
               textShadow: '1px 1px 3px rgba(0,0,0,0.3)',
             }}
           >
-            💡 Transformando gerações através do conhecimento!
+            💡 {siteConfig.slogan}
           </Typography>
 
           <Typography
@@ -94,7 +97,7 @@ export default function Hero() {
           >
             🌐 Esportes / Cultura e Educação
             <br />
-            📍 Rua David Tows 201 - Xaxim, Curitiba
+            📍 {enderecoCompleto}
           </Typography>
         </Box>
 

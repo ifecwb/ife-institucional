@@ -19,10 +19,11 @@ import siteConfig, { gerarLinkEmail, gerarLinkWhatsApp } from '@/config/site.con
 const navLinks = [
   { label: 'Início', href: '/' },
   { label: 'Sobre', href: '/sobre' },
-  { label: 'Projetos e Cursos', href: '/projetos-e-cursos' },
+  { label: 'Projetos e Oficinas', href: '/projetos-e-cursos' },
   { label: 'Seja Voluntário', href: '/seja-voluntario' },
   { label: 'Notícias', href: '/noticias' },
   { label: 'Doar', href: '/doar' },
+  { label: 'Perguntas Frequentes', href: '/faq' },
 ];
 
 export default function Footer() {

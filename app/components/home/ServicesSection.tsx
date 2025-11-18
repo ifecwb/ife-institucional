@@ -11,24 +11,24 @@ import PageTitle from '../common/PageTitle';
 
 const services = [
   {
-    id: 'educacao',
-    icon: <SchoolIcon sx={{ fontSize: 48 }} />,
-    title: 'Educação',
-    description: 'Cursos e oficinas que ampliam oportunidades e desenvolvem habilidades essenciais para o futuro.',
+    id: 'esporte',
+    icon: <SportsIcon sx={{ fontSize: 48 }} />,
+    title: 'Esporte e Convivência',
+    description: 'Futebol, Judô e Vôlei com atividades semanais regulares, promovendo desenvolvimento socioemocional, fortalecimento de vínculos e valores como respeito, disciplina e trabalho em equipe.',
     color: '#467FF7',
   },
   {
-    id: 'esporte',
-    icon: <SportsIcon sx={{ fontSize: 48 }} />,
-    title: 'Esporte',
-    description: 'Atividades esportivas que promovem desenvolvimento físico, disciplina e trabalho em equipe.',
+    id: 'socioeducacao',
+    icon: <SchoolIcon sx={{ fontSize: 48 }} />,
+    title: 'Socioeducação',
+    description: 'Oficinas para todas as idades focadas em convivência, cidadania, fortalecimento de vínculos familiares e comunitários, desenvolvimento da comunicação e promoção de direitos.',
     color: '#36A099',
   },
   {
-    id: 'cultura',
+    id: 'trabalho',
     icon: <PaletteIcon sx={{ fontSize: 48 }} />,
-    title: 'Cultura',
-    description: 'Expressão artística e cidadania através de atividades culturais que inspiram e transformam.',
+    title: 'Integração ao Mundo do Trabalho',
+    description: 'Exclusivo para maiores de 14 anos. Oficinas de sensibilização, orientação, desenvolvimento de habilidades organizacionais, comunicação e projeto de vida.',
     color: '#8F539B',
   },
 ];
@@ -45,7 +45,7 @@ export default function ServicesSection() {
           variant="h2"
           sx={{ textAlign: 'center', mb: 6 }}
         >
-          Nossos Projetos e Cursos
+          Nossos Eixos de Atuação
         </PageTitle>
 
         <Box

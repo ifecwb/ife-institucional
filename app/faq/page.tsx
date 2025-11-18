@@ -9,8 +9,6 @@ import VolunteerFAQ from '../components/faq/VolunteerFAQ'
 import DonationFAQ from '../components/faq/DonationFAQ'
 
 export default function FAQPage() {
-  const linkWhatsApp = gerarLinkWhatsApp('Olá! Tenho uma dúvida sobre o IFE.')
-
   return (
     <MainLayout>
       <PageHero
@@ -109,7 +107,7 @@ export default function FAQPage() {
           <Button
             variant="contained"
             size="large"
-            href={linkWhatsApp}
+            href={gerarLinkWhatsApp('Olá! Tenho uma dúvida sobre o IFE.')}
             target="_blank"
             rel="noopener noreferrer"
             sx={{

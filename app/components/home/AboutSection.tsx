@@ -37,20 +37,28 @@ export default function AboutSection() {
 
             <Typography
               variant="body1"
-              sx={{ mb: 3, fontSize: '1.125rem', lineHeight: 1.8 }}
+              sx={{ mb: 3, fontSize: '1.125rem', lineHeight: 1.8, color: 'text.secondary' }}
             >
-              O Instituto Futuro de Excelência (IFE)
-              é uma sociedade civil fundada em
-              2020, focada no desenvolvimento integral
-              de crianças e adolescentes através do
-              esporte, cultura e socioeducação.
+              Organização da sociedade civil fundada em 2020, focada no desenvolvimento integral
+              de crianças e adolescentes através do esporte, cultura e socioeducação.
             </Typography>
 
             <Typography
               variant="body1"
-              sx={{ mb: 4, fontSize: '1.125rem', lineHeight: 1.8 }}
+              sx={{ mb: 3, fontSize: '1.125rem', lineHeight: 1.8, color: 'text.secondary' }}
             >
-              Nossos eixos principais de atuação incluem Esporte e Convivência, Socioeducação, e Integração ao Mundo do Trabalho para maiores de 14 anos.
+              Atendemos anualmente entre 110 e 150 crianças e adolescentes de 5 a 17 anos
+              em Xaxim, Bairro Novo, Ganchinho e Sítio Cercado, com atendimento aberto a toda Curitiba.
+              Nossos eixos de atuação incluem Esporte e Convivência (Futebol, Judô e Vôlei),
+              Socioeducação, e Integração ao Mundo do Trabalho para maiores de 14 anos.
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{ mb: 4, fontSize: '1.125rem', lineHeight: 1.8, color: 'text.secondary' }}
+            >
+              Possuímos inscrições ativas no COMTIBA e Conselho Municipal do Esporte (CME),
+              além de quatro termos de fomento vigentes com FMCA e Prefeitura Municipal de Curitiba.
             </Typography>
 
             <CTAButton href="/sobre" variant="outlined">

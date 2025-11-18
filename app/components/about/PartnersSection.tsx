@@ -47,6 +47,7 @@ export default function PartnersSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
+              sx={{ height: '100%' }}
             >
               <Box
                 component="a"
@@ -55,9 +56,12 @@ export default function PartnersSection() {
                 rel="noopener noreferrer"
                 sx={{
                   display: 'flex',
+                  flexDirection: 'column',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  height: 150,
+                  gap: 2,
+                  height: '100%',
+                  minHeight: 180,
                   bgcolor: 'white',
                   borderRadius: 2,
                   p: 3,
@@ -69,6 +73,10 @@ export default function PartnersSection() {
                     borderColor: 'primary.main',
                     boxShadow: '0 2px 8px rgba(70, 127, 247, 0.12)',
                     transform: 'translateY(-2px)',
+                    '& img': {
+                      filter: 'grayscale(0%)',
+                      opacity: 1,
+                    },
                   },
                 }}
               >
@@ -78,17 +86,24 @@ export default function PartnersSection() {
                   alt={partner.name}
                   sx={{
                     maxWidth: '100%',
-                    maxHeight: '100%',
+                    maxHeight: 80,
                     objectFit: 'contain',
                     filter: 'grayscale(100%)',
                     opacity: 0.7,
                     transition: 'all 0.2s ease',
-                    '&:hover': {
-                      filter: 'grayscale(0%)',
-                      opacity: 1,
-                    },
                   }}
                 />
+                <Typography
+                  variant="body2"
+                  sx={{
+                    textAlign: 'center',
+                    color: 'text.secondary',
+                    fontSize: '0.875rem',
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {partner.name}
+                </Typography>
               </Box>
             </Box>
           ))}

@@ -7,6 +7,7 @@ import StatsSection from './components/home/StatsSection';
 import PhotoGallery from './components/home/PhotoGallery';
 import CTASection from './components/home/CTASection';
 import TestimonialsSection from './components/home/TestimonialsSection';
+import PartnersSection from './components/about/PartnersSection';
 import ContactSection from './components/home/ContactSection';
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
       <PhotoGallery />
       <CTASection />
       <TestimonialsSection />
+      <PartnersSection />
       <ContactSection />
     </MainLayout>
   );

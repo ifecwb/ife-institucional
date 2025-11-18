@@ -9,7 +9,7 @@ export const siteConfig = {
   // ==================== INFORMAÇÕES BÁSICAS ====================
   nome: 'Instituto Futuro de Excelência',
   sigla: 'IFE',
-  slogan: 'Transformando gerações através do conhecimento',
+  slogan: 'Formar, Inspirar e Transformar',
   
   // ==================== CONTATO ====================
   contato: {
@@ -22,13 +22,22 @@ export const siteConfig = {
 
   // ==================== ENDEREÇO ====================
   endereco: {
-    rua: 'Rua David Tows',
-    numero: '201',
+    // rua: 'Rua David Tows',
+    // numero: '201',
+    // complemento: '',
+    // bairro: 'Xaxim',
+    // cidade: 'Curitiba',
+    // estado: 'PR',
+    // cep: '81830-270',
+
+    rua: 'Av. Vicente Machado',
+    numero: '2996',
     complemento: '',
-    bairro: 'Xaxim',
+    bairro: 'Campina do Siqueira',
     cidade: 'Curitiba',
     estado: 'PR',
     cep: '81830-270',
+
     googleMapsUrl: 'https://share.google/f8Uy5bIOvIrtPoF4z',
   },
 
@@ -69,24 +78,59 @@ export const siteConfig = {
 
   // ==================== INFORMAÇÕES INSTITUCIONAIS ====================
   institucional: {
-    cnpj: '00.000.000/0001-00',
-    dataFundacao: '2015-01-15',
+    cnpj: '37.695.827/0001-77',
+    dataFundacao: '2020-01-01',
     razaoSocial: 'Instituto Futuro de Excelência',
+    presidente: 'Emerson Rafael Baptista dos Anjos',
+    vigenciaDiretoria: '2023-2027',
     inscricaoMunicipal: '000.000.000-0',
     inscricaoEstadual: 'ISENTO',
-    utilidadePublica: {
-      municipal: {
-        numero: 'Lei Municipal nº 0000/2016',
-        data: '2016-03-20',
+    reconhecimentos: {
+      comtiba: {
+        nome: 'COMTIBA - Conselho Municipal dos Direitos da Criança e do Adolescente',
+        descricao: 'Inscrição ativa no Conselho Municipal dos Direitos da Criança e do Adolescente de Curitiba',
+        ativo: true,
       },
-      estadual: {
-        numero: 'Lei Estadual nº 0000/2017',
-        data: '2017-05-15',
+      cme: {
+        nome: 'CME - Conselho Municipal do Esporte',
+        descricao: 'Inscrição ativa no Conselho Municipal do Esporte conforme Resolução 03/2025',
+        ativo: true,
       },
-      federal: {
-        numero: 'Portaria nº 0000/2018',
-        data: '2018-08-10',
+      lei13019: {
+        nome: 'Lei 13.019/2014',
+        descricao: 'Conformidade com o Marco Regulatório das Organizações da Sociedade Civil',
+        ativo: true,
       },
+    },
+    parcerias: {
+      termosAtivos: 4,
+      recursosCaptados: 98472.04,
+      convenios: [
+        {
+          numero: '6984/2024',
+          concedente: 'FMCA',
+          vigenciaAte: '12/11/2025',
+          valor: 30000.00,
+        },
+        {
+          numero: '26729/2025',
+          concedente: 'FMCA',
+          vigenciaAte: '12/08/2026',
+          valor: 20000.00,
+        },
+        {
+          numero: '26939/2025',
+          concedente: 'PM Curitiba',
+          vigenciaAte: '18/09/2026',
+          valor: 28472.04,
+        },
+        {
+          numero: '27071/2025',
+          concedente: 'FMCA',
+          vigenciaAte: '03/11/2026',
+          valor: 20000.00,
+        },
+      ],
     },
   },
 
@@ -99,10 +143,12 @@ export const siteConfig = {
 
   // ==================== ESTATÍSTICAS ====================
   estatisticas: {
-    criancasAtendidas: 500,
-    cursosAtivos: 15,
-    voluntariosAtivos: 100,
-    anosDeHistoria: 10,
+    criancasAtendidas: 150,
+    frequenciaSemanal: 90,
+    engajamentoFamiliar: 85,
+    anosDeHistoria: 5,
+    eixosAtuacao: 3,
+    termosFomento: 4,
   },
 
   // ==================== MENSAGENS WHATSAPP (Templates) ====================

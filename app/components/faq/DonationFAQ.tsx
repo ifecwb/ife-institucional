@@ -20,7 +20,11 @@ export default function DonationFAQ() {
     },
     {
       question: 'As doações têm dedução no Imposto de Renda?',
-      answer: `Sim! O IFE possui título de Utilidade Pública Federal desde ${siteConfig.institucional.utilidadePublica.federal.data}. Doações de pessoas físicas e jurídicas podem ser deduzidas do Imposto de Renda. Entre em contato conosco para receber o recibo de doação.`,
+      answer: `Sim! O IFE possui título de Utilidade Pública Federal desde ${new Date(siteConfig.institucional.dataFundacao).toLocaleDateString('pt-BR', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        })}. Doações de pessoas físicas e jurídicas podem ser deduzidas do Imposto de Renda. Entre em contato conosco para receber o recibo de doação.`,
     },
     {
       question: 'Posso fazer doações mensais recorrentes?',

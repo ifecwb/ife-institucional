@@ -12,15 +12,25 @@ import {
   Typography,
   Divider,
   Button,
+  Collapse,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const navItems = [
   { label: 'Início', href: '/' },
-  { label: 'Sobre', href: '/sobre' },
-  { label: 'Projetos e Cursos', href: '/projetos-e-cursos' },
+  { 
+    label: 'Quem Somos', 
+    href: '/sobre',
+    submenu: [
+      { label: 'Sobre o IFE', href: '/sobre' },
+      { label: 'Transparência', href: '/transparencia' },
+    ]
+  },
+  { label: 'Projetos e Oficinas', href: '/projetos-e-cursos' },
   { label: 'Seja Voluntário', href: '/seja-voluntario' },
   { label: 'Notícias', href: '/noticias' },
 ];
@@ -32,6 +42,11 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ open, onClose }: Readonly<MobileMenuProps>) {
   const pathname = usePathname();
+  const [openSubmenu, setOpenSubmenu] = React.useState<number | null>(null);
+
+  const handleSubmenuToggle = (index: number) => {
+    setOpenSubmenu(openSubmenu === index ? null : index);
+  };
 
   return (
     <Drawer
@@ -83,40 +98,96 @@ export default function MobileMenu({ open, onClose }: Readonly<MobileMenuProps>)
 
         {/* Lista de Navegação */}
         <List sx={{ flexGrow: 1, pt: 2 }}>
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
+          {navItems.map((item, index) => {
+            const isActive = item.href === '/' 
+              ? pathname === '/' 
+              : pathname.startsWith(item.href) || (item.submenu && item.submenu.some(sub => pathname.startsWith(sub.href)));
+            
+            const hasSubmenu = item.submenu && item.submenu.length > 0;
+            
             return (
-              <ListItem key={item.href} disablePadding>
-                <ListItemButton
-                  component={Link}
-                  href={item.href}
-                  onClick={onClose}
-                  selected={isActive}
-                  sx={{
-                    py: 1.5,
-                    px: 3,
-                    '&.Mui-selected': {
-                      bgcolor: 'primary.main',
-                      color: 'primary.contrastText',
-                      '&:hover': {
-                        bgcolor: 'primary.dark',
+              <React.Fragment key={item.href}>
+                <ListItem disablePadding>
+                  <ListItemButton
+                    component={hasSubmenu ? 'div' : Link}
+                    href={hasSubmenu ? undefined : item.href}
+                    onClick={hasSubmenu ? () => handleSubmenuToggle(index) : onClose}
+                    selected={isActive && !hasSubmenu}
+                    sx={{
+                      py: 1.5,
+                      px: 3,
+                      '&.Mui-selected': {
+                        bgcolor: 'primary.main',
+                        color: 'primary.contrastText',
+                        '&:hover': {
+                          bgcolor: 'primary.dark',
+                        },
                       },
-                    },
-                    '&:hover': {
-                      bgcolor: 'action.hover',
-                    },
-                  }}
-                >
-                  <ListItemText
-                    primary={item.label}
-                    slotProps={{
-                      primary: {
-                        fontWeight: isActive ? 600 : 500,
+                      '&:hover': {
+                        bgcolor: 'action.hover',
                       },
                     }}
-                  />
-                </ListItemButton>
-              </ListItem>
+                  >
+                    <ListItemText
+                      primary={item.label}
+                      slotProps={{
+                        primary: {
+                          fontWeight: isActive ? 600 : 500,
+                        },
+                      }}
+                    />
+                    {hasSubmenu && (
+                      openSubmenu === index ? <ExpandLess /> : <ExpandMore />
+                    )}
+                  </ListItemButton>
+                </ListItem>
+                
+                {hasSubmenu && (
+                  <Collapse in={openSubmenu === index} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                      {item.submenu.map((subItem) => {
+                        const isSubActive = pathname.startsWith(subItem.href);
+                        return (
+                          <ListItem key={subItem.href} disablePadding>
+                            <ListItemButton
+                              component={Link}
+                              href={subItem.href}
+                              onClick={onClose}
+                              selected={isSubActive}
+                              sx={{
+                                py: 1.5,
+                                pl: 5,
+                                pr: 3,
+                                '&.Mui-selected': {
+                                  bgcolor: 'primary.light',
+                                  color: 'primary.main',
+                                  fontWeight: 600,
+                                  '&:hover': {
+                                    bgcolor: 'primary.light',
+                                  },
+                                },
+                                '&:hover': {
+                                  bgcolor: 'action.hover',
+                                },
+                              }}
+                            >
+                              <ListItemText
+                                primary={subItem.label}
+                                slotProps={{
+                                  primary: {
+                                    fontWeight: isSubActive ? 600 : 500,
+                                    fontSize: '0.9rem',
+                                  },
+                                }}
+                              />
+                            </ListItemButton>
+                          </ListItem>
+                        );
+                      })}
+                    </List>
+                  </Collapse>
+                )}
+              </React.Fragment>
             );
           })}
         </List>

@@ -47,32 +47,21 @@ export default function TestimonialsSection() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 6000,
     pauseOnHover: true,
     arrows: false,
-    // Make sure mobile always shows a single item — add multiple breakpoints
     responsive: [
       {
-        // small phones
-        breakpoint: 480,
+        breakpoint: 1024,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: false,
         },
       },
-      {
-        // tablets / small screens
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          arrows: false,
-        },
-      }
     ],
   };
 
@@ -83,23 +72,24 @@ export default function TestimonialsSection() {
           variant="h2"
           sx={{ textAlign: 'center', mb: 6 }}
         >
-          Parcerias
+          O que dizem
         </PageTitle>
 
-        <Box sx={{ px: { xs: 0, md: 2 } }}>
+        <Box sx={{ px: { xs: 1, md: 1 }, maxWidth: { xs: '100%', md: 'none' } }}>
           <Slider {...settings}>
             {testimonials.map((testimonial) => (
-              <Box key={testimonial.id} sx={{ px: 2 }}>
-                <Card
-                  sx={{
-                    height: '100%',
-                    minHeight: 280,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    position: 'relative',
-                    overflow: 'visible',
-                  }}
-                >
+              <Box key={testimonial.id}>
+                <Box sx={{ px: { xs: 1, md: 1 } }}>
+                  <Card
+                    sx={{
+                      height: '100%',
+                      minHeight: 280,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      position: 'relative',
+                      overflow: 'hidden',
+                    }}
+                  >
                   {/* <Box
                     sx={{
                       position: 'absolute',
@@ -179,6 +169,7 @@ export default function TestimonialsSection() {
                     </Box>
                   </CardContent>
                 </Card>
+                </Box>
               </Box>
             ))}
           </Slider>

@@ -23,34 +23,34 @@ const stats: Stat[] = [
   {
     id: 1,
     icon: <School sx={{ fontSize: { xs: 40, md: 50 } }} />,
-    value: 500,
-    suffix: '+',
+    value: 150,
+    suffix: '',
     label: 'Crianças Atendidas',
-    description: 'Recebendo educação de qualidade',
+    description: 'Entre 5 e 17 anos anualmente',
   },
   {
     id: 2,
     icon: <People sx={{ fontSize: { xs: 40, md: 50 } }} />,
-    value: 15,
-    suffix: '+',
-    label: 'Cursos e Atividades',
-    description: 'Esporte, cultura e educação',
+    value: 90,
+    suffix: '%',
+    label: 'Frequência Semanal',
+    description: 'Participação contínua nas atividades',
   },
   {
     id: 3,
     icon: <VolunteerActivism sx={{ fontSize: { xs: 40, md: 50 } }} />,
-    value: 100,
-    suffix: '+',
-    label: 'Voluntários Ativos',
-    description: 'Dedicando seu tempo à causa',
+    value: 85,
+    suffix: '%',
+    label: 'Engajamento Familiar',
+    description: 'Envolvimento familiar e escolar',
   },
   {
     id: 4,
     icon: <EmojiEvents sx={{ fontSize: { xs: 40, md: 50 } }} />,
-    value: 10,
+    value: 5,
     suffix: '',
     label: 'Anos de História',
-    description: 'Transformando vidas desde 2015',
+    description: 'Transformando vidas desde 2020',
   },
 ];
 
@@ -118,9 +118,13 @@ export default function StatsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
+                style={{ height: '100%' }}
               >
                 <Box
                   sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
                     textAlign: 'center',
                     color: 'white',
                     p: { xs: 2, md: 3 },

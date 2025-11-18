@@ -13,6 +13,7 @@ import { motion } from 'framer-motion';
 import SendIcon from '@mui/icons-material/Send';
 import Section from '../common/Section';
 import PageTitle from '../common/PageTitle';
+import siteConfig, {gerarLinkWhatsApp} from '@/config/site.config';
 
 /**
  * Seção Contato da página inicial
@@ -157,13 +158,14 @@ export default function ContactSection() {
               Outras Formas de Contato
             </Typography>
             <Typography variant="body2" sx={{ mb: 1 }}>
-              📧 contato@ife.org.br
+              📧 {siteConfig.contato.email}
             </Typography>
             <Typography variant="body2" sx={{ mb: 1 }}>
-              📱 (41) 99999-9999 (WhatsApp)
+              📱 <a href={gerarLinkWhatsApp(siteConfig.contato.telefoneWhatsApp)}>{} (WhatsApp)</a>
             </Typography>
             <Typography variant="body2">
-              📍 Rua David Tows 201 - Xaxim, Curitiba - PR
+              📍  {siteConfig.endereco.rua} - {siteConfig.endereco.numero}<br />
+                  {siteConfig.endereco.bairro}, {siteConfig.endereco.cidade} - {siteConfig.endereco.estado}
             </Typography>
           </Box>
         </Box>
