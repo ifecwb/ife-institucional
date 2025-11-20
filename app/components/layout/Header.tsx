@@ -122,19 +122,6 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                   }
                 }}
               />
-              {/* <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                  fontWeight: 700,
-                  color: 'primary.main',
-                  fontSize: { xs: '1rem', md: '1.25rem' },
-                  whiteSpace: 'nowrap',
-                  display: { xs: 'none', md: 'block' },
-                }}
-              >
-                IFE
-              </Typography> */}
             </Link>
 
             {/* Espaçador */}
@@ -211,7 +198,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                           horizontal: 'left',
                         }}
                       >
-                        {item.submenu.map((subItem) => (
+                        {item.submenu?.map((subItem) => (
                           <MenuItem
                             key={subItem.href}
                             component={Link}
@@ -220,9 +207,12 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                             selected={pathname.startsWith(subItem.href)}
                             sx={{
                               '&.Mui-selected': {
-                                bgcolor: 'primary.light',
-                                color: 'primary.main',
+                                bgcolor: 'primary.main',
+                                color: 'white',
                                 fontWeight: 600,
+                                '&:hover': {
+                                  bgcolor: 'primary.dark',
+                                },
                               },
                             }}
                           >

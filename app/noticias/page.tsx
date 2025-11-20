@@ -11,12 +11,6 @@ export const metadata = {
   description: 'Acompanhe as últimas notícias, projetos e histórias de transformação do IFE'
 }
  
-// TODO: adicionar paginação nos posts
-// TODO: adicionar um exemplo com styled-components ou SCSS direto
-// TODO: adicionar SEO em tags/notícias - site map automático
-// TODO: múltiplas tags na seção de notícias
-// TODO: configuração manual de Head/Scripts/Meta - individual e geral
-// TODO: no cabeçalho, quando o menu estiver selecioando, utilizar cor com mais contraste
 export default async function NoticiasPage() {
   const tags = await getTags()
   const posts = await getPosts()
