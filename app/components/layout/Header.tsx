@@ -17,6 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { mainNavigation, ctaButton } from '@/app/data/navigation';
 
 interface HideOnScrollProps {
   children: React.ReactElement;
@@ -31,21 +32,6 @@ function HideOnScroll({ children }: Readonly<HideOnScrollProps>) {
     </Slide>
   );
 }
-
-const navItems = [
-  { label: 'Início', href: '/' },
-  { 
-    label: 'Quem Somos', 
-    href: '/sobre',
-    submenu: [
-      { label: 'Sobre o IFE', href: '/sobre' },
-      { label: 'Transparência', href: '/transparencia' },
-    ]
-  },
-  { label: 'Projetos e Oficinas', href: '/projetos-e-cursos' },
-  { label: 'Seja Voluntário', href: '/seja-voluntario' },
-  { label: 'Notícias', href: '/noticias' },
-];
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -162,7 +148,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                 alignItems: 'center',
               }}
             >
-              {navItems.map((item, index) => {
+              {mainNavigation.map((item, index) => {
                 const isActive = item.href === '/' 
                   ? pathname === '/' 
                   : pathname.startsWith(item.href) || (item.submenu && item.submenu.some(sub => pathname.startsWith(sub.href)));
@@ -252,7 +238,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
               {/* Botão CTA Doar */}
               <Button
                 component={Link}
-                href="/doar"
+                href={ctaButton.href}
                 variant="contained"
                 color="primary"
                 sx={{
@@ -268,7 +254,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                   transition: 'all 0.2s ease',
                 }}
               >
-                Doar
+                {ctaButton.label}
               </Button>
             </Box>
 

@@ -15,17 +15,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
 import siteConfig, { gerarLinkEmail, gerarLinkWhatsApp } from '@/config/site.config';
-
-const navLinks = [
-  { label: 'Início', href: '/' },
-  { label: 'Sobre', href: '/sobre' },
-  { label: 'Projetos e Oficinas', href: '/projetos-e-cursos' },
-  { label: 'Seja Voluntário', href: '/seja-voluntario' },
-  { label: 'Notícias', href: '/noticias' },
-  { label: 'Doar', href: '/doar' },
-  { label: 'Perguntas Frequentes', href: '/faq' },
-  { label: 'Transparência', href: '/transparencia' },
-];
+import { footerNavigation } from '@/app/data/navigation';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -122,7 +112,7 @@ export default function Footer() {
               Links Rápidos
             </Typography>
             <Box component="nav" sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: { xs: 'center', md: 'flex-start' } }}>
-              {navLinks.map((link) => (
+              {footerNavigation.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
