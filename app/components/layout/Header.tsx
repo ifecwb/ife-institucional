@@ -17,6 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { mainNavigation, ctaButton } from '@/app/data/navigation';
 
 interface HideOnScrollProps {
   children: React.ReactElement;
@@ -31,21 +32,6 @@ function HideOnScroll({ children }: Readonly<HideOnScrollProps>) {
     </Slide>
   );
 }
-
-const navItems = [
-  { label: 'Início', href: '/' },
-  { 
-    label: 'Quem Somos', 
-    href: '/sobre',
-    submenu: [
-      { label: 'Sobre o IFE', href: '/sobre' },
-      { label: 'Transparência', href: '/transparencia' },
-    ]
-  },
-  { label: 'Projetos e Oficinas', href: '/projetos-e-cursos' },
-  { label: 'Seja Voluntário', href: '/seja-voluntario' },
-  { label: 'Notícias', href: '/noticias' },
-];
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -136,19 +122,6 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                   }
                 }}
               />
-              {/* <Typography
-                variant="h6"
-                component="div"
-                sx={{
-                  fontWeight: 700,
-                  color: 'primary.main',
-                  fontSize: { xs: '1rem', md: '1.25rem' },
-                  whiteSpace: 'nowrap',
-                  display: { xs: 'none', md: 'block' },
-                }}
-              >
-                IFE
-              </Typography> */}
             </Link>
 
             {/* Espaçador */}
@@ -162,7 +135,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                 alignItems: 'center',
               }}
             >
-              {navItems.map((item, index) => {
+              {mainNavigation.map((item, index) => {
                 const isActive = item.href === '/' 
                   ? pathname === '/' 
                   : pathname.startsWith(item.href) || (item.submenu && item.submenu.some(sub => pathname.startsWith(sub.href)));
@@ -225,7 +198,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                           horizontal: 'left',
                         }}
                       >
-                        {item.submenu.map((subItem) => (
+                        {item.submenu?.map((subItem) => (
                           <MenuItem
                             key={subItem.href}
                             component={Link}
@@ -234,9 +207,12 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                             selected={pathname.startsWith(subItem.href)}
                             sx={{
                               '&.Mui-selected': {
-                                bgcolor: 'primary.light',
-                                color: 'primary.main',
+                                bgcolor: 'primary.main',
+                                color: 'white',
                                 fontWeight: 600,
+                                '&:hover': {
+                                  bgcolor: 'primary.dark',
+                                },
                               },
                             }}
                           >
@@ -252,7 +228,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
               {/* Botão CTA Doar */}
               <Button
                 component={Link}
-                href="/doar"
+                href={ctaButton.href}
                 variant="contained"
                 color="primary"
                 sx={{
@@ -268,7 +244,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                   transition: 'all 0.2s ease',
                 }}
               >
-                Doar
+                {ctaButton.label}
               </Button>
             </Box>
 

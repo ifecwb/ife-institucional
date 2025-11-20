@@ -129,16 +129,20 @@ export default function HeroCarousel() {
         >
           {/* Background Image */}
           <Box
+            component="img"
+            src={slides[currentSlide].image}
+            alt={slides[currentSlide].title}
+            loading="lazy"
             sx={{
               position: 'absolute',
               top: 0,
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundImage: `url(${slides[currentSlide].image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
               zIndex: 0,
             }}
           />

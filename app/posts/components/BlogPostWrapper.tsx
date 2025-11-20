@@ -10,7 +10,7 @@ interface BlogPostWrapperProps {
     title?: string
     date?: string
     author?: string
-    tag?: string
+    tag?: string | string[]
     description?: string
   }
   readonly children: React.ReactNode
@@ -44,28 +44,58 @@ export default function BlogPostWrapper({ metadata, children }: Readonly<BlogPos
           </Button>
           
           {metadata?.tag && (
-            <Button
-              component={Link}
-              href={`/tags/${metadata.tag}`}
-              startIcon={<Label />}
-              variant="outlined"
-              size="small"
-              sx={{ textTransform: 'none' }}
-            >
-              Ver mais em {metadata.tag}
-            </Button>
+            <>
+              {Array.isArray(metadata.tag) ? (
+                metadata.tag.map((tag) => (
+                  <Button
+                    key={tag}
+                    component={Link}
+                    href={`/tags/${tag}`}
+                    startIcon={<Label />}
+                    variant="outlined"
+                    size="small"
+                    sx={{ textTransform: 'none' }}
+                  >
+                    Ver mais em {tag}
+                  </Button>
+                ))
+              ) : (
+                <Button
+                  component={Link}
+                  href={`/tags/${metadata.tag}`}
+                  startIcon={<Label />}
+                  variant="outlined"
+                  size="small"
+                  sx={{ textTransform: 'none' }}
+                >
+                  Ver mais em {metadata.tag}
+                </Button>
+              )}
+            </>
           )}
         </Box>
 
         {/* Header do Post */}
         <Box sx={{ mb: 4, textAlign: 'center' }}>
           {metadata?.tag && (
-            <Chip 
-              label={metadata.tag} 
-              color="primary" 
-              size="small"
-              sx={{ mb: 2 }}
-            />
+            <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center', flexWrap: 'wrap', mb: 2 }}>
+              {Array.isArray(metadata.tag) ? (
+                metadata.tag.map((tag) => (
+                  <Chip 
+                    key={tag}
+                    label={tag} 
+                    color="primary" 
+                    size="small"
+                  />
+                ))
+              ) : (
+                <Chip 
+                  label={metadata.tag} 
+                  color="primary" 
+                  size="small"
+                />
+              )}
+            </Box>
           )}
           
           {metadata?.title && (
