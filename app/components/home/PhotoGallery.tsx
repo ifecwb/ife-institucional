@@ -175,6 +175,7 @@ export default function PhotoGallery() {
                   src={photo.src}
                   alt={photo.alt}
                   loading="lazy"
+                  decoding="async"
                   sx={{
                     width: '100%',
                     height: '100%',
@@ -297,6 +298,8 @@ export default function PhotoGallery() {
                 <img
                   src={photos[currentIndex].src}
                   alt={photos[currentIndex].alt}
+                  loading="lazy"
+                  decoding="async"
                   style={{
                     maxWidth: '100%',
                     maxHeight: '80vh',
