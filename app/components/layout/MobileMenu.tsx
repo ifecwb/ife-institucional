@@ -19,21 +19,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-const navItems = [
-  { label: 'Início', href: '/' },
-  { 
-    label: 'Quem Somos', 
-    href: '/sobre',
-    submenu: [
-      { label: 'Sobre o IFE', href: '/sobre' },
-      { label: 'Transparência', href: '/transparencia' },
-    ]
-  },
-  { label: 'Projetos e Oficinas', href: '/projetos-e-cursos' },
-  { label: 'Seja Voluntário', href: '/seja-voluntario' },
-  { label: 'Notícias', href: '/noticias' },
-];
+import { mainNavigation, ctaButton } from '@/app/data/navigation';
 
 interface MobileMenuProps {
   open: boolean;
@@ -98,7 +84,7 @@ export default function MobileMenu({ open, onClose }: Readonly<MobileMenuProps>)
 
         {/* Lista de Navegação */}
         <List sx={{ flexGrow: 1, pt: 2 }}>
-          {navItems.map((item, index) => {
+          {mainNavigation.map((item, index) => {
             const isActive = item.href === '/' 
               ? pathname === '/' 
               : pathname.startsWith(item.href) || (item.submenu && item.submenu.some(sub => pathname.startsWith(sub.href)));
@@ -145,7 +131,7 @@ export default function MobileMenu({ open, onClose }: Readonly<MobileMenuProps>)
                 {hasSubmenu && (
                   <Collapse in={openSubmenu === index} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                      {item.submenu.map((subItem) => {
+                      {item.submenu?.map((subItem) => {
                         const isSubActive = pathname.startsWith(subItem.href);
                         return (
                           <ListItem key={subItem.href} disablePadding>
@@ -198,7 +184,7 @@ export default function MobileMenu({ open, onClose }: Readonly<MobileMenuProps>)
         <Box sx={{ p: 2 }}>
           <Button
             component={Link}
-            href="/doar"
+            href={ctaButton.href}
             variant="contained"
             color="primary"
             fullWidth
@@ -213,7 +199,7 @@ export default function MobileMenu({ open, onClose }: Readonly<MobileMenuProps>)
               },
             }}
           >
-            Doar Agora
+            {ctaButton.label}
           </Button>
         </Box>
 

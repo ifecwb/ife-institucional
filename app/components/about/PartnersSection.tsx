@@ -84,6 +84,8 @@ export default function PartnersSection() {
                   component="img"
                   src={partner.logo}
                   alt={partner.name}
+                  loading="lazy"
+                  decoding="async"
                   sx={{
                     maxWidth: '100%',
                     maxHeight: 80,

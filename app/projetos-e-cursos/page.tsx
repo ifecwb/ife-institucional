@@ -11,6 +11,7 @@ import FAQAccordion from '../components/common/FAQAccordion';
 import CTAButton from '../components/common/CTAButton';
 import { services, workshops, galleryImages, projectsFAQ } from '../data/projects';
 import { motion } from 'framer-motion';
+import { gerarLinkWhatsApp } from '@/config/site.config';
 
 export default function ProjetosPage() {
   return (
@@ -203,7 +204,7 @@ export default function ProjetosPage() {
             Garanta uma vaga nas nossas atividades. As turmas são limitadas!
           </Typography>
           <CTAButton
-            href="https://wa.me/5541999999999?text=Olá! Gostaria de me inscrever nas atividades do IFE."
+            href={gerarLinkWhatsApp('Olá! Gostaria de me inscrever nas atividades do IFE.')}
             size="large"
             external
             sx={{

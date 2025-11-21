@@ -27,6 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      {/* Adicionar aqui os demais imports, links, tracks, adsense */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
