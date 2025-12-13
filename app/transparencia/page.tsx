@@ -22,8 +22,45 @@ import Section from '../components/common/Section';
 import siteConfig, { gerarLinkWhatsApp } from '@/app/data/site.config';
 
 export const metadata: Metadata = {
-  title: 'Transparência - IFE',
-  description: 'Portal de transparência do Instituto Futuro de Excelência. Acesse informações institucionais, prestação de contas e documentos oficiais.',
+  title: 'Transparência | Instituto Futuro de Excelência',
+  description:
+    'Portal de transparência do IFE. Acesse informações institucionais, prestação de contas, documentos oficiais, convênios e demonstrativos financeiros.',
+  keywords: [
+    'transparência',
+    'prestação de contas',
+    'documentos',
+    'convênios',
+    'CNPJ',
+    'dados institucionais',
+    'IFE',
+    'curitiba',
+  ],
+  alternates: {
+    canonical: `${siteConfig.seo.urlSite}/transparencia`,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'pt_BR',
+    url: `${siteConfig.seo.urlSite}/transparencia`,
+    siteName: siteConfig.sigla,
+    title: 'Portal de Transparência - Instituto Futuro de Excelência',
+    description:
+      'Acesse informações institucionais, prestação de contas e documentos oficiais do IFE.',
+    images: [
+      {
+        url: `${siteConfig.seo.urlSite}/images/emprego.jpeg`,
+        width: 1200,
+        height: 630,
+        alt: 'Instituto Futuro de Excelência (IFE) - Transparência',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Portal de Transparência - IFE',
+    description: 'Acesse informações institucionais e prestação de contas do IFE.',
+    images: [`${siteConfig.seo.urlSite}/images/emprego.jpeg`],
+  },
 };
 
 export default function TransparenciaPage() {
