@@ -4,6 +4,7 @@ import MainLayout from './components/layout/MainLayout';
 import HeroCarousel from './components/home/HeroCarousel';
 import AchievementBadges from './components/home/AchievementBadges';
 import AboutSection from './components/home/AboutSection';
+import MissionSection from './components/home/MissionSection';
 import ServicesSection from './components/home/ServicesSection';
 import StatsSection from './components/home/StatsSection';
 import PhotoGallery from './components/home/PhotoGallery';
@@ -18,6 +19,7 @@ export default function HomeClient() {
       <HeroCarousel />
       <AchievementBadges />
       <AboutSection />
+      <MissionSection />
       <ServicesSection />
       <StatsSection />
       <PhotoGallery />
