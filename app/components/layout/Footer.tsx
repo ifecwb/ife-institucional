@@ -14,7 +14,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import Link from 'next/link';
-import siteConfig, { gerarLinkEmail, gerarLinkWhatsApp } from '@/config/site.config';
+import siteConfig, { gerarLinkEmail, gerarLinkWhatsApp } from '@/app/data/site.config';
 import { footerNavigation } from '@/app/data/navigation';
 
 export default function Footer() {

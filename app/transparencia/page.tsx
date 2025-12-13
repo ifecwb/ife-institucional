@@ -19,7 +19,7 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import MainLayout from '../components/layout/MainLayout';
 import PageHero from '../components/common/PageHero';
 import Section from '../components/common/Section';
-import siteConfig, { gerarLinkWhatsApp } from '@/config/site.config';
+import siteConfig, { gerarLinkWhatsApp } from '@/app/data/site.config';
 
 export const metadata: Metadata = {
   title: 'Transparência - IFE',

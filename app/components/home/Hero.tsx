@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import CTAButton from '../common/CTAButton';
-import siteConfig from '@/config/site.config';
+import siteConfig from '@/app/data/site.config';
 
 /**
  * Seção Hero da página inicial

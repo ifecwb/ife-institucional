@@ -2,7 +2,7 @@
 
 import { Fab, Tooltip, Zoom } from '@mui/material';
 import { WhatsApp } from '@mui/icons-material';
-import { siteConfig, gerarLinkWhatsApp } from '@/config/site.config';
+import { gerarLinkWhatsApp } from '@/app/data/site.config';
 
 interface FloatingWhatsAppProps {
   readonly message?: string;

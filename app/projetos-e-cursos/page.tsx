@@ -11,7 +11,7 @@ import FAQAccordion from '../components/common/FAQAccordion';
 import CTAButton from '../components/common/CTAButton';
 import { services, workshops, galleryImages, projectsFAQ } from '../data/projects';
 import { motion } from 'framer-motion';
-import { gerarLinkWhatsApp } from '@/config/site.config';
+import { gerarLinkWhatsApp } from '@/app/data/site.config';
 
 export default function ProjetosPage() {
   return (

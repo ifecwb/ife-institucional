@@ -9,7 +9,7 @@ import {
   Link,
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { siteConfig } from '@/config/site.config'
+import { siteConfig } from '@/app/data/site.config'
 
 export default function DonationFAQ() {
   const faqs = [

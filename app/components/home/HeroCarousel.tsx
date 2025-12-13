@@ -21,7 +21,7 @@ const slides: Slide[] = [
     id: 1,
     title: 'Transformando Vidas',
     subtitle: 'Através da Educação e Cultura',
-    description: 'Há mais de 10 anos levando oportunidades para crianças e adolescentes em situação de vulnerabilidade social.',
+    description: 'Há mais de 5 anos levando oportunidades para crianças e adolescentes em situação de vulnerabilidade social.',
     ctaText: 'Conheça Nossos Projetos',
     ctaLink: '/projetos-e-cursos',
     image: '/images/aula1.jpeg',

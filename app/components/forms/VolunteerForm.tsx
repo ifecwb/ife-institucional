@@ -9,7 +9,7 @@ import {
   CircularProgress,
 } from '@mui/material'
 import { Send } from '@mui/icons-material'
-import { siteConfig, gerarLinkWhatsApp } from '@/config/site.config'
+import { siteConfig, gerarLinkWhatsApp } from '@/app/data/site.config'
 
 interface VolunteerFormProps {
   readonly onSuccess?: () => void

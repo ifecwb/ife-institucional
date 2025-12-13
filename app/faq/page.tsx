@@ -4,7 +4,7 @@ import MainLayout from '../components/layout/MainLayout'
 import PageHero from '../components/common/PageHero'
 import Section from '../components/common/Section'
 import { Container, Box, Typography, Button } from '@mui/material'
-import { siteConfig, gerarLinkWhatsApp } from '@/config/site.config'
+import { siteConfig, gerarLinkWhatsApp } from '@/app/data/site.config'
 import VolunteerFAQ from '../components/faq/VolunteerFAQ'
 import DonationFAQ from '../components/faq/DonationFAQ'
 

@@ -1,12 +1,13 @@
 import MainLayout from '../components/layout/MainLayout';
 import PageHero from '../components/common/PageHero';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Typography, Paper } from '@mui/material';
 import Section from '../components/common/Section';
 import TimelineSection from '../components/about/TimelineSection';
 import MissionVisionValues from '../components/about/MissionVisionValues';
 import TeamSection from '../components/about/TeamSection';
 import PartnersSection from '../components/about/PartnersSection';
 import CTAButton from '../components/common/CTAButton';
+import PartnershipForm from '../components/forms/PartnershipForm';
 
 export default function SobrePage() {
   return (
@@ -46,7 +47,7 @@ export default function SobrePage() {
           >
             O Instituto Futuro de Excelência (IFE) é uma organização sem fins lucrativos
             dedicada a transformar vidas através da educação, do esporte e da cultura.
-            Fundado em 2015, atuamos na comunidade de Xaxim, em Curitiba, oferecendo
+            Fundado em 2020, atuamos na comunidade de Xaxim, em Curitiba, oferecendo
             oportunidades e desenvolvendo o potencial de crianças e jovens.
           </Typography>
 
@@ -78,6 +79,53 @@ export default function SobrePage() {
 
       {/* Parceiros */}
       <PartnersSection />
+
+      {/* Formulário de Parcerias */}
+      <Section py={10}>
+        <Container maxWidth="md">
+          <Typography
+            variant="h4"
+            component="h2"
+            gutterBottom
+            sx={{
+              fontWeight: 700,
+              textAlign: 'center',
+              mb: 2,
+              color: 'primary.main',
+            }}
+          >
+            Seja um Parceiro
+          </Typography>
+
+          <Typography
+            variant="body1"
+            sx={{
+              fontSize: '1.125rem',
+              lineHeight: 1.8,
+              textAlign: 'center',
+              color: 'text.secondary',
+              mb: 5,
+            }}
+          >
+            Sua empresa ou organização pode fazer a diferença na vida de crianças e jovens.
+            Preencha o formulário abaixo e nossa equipe entrará em contato para discutir
+            as melhores formas de parceria.
+          </Typography>
+
+          <Paper
+            elevation={0}
+            sx={{
+              p: { xs: 3, md: 5 },
+              borderRadius: 3,
+              bgcolor: 'background.paper',
+              border: '1px solid',
+              borderColor: 'divider',
+            }}
+          >
+            <PartnershipForm />
+          </Paper>
+        </Container>
+      </Section>
 
       {/* CTA Final */}
       <Section

@@ -174,6 +174,26 @@ export const siteConfig = {
       (dados.valor ? `*Valor:* R$ ${dados.valor}\n` : '') +
       (dados.tipo ? `*Tipo de Doação:* ${dados.tipo}\n` : '') +
       `\nGostaria de mais informações sobre como fazer uma doação.`,
+
+    parceria: (dados: { 
+      nomeEmpresa: string; 
+      nomeContato: string; 
+      cargo?: string;
+      email: string; 
+      telefone: string; 
+      tipoEmpresa?: string;
+      tipoParceria?: string;
+      mensagem?: string 
+    }) => 
+      `*Proposta de Parceria - Site IFE*\n\n` +
+      `*Empresa/Organização:* ${dados.nomeEmpresa}\n` +
+      `*Nome do Contato:* ${dados.nomeContato}\n` +
+      (dados.cargo ? `*Cargo:* ${dados.cargo}\n` : '') +
+      `*Email:* ${dados.email}\n` +
+      `*Telefone:* ${dados.telefone}\n` +
+      (dados.tipoEmpresa ? `*Tipo de Empresa:* ${dados.tipoEmpresa}\n` : '') +
+      (dados.tipoParceria ? `*Tipo de Parceria:* ${dados.tipoParceria}\n` : '') +
+      (dados.mensagem ? `\n*Mensagem:*\n${dados.mensagem}` : ''),
   },
 
   // ==================== SEO ====================
@@ -181,8 +201,8 @@ export const siteConfig = {
     titulo: 'Instituto Futuro de Excelência - Transformando Vidas',
     descricao: 'O IFE é uma organização sem fins lucrativos que promove educação, esporte e cultura para crianças e adolescentes em Curitiba.',
     palavrasChave: 'instituto, educação, esporte, cultura, voluntariado, doação, curitiba, crianças, adolescentes',
-    urlSite: 'https://ifecuritiba.org.br',
-    urlImagem: 'https://ifecuritiba.org.br/og-image.jpg',
+    urlSite: 'https://ifecwb.org.br',
+    urlImagem: 'https://ifecwb.org.br/og-image.jpg',
   },
 
   // ==================== FEATURES (ativar/desativar funcionalidades) ====================
