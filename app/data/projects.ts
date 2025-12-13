@@ -34,19 +34,34 @@ export const services: Service[] = [
     id: 'sports',
     title: 'Oficinas Esportivas',
     description:
-      'Desenvolvemos habilidades físicas e valores como disciplina, trabalho em equipe e superação através do judô, futsal, vôlei e ballet.',
+      'Desenvolvemos habilidades físicas e valores como disciplina, trabalho em equipe e superação através do judô, futsal e vôlei.',
     icon: 'sports_soccer',
   },
   {
-    id: 'courses',
-    title: 'Cursos de Capacitação',
+    id: 'culture',
+    title: 'Atividades Culturais',
     description:
-      'Oferecemos cursos de informática e empreendedorismo criativo para preparar jovens para o mercado de trabalho e desenvolver autonomia.',
+      'Expressão artística e desenvolvimento sociocultural através de dança de salão, ballet e danças urbanas.',
+    icon: 'theater_comedy',
+  },
+  {
+    id: 'courses',
+    title: 'Mundo do Trabalho',
+    description:
+      'Preparação para o mercado de trabalho através de tecnologia da informação, desenvolvimento socioemocional, orientação profissional e cidadania.',
     icon: 'school',
+  },
+  {
+    id: 'senai',
+    title: 'Trilha SENAI/IFE',
+    description:
+      'Cursos profissionalizantes em parceria com SENAI: Assistente Administrativo, Operador de Computador, Atendimento ao Cliente e Auxiliar de Logística.',
+    icon: 'workspace_premium',
   },
 ];
 
 export const workshops: Workshop[] = [
+  // Esportes
   {
     id: 'judo',
     title: 'Judô',
@@ -57,17 +72,6 @@ export const workshops: Workshop[] = [
     instructor: 'Sensei Carlos Silva',
     image: 'https://picsum.photos/800/600?random=30',
     icon: 'sports_martial_arts',
-  },
-  {
-    id: 'entrepreneurship',
-    title: 'Empreendedorismo Criativo',
-    description:
-      'Desenvolvemos a criatividade e o espírito empreendedor dos jovens através de projetos práticos e mentoria.',
-    ageGroup: '14 a 17 anos',
-    schedule: 'Qua e Sex, 15h às 17h',
-    instructor: 'Profª Ana Santos',
-    image: 'https://picsum.photos/800/600?random=31',
-    icon: 'lightbulb',
   },
   {
     id: 'futsal',
@@ -81,6 +85,141 @@ export const workshops: Workshop[] = [
     icon: 'sports_soccer',
   },
   {
+    id: 'volei',
+    title: 'Vôlei',
+    description:
+      'Coordenação, agilidade e espírito de equipe. O vôlei promove o desenvolvimento integral através do esporte coletivo.',
+    ageGroup: '10 a 17 anos',
+    schedule: 'Qua e Sex, 14h às 16h',
+    instructor: 'Prof. Marcos Oliveira',
+    image:'/images/volei1.jpeg',
+    icon: 'sports_volleyball',
+  },
+  // Cultura
+  {
+    id: 'danca-salao',
+    title: 'Dança de Salão',
+    description:
+      'Expressão corporal, ritmo e socialização. A dança de salão desenvolve a coordenação motora e o relacionamento interpessoal.',
+    ageGroup: '12 a 17 anos',
+    schedule: 'Ter e Qui, 15h às 17h',
+    instructor: 'Profª Juliana Costa',
+    image: 'https://picsum.photos/800/600?random=34',
+    icon: 'music_note',
+  },
+  {
+    id: 'ballet',
+    title: 'Ballet',
+    description:
+      'Postura, disciplina e expressão artística. O ballet clássico promove o desenvolvimento físico e emocional.',
+    ageGroup: '5 a 14 anos',
+    schedule: 'Seg e Qua, 14h às 15h30',
+    instructor: 'Profª Marina Santos',
+    image: 'https://picsum.photos/800/600?random=35',
+    icon: 'self_improvement',
+  },
+  {
+    id: 'dancas-urbanas',
+    title: 'Danças Urbanas',
+    description:
+      'Criatividade, autoexpressão e cultura urbana. As danças urbanas conectam os jovens com a cultura contemporânea.',
+    ageGroup: '10 a 17 anos',
+    schedule: 'Sex, 16h às 18h',
+    instructor: 'Prof. Diego Ferreira',
+    image: 'https://picsum.photos/800/600?random=36',
+    icon: 'music_note',
+  },
+  // Mundo do Trabalho
+  {
+    id: 'tecnologia-informacao',
+    title: 'Tecnologia da Informação',
+    description:
+      'Informática básica, internet e ferramentas digitais. Preparação para o mundo digital e oportunidades profissionais.',
+    ageGroup: '14 a 17 anos',
+    schedule: 'Ter e Qui, 9h às 11h',
+    instructor: 'Prof. André Martins',
+    image: 'https://picsum.photos/800/600?random=37',
+    icon: 'computer',
+  },
+  {
+    id: 'desenvolvimento-socioemocional',
+    title: 'Desenvolvimento Socioemocional',
+    description:
+      'Inteligência emocional, relacionamentos e autoconhecimento. Desenvolvimento de habilidades essenciais para a vida.',
+    ageGroup: '14 a 17 anos',
+    schedule: 'Qua, 14h às 16h',
+    instructor: 'Psicóloga Laura Mendes',
+    image: 'https://picsum.photos/800/600?random=38',
+    icon: 'psychology',
+  },
+  {
+    id: 'mundo-trabalho',
+    title: 'Orientação para o Mundo do Trabalho',
+    description:
+      'Orientação profissional, elaboração de currículo e preparação para entrevistas. Ponte para o primeiro emprego.',
+    ageGroup: '14 a 17 anos',
+    schedule: 'Sex, 14h às 16h',
+    instructor: 'Profª Carolina Souza',
+    image: 'https://picsum.photos/800/600?random=39',
+    icon: 'work',
+  },
+  {
+    id: 'cidadania-convivencia',
+    title: 'Cidadania e Convivência',
+    description:
+      'Valores, direitos e deveres, participação social. Formação de cidadãos conscientes e atuantes na sociedade.',
+    ageGroup: '12 a 17 anos',
+    schedule: 'Seg, 15h às 17h',
+    instructor: 'Prof. Ricardo Alves',
+    image: 'https://picsum.photos/800/600?random=40',
+    icon: 'groups',
+  },
+  // Trilha SENAI/IFE
+  {
+    id: 'assistente-administrativo',
+    title: 'Assistente Administrativo (SENAI)',
+    description:
+      'Curso profissionalizante em parceria com SENAI. Formação completa para atuar na área administrativa.',
+    ageGroup: '16 a 17 anos',
+    schedule: 'Seg a Sex, 8h às 12h',
+    instructor: 'SENAI Paraná',
+    image: 'https://picsum.photos/800/600?random=41',
+    icon: 'business_center',
+  },
+  {
+    id: 'operador-computador',
+    title: 'Operador de Computador (SENAI)',
+    description:
+      'Curso profissionalizante em parceria com SENAI. Capacitação técnica em informática e sistemas.',
+    ageGroup: '16 a 17 anos',
+    schedule: 'Seg a Sex, 13h às 17h',
+    instructor: 'SENAI Paraná',
+    image: 'https://picsum.photos/800/600?random=42',
+    icon: 'computer',
+  },
+  {
+    id: 'atendimento-cliente',
+    title: 'Atendimento ao Cliente (SENAI)',
+    description:
+      'Curso profissionalizante em parceria com SENAI. Técnicas de comunicação e excelência no atendimento.',
+    ageGroup: '16 a 17 anos',
+    schedule: 'Seg a Sex, 8h às 12h',
+    instructor: 'SENAI Paraná',
+    image: 'https://picsum.photos/800/600?random=43',
+    icon: 'support_agent',
+  },
+  {
+    id: 'auxiliar-logistica',
+    title: 'Auxiliar de Logística (SENAI)',
+    description:
+      'Curso profissionalizante em parceria com SENAI. Formação em processos logísticos e gestão de estoques.',
+    ageGroup: '16 a 17 anos',
+    schedule: 'Seg a Sex, 13h às 17h',
+    instructor: 'SENAI Paraná',
+    image: 'https://picsum.photos/800/600?random=44',
+    icon: 'local_shipping',
+  },
+  {
     id: 'volleyball',
     title: 'Vôlei',
     description:
@@ -88,19 +227,8 @@ export const workshops: Workshop[] = [
     ageGroup: '10 a 17 anos',
     schedule: 'Ter e Qui, 16h às 18h',
     instructor: 'Profª Juliana Costa',
-    image: 'https://picsum.photos/800/600?random=33',
+    image: '/images/volei1.jpeg',
     icon: 'sports_volleyball',
-  },
-  {
-    id: 'ballet',
-    title: 'Ballet',
-    description:
-      'Graça, postura e expressão artística. O ballet desenvolve coordenação, concentração e autoestima através da dança.',
-    ageGroup: '5 a 15 anos',
-    schedule: 'Seg, Qua e Sex, 14h às 15h30',
-    instructor: 'Profª Maria Fernanda',
-    image: 'https://picsum.photos/800/600?random=34',
-    icon: 'theater_comedy',
   },
   {
     id: 'informatics',
@@ -118,55 +246,55 @@ export const workshops: Workshop[] = [
 export const galleryImages: GalleryImage[] = [
   {
     id: '1',
-    src: 'https://picsum.photos/800/600?random=40',
+    src: '/images/aula1.jpeg',
     alt: 'Aula de Judô',
     category: 'Esportes',
   },
   {
     id: '2',
-    src: 'https://picsum.photos/800/600?random=41',
+    src: '/images/aula2.jpeg',
     alt: 'Oficina de Empreendedorismo',
     category: 'Cursos',
   },
   {
     id: '3',
-    src: 'https://picsum.photos/800/600?random=42',
+    src: '/images/aula3.jpeg',
     alt: 'Treino de Futsal',
     category: 'Esportes',
   },
   {
     id: '4',
-    src: 'https://picsum.photos/800/600?random=43',
+    src: '/images/biblioteca.jpeg',
     alt: 'Aula de Ballet',
     category: 'Cultura',
   },
   {
     id: '5',
-    src: 'https://picsum.photos/800/600?random=44',
+    src: '/images/certificado.jpeg',
     alt: 'Curso de Informática',
     category: 'Cursos',
   },
   {
     id: '6',
-    src: 'https://picsum.photos/800/600?random=45',
+    src: '/images/doacao.jpeg',
     alt: 'Campeonato de Vôlei',
     category: 'Esportes',
   },
   {
     id: '7',
-    src: 'https://picsum.photos/800/600?random=46',
+    src: '/images/emprego.jpeg',
     alt: 'Apresentação Cultural',
     category: 'Cultura',
   },
   {
     id: '8',
-    src: 'https://picsum.photos/800/600?random=47',
+    src: '/images/turma.jpeg',
     alt: 'Projeto Empreendedor',
     category: 'Cursos',
   },
   {
     id: '9',
-    src: 'https://picsum.photos/800/600?random=48',
+    src: '/images/turma2.jpeg',
     alt: 'Evento Esportivo',
     category: 'Esportes',
   },

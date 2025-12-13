@@ -24,8 +24,8 @@ const stats: Stat[] = [
     id: 1,
     icon: <School sx={{ fontSize: { xs: 40, md: 50 } }} />,
     value: 150,
-    suffix: '',
-    label: 'Crianças Atendidas',
+    suffix: '+',
+    label: 'Crianças e Adolescentes Atendidos',
     description: 'Entre 5 e 17 anos anualmente',
   },
   {

@@ -21,22 +21,39 @@ export default function WorkshopCard({ workshop, index }: WorkshopCardProps) {
       <Card
         sx={{
           height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        transition: 'all 0.2s ease',
-        '&:hover': {
-          transform: 'translateY(-2px)',
-          boxShadow: 3,
-        },
+          display: 'flex',
+          flexDirection: 'column',
+          transition: 'all 0.2s ease',
+          '&:hover': {
+            transform: 'translateY(-2px)',
+            boxShadow: 3,
+          },
         }}
       >
-        <CardMedia
-          component="img"
-          height="240"
-          image={workshop.image}
-          alt={workshop.title}
-          sx={{ objectFit: 'cover' }}
-        />
+        <Box
+          sx={{
+            position: 'relative',
+            width: '100%',
+            paddingTop: '75%', // 4:3 aspect ratio (3/4 = 0.75)
+            overflow: 'hidden',
+            bgcolor: 'grey.200',
+          }}
+        >
+          <CardMedia
+            component="img"
+            image={workshop.image}
+            alt={workshop.title}
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+            }}
+          />
+        </Box>
         <CardContent sx={{ flexGrow: 1, p: 3 }}>
           <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 700 }}>
             {workshop.title}

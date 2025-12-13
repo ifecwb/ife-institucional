@@ -1,9 +1,10 @@
 'use client';
 
+import { useState, useMemo, useCallback } from 'react';
 import MainLayout from '../components/layout/MainLayout';
 import PageHero from '../components/common/PageHero';
-import { Box, Container, Typography, Card, CardContent } from '@mui/material';
-import { School, SportsSoccer } from '@mui/icons-material';
+import { Box, Container, Typography, Card, CardContent, TextField, InputAdornment } from '@mui/material';
+import { School, SportsSoccer, Search, TheaterComedy, WorkspacePremium } from '@mui/icons-material';
 import Section from '../components/common/Section';
 import PageTitle from '../components/common/PageTitle';
 import WorkshopCard from '../components/projects/WorkshopCard';
@@ -14,6 +15,25 @@ import { motion } from 'framer-motion';
 import { gerarLinkWhatsApp } from '@/app/data/site.config';
 
 export default function ProjetosClient() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Filtrar workshops baseado no termo de pesquisa
+  const filteredWorkshops = useMemo(() => {
+    if (!searchTerm.trim()) return workshops;
+    
+    const term = searchTerm.toLowerCase();
+    return workshops.filter(workshop =>
+      workshop.title.toLowerCase().includes(term) ||
+      workshop.description.toLowerCase().includes(term) ||
+      workshop.ageGroup.toLowerCase().includes(term) ||
+      workshop.instructor.toLowerCase().includes(term)
+    );
+  }, [searchTerm]);
+
+  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  }, []);
+
   return (
     <MainLayout>
       <PageHero
@@ -80,11 +100,10 @@ export default function ProjetosClient() {
                         mb: 3,
                       }}
                     >
-                      {service.icon === 'sports_soccer' ? (
-                        <SportsSoccer sx={{ fontSize: 32, color: 'white' }} />
-                      ) : (
-                        <School sx={{ fontSize: 32, color: 'white' }} />
-                      )}
+                      {service.icon === 'sports_soccer' && <SportsSoccer sx={{ fontSize: 32, color: 'white' }} />}
+                      {service.icon === 'school' && <School sx={{ fontSize: 32, color: 'white' }} />}
+                      {service.icon === 'theater_comedy' && <TheaterComedy sx={{ fontSize: 32, color: 'white' }} />}
+                      {service.icon === 'workspace_premium' && <WorkspacePremium sx={{ fontSize: 32, color: 'white' }} />}
                     </Box>
 
                     <Typography variant="h5" gutterBottom sx={{ fontWeight: 700 }}>
@@ -112,10 +131,43 @@ export default function ProjetosClient() {
             variant="body1"
             color="text.secondary"
             align="center"
-            sx={{ mb: 6, maxWidth: 700, mx: 'auto' }}
+            sx={{ mb: 4, maxWidth: 700, mx: 'auto' }}
           >
             Atividades gratuitas para crianças e adolescentes de 5 a 17 anos
           </Typography>
+
+          {/* Campo de Pesquisa */}
+          <Box sx={{ maxWidth: 600, mx: 'auto', mb: 6 }}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="Pesquisar por oficina, curso, idade ou instrutor..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search />
+                  </InputAdornment>
+                ),
+              }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: 2,
+                  bgcolor: 'background.paper',
+                },
+              }}
+            />
+            {searchTerm && (
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ mt: 2, textAlign: 'center' }}
+              >
+                {filteredWorkshops.length} {filteredWorkshops.length === 1 ? 'resultado encontrado' : 'resultados encontrados'}
+              </Typography>
+            )}
+          </Box>
 
           <Box
             sx={{
@@ -128,9 +180,20 @@ export default function ProjetosClient() {
               gap: 4,
             }}
           >
-            {workshops.map((workshop, index) => (
-              <WorkshopCard key={workshop.id} workshop={workshop} index={index} />
-            ))}
+            {filteredWorkshops.length > 0 ? (
+              filteredWorkshops.map((workshop, index) => (
+                <WorkshopCard key={workshop.id} workshop={workshop} index={index} />
+              ))
+            ) : (
+              <Box sx={{ gridColumn: '1 / -1', textAlign: 'center', py: 8 }}>
+                <Typography variant="h6" color="text.secondary" gutterBottom>
+                  Nenhuma oficina encontrada
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Tente ajustar sua pesquisa ou limpar o campo de busca
+                </Typography>
+              </Box>
+            )}
           </Box>
         </Container>
       </Section>

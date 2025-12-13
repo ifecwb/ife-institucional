@@ -78,7 +78,7 @@ export const siteConfig = {
 
   // ==================== INFORMAÇÕES INSTITUCIONAIS ====================
   institucional: {
-    cnpj: '37.695.827/0001-77',
+    cnpj: '36.942.850/0001-56',
     dataFundacao: '2020-01-01',
     razaoSocial: 'Instituto Futuro de Excelência',
     presidente: 'Emerson Rafael Baptista dos Anjos',
@@ -88,12 +88,17 @@ export const siteConfig = {
     reconhecimentos: {
       comtiba: {
         nome: 'COMTIBA - Conselho Municipal dos Direitos da Criança e do Adolescente',
-        descricao: 'Inscrição ativa no Conselho Municipal dos Direitos da Criança e do Adolescente de Curitiba',
+        descricao: 'Inscrição COMTIBA 166/2020 - Conselho Municipal dos Direitos da Criança e do Adolescente de Curitiba',
         ativo: true,
       },
       cme: {
         nome: 'CME - Conselho Municipal do Esporte',
-        descricao: 'Inscrição ativa no Conselho Municipal do Esporte conforme Resolução 03/2025',
+        descricao: 'Inscrição CME 008/2020 - Conselho Municipal do Esporte',
+        ativo: true,
+      },
+      cmdca: {
+        nome: 'CMDCA - Conselho Municipal dos Direitos da Criança e do Adolescente',
+        descricao: 'Inscrição CMDCA 083/2020 - Conselho Municipal dos Direitos da Criança e do Adolescente',
         ativo: true,
       },
       lei13019: {

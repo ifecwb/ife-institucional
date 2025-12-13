@@ -145,7 +145,7 @@ export default function TransparenciaPage() {
           </Typography>
 
           <Grid container spacing={3}>
-            <Grid size={{ xs: 12, md: 4 }}>
+            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
               <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'divider' }}>
                 <CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -161,7 +161,7 @@ export default function TransparenciaPage() {
               </Card>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 4 }}>
+            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
               <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'divider' }}>
                 <CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -177,7 +177,23 @@ export default function TransparenciaPage() {
               </Card>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 4 }}>
+            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+              <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'divider' }}>
+                <CardContent>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    <VerifiedIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
+                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                      {siteConfig.institucional.reconhecimentos.cmdca.nome.split(' - ')[0]}
+                    </Typography>
+                  </Box>
+                  <Typography variant="body2" color="text.secondary">
+                    {siteConfig.institucional.reconhecimentos.cmdca.descricao}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
               <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'divider' }}>
                 <CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>

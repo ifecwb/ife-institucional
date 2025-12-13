@@ -95,7 +95,7 @@ export default function Hero() {
               textShadow: '1px 1px 3px rgba(0,0,0,0.3)',
             }}
           >
-            🌐 Esportes / Cultura e Educação
+            Mais que um instituto, uma família que transforma vidas.
             <br />
             📍 {enderecoCompleto}
           </Typography>
