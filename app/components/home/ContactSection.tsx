@@ -13,7 +13,7 @@ import { motion } from 'framer-motion';
 import SendIcon from '@mui/icons-material/Send';
 import Section from '../common/Section';
 import PageTitle from '../common/PageTitle';
-import siteConfig, {gerarLinkWhatsApp} from '@/config/site.config';
+import siteConfig, {gerarLinkWhatsApp} from '@/app/data/site.config';
 
 /**
  * Seção Contato da página inicial

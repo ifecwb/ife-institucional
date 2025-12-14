@@ -19,11 +19,48 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import MainLayout from '../components/layout/MainLayout';
 import PageHero from '../components/common/PageHero';
 import Section from '../components/common/Section';
-import siteConfig, { gerarLinkWhatsApp } from '@/config/site.config';
+import siteConfig, { gerarLinkWhatsApp } from '@/app/data/site.config';
 
 export const metadata: Metadata = {
-  title: 'Transparência - IFE',
-  description: 'Portal de transparência do Instituto Futuro de Excelência. Acesse informações institucionais, prestação de contas e documentos oficiais.',
+  title: 'Transparência | Instituto Futuro de Excelência',
+  description:
+    'Portal de transparência do IFE. Acesse informações institucionais, prestação de contas, documentos oficiais, convênios e demonstrativos financeiros.',
+  keywords: [
+    'transparência',
+    'prestação de contas',
+    'documentos',
+    'convênios',
+    'CNPJ',
+    'dados institucionais',
+    'IFE',
+    'curitiba',
+  ],
+  alternates: {
+    canonical: `${siteConfig.seo.urlSite}/transparencia`,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'pt_BR',
+    url: `${siteConfig.seo.urlSite}/transparencia`,
+    siteName: siteConfig.sigla,
+    title: 'Portal de Transparência - Instituto Futuro de Excelência',
+    description:
+      'Acesse informações institucionais, prestação de contas e documentos oficiais do IFE.',
+    images: [
+      {
+        url: `${siteConfig.seo.urlSite}/images/emprego.jpeg`,
+        width: 1200,
+        height: 630,
+        alt: 'Instituto Futuro de Excelência (IFE) - Transparência',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Portal de Transparência - IFE',
+    description: 'Acesse informações institucionais e prestação de contas do IFE.',
+    images: [`${siteConfig.seo.urlSite}/images/emprego.jpeg`],
+  },
 };
 
 export default function TransparenciaPage() {
@@ -108,7 +145,7 @@ export default function TransparenciaPage() {
           </Typography>
 
           <Grid container spacing={3}>
-            <Grid size={{ xs: 12, md: 4 }}>
+            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
               <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'divider' }}>
                 <CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -124,7 +161,7 @@ export default function TransparenciaPage() {
               </Card>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 4 }}>
+            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
               <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'divider' }}>
                 <CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -140,7 +177,23 @@ export default function TransparenciaPage() {
               </Card>
             </Grid>
 
-            <Grid size={{ xs: 12, md: 4 }}>
+            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+              <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'divider' }}>
+                <CardContent>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                    <VerifiedIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
+                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                      {siteConfig.institucional.reconhecimentos.cmdca.nome.split(' - ')[0]}
+                    </Typography>
+                  </Box>
+                  <Typography variant="body2" color="text.secondary">
+                    {siteConfig.institucional.reconhecimentos.cmdca.descricao}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+
+            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
               <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'divider' }}>
                 <CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>

@@ -21,11 +21,11 @@ export default function PartnersSection() {
             textAlign: 'center',
             color: 'text.secondary',
             mb: 6,
-            maxWidth: 600,
+            maxWidth: 800,
             mx: 'auto',
           }}
         >
-          Juntos somos mais fortes. Agradecemos a confiança e o apoio de nossos parceiros.
+          Nosso trabalho só é possível graças ao apoio de parceiros que acreditam na transformação social. Agradecemos especialmente ao SENAI, Telefônica Vivo, SESI, Mais 1 Café e Market4You, além dos órgãos públicos que viabilizam nossos projetos, como COMTIBA, CME, CMDCA e a Prefeitura de Curitiba.
         </Typography>
 
         <Box

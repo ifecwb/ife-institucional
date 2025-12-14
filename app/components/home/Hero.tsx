@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import CTAButton from '../common/CTAButton';
-import siteConfig from '@/config/site.config';
+import siteConfig from '@/app/data/site.config';
 
 /**
  * Seção Hero da página inicial
@@ -95,7 +95,7 @@ export default function Hero() {
               textShadow: '1px 1px 3px rgba(0,0,0,0.3)',
             }}
           >
-            🌐 Esportes / Cultura e Educação
+            Mais que um instituto, uma família que transforma vidas.
             <br />
             📍 {enderecoCompleto}
           </Typography>
