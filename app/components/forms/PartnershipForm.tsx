@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 import {
   Box,
   TextField,
@@ -10,25 +12,15 @@ import {
   MenuItem,
 } from '@mui/material'
 import { Send } from '@mui/icons-material'
-import { siteConfig, gerarLinkWhatsApp } from '@/app/data/site.config'
 
 interface PartnershipFormProps {
   readonly onSuccess?: () => void
 }
 
 export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormProps>) {
-  const [formData, setFormData] = useState({
-    nomeEmpresa: '',
-    nomeContato: '',
-    cargo: '',
-    email: '',
-    telefone: '',
-    tipoEmpresa: '',
-    tipoParceria: '',
-    mensagem: '',
-  })
+  const { register, handleSubmit, setValue } = useForm()
+  const [result, setResult] = useState('')
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
 
   const tiposEmpresa = [
     'Empresa Privada',
@@ -48,60 +40,57 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
     'Outro',
   ]
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-    setError('')
+  const onHCaptchaChange = (token: string) => {
+    setValue('h-captcha-response', token)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const onSubmit = async (data: any) => {
+    setResult('Enviando...')
     setLoading(true)
-    setError('')
 
-    // Validação básica
-    if (!formData.nomeEmpresa || !formData.nomeContato || !formData.email || !formData.telefone) {
-      setError('Por favor, preencha todos os campos obrigatórios.')
-      setLoading(false)
-      return
-    }
+    const formData = new FormData()
+    Object.keys(data).forEach(key => formData.append(key, data[key]))
+    formData.append('access_key', 'e8f7e662-b90d-48a4-9176-a563bcc0ba65')
 
     try {
-      // Gera mensagem do WhatsApp usando o template
-      const mensagem = siteConfig.whatsappTemplates.parceria(formData)
-      const linkWhatsApp = gerarLinkWhatsApp(mensagem)
-
-      // Abre o WhatsApp em nova aba
-      window.open(linkWhatsApp, '_blank', 'noopener,noreferrer')
-
-      // Callback de sucesso
-      if (onSuccess) {
-        onSuccess()
-      }
-
-      // Limpa o formulário
-      setFormData({
-        nomeEmpresa: '',
-        nomeContato: '',
-        cargo: '',
-        email: '',
-        telefone: '',
-        tipoEmpresa: '',
-        tipoParceria: '',
-        mensagem: '',
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
       })
+
+      const responseData = await response.json()
+      
+      if (responseData.success) {
+        setResult('Formulário enviado com sucesso! Entraremos em contato em breve.')
+        
+        // Callback de sucesso
+        if (onSuccess) {
+          onSuccess()
+        }
+        
+        // Limpar mensagem após 5 segundos
+        setTimeout(() => setResult(''), 5000)
+      } else {
+        setResult('Erro ao enviar formulário. Por favor, tente novamente.')
+        setTimeout(() => setResult(''), 5000)
+      }
     } catch (err) {
-      setError('Erro ao processar formulário. Tente novamente.')
+      setResult('Erro ao conectar. Por favor, tente novamente.')
+      setTimeout(() => setResult(''), 5000)
+      console.error('Erro:', err)
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-      {error && (
-        <Alert severity="error" onClose={() => setError('')}>
-          {error}
+    <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+      {result && (
+        <Alert 
+          severity={result.includes('sucesso') ? 'success' : 'error'}
+          onClose={() => setResult('')}
+        >
+          {result}
         </Alert>
       )}
 
@@ -109,9 +98,7 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
         required
         fullWidth
         label="Nome da Empresa/Organização"
-        name="nomeEmpresa"
-        value={formData.nomeEmpresa}
-        onChange={handleChange}
+        {...register('nomeEmpresa', { required: true })}
         disabled={loading}
       />
 
@@ -120,18 +107,14 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
           required
           fullWidth
           label="Nome do Contato"
-          name="nomeContato"
-          value={formData.nomeContato}
-          onChange={handleChange}
+          {...register('nomeContato', { required: true })}
           disabled={loading}
         />
 
         <TextField
           fullWidth
           label="Cargo"
-          name="cargo"
-          value={formData.cargo}
-          onChange={handleChange}
+          {...register('cargo')}
           disabled={loading}
         />
       </Box>
@@ -142,9 +125,7 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
           fullWidth
           type="email"
           label="E-mail"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
+          {...register('email', { required: true })}
           disabled={loading}
         />
 
@@ -152,10 +133,8 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
           required
           fullWidth
           label="Telefone/WhatsApp"
-          name="telefone"
           placeholder="(00) 00000-0000"
-          value={formData.telefone}
-          onChange={handleChange}
+          {...register('telefone', { required: true })}
           disabled={loading}
         />
       </Box>
@@ -165,11 +144,11 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
           select
           fullWidth
           label="Tipo de Empresa/Organização"
-          name="tipoEmpresa"
-          value={formData.tipoEmpresa}
-          onChange={handleChange}
+          {...register('tipoEmpresa')}
           disabled={loading}
+          defaultValue=""
         >
+          <MenuItem value="">Selecione...</MenuItem>
           {tiposEmpresa.map((tipo) => (
             <MenuItem key={tipo} value={tipo}>
               {tipo}
@@ -181,11 +160,11 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
           select
           fullWidth
           label="Tipo de Parceria"
-          name="tipoParceria"
-          value={formData.tipoParceria}
-          onChange={handleChange}
+          {...register('tipoParceria')}
           disabled={loading}
+          defaultValue=""
         >
+          <MenuItem value="">Selecione...</MenuItem>
           {tiposParceria.map((tipo) => (
             <MenuItem key={tipo} value={tipo}>
               {tipo}
@@ -199,11 +178,14 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
         multiline
         rows={4}
         label="Mensagem (opcional)"
-        name="mensagem"
+        {...register('mensagem')}
         placeholder="Conte-nos mais sobre a proposta de parceria..."
-        value={formData.mensagem}
-        onChange={handleChange}
         disabled={loading}
+      />
+
+      <HCaptcha
+        sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+        onVerify={onHCaptchaChange}
       />
 
       <Button
@@ -214,12 +196,8 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
         disabled={loading}
         sx={{ alignSelf: 'flex-start' }}
       >
-        {loading ? 'Processando...' : 'Enviar via WhatsApp'}
+        {loading ? 'Enviando...' : 'Enviar Formulário'}
       </Button>
-
-      <Alert severity="info">
-        Ao clicar em "Enviar", você será redirecionado para o WhatsApp com sua mensagem pré-preenchida.
-      </Alert>
     </Box>
   )
 }
