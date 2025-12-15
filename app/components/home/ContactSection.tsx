@@ -1,6 +1,8 @@
 'use client';
 
 import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import {
   Box,
   Container,
@@ -17,32 +19,48 @@ import siteConfig, {gerarLinkWhatsApp} from '@/app/data/site.config';
 
 /**
  * Seção Contato da página inicial
- * Formulário simples (será integrado com react-hook-form em fase posterior)
+ * Integrado com Web3Forms para envio de formulário
  */
 export default function ContactSection() {
-  const [formData, setFormData] = React.useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [status, setStatus] = React.useState<'idle' | 'success' | 'error'>('idle');
+  const { register, handleSubmit, setValue } = useForm();
+  const [result, setResult] = React.useState<string>('');
+  const [loading, setLoading] = React.useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+  const onHCaptchaChange = (token: string) => {
+    setValue('h-captcha-response', token);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simulação de envio (será implementado com react-hook-form + integração real)
-    console.log('Form data:', formData);
-    setStatus('success');
-    setTimeout(() => {
-      setStatus('idle');
-      setFormData({ name: '', email: '', message: '' });
-    }, 3000);
+  const onSubmit = async (data: any) => {
+    setResult('Enviando...');
+    setLoading(true);
+    
+    const formData = new FormData();
+    Object.keys(data).forEach(key => formData.append(key, data[key]));
+    formData.append('access_key', '2ce8774d-0464-46a4-942b-8a1d8fba8571');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const responseData = await response.json();
+      
+      if (responseData.success) {
+        setResult('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+        // Limpar mensagem após 5 segundos
+        setTimeout(() => setResult(''), 5000);
+      } else {
+        setResult('Erro ao enviar mensagem. Por favor, tente novamente.');
+        setTimeout(() => setResult(''), 5000);
+      }
+    } catch (error) {
+      setResult('Erro ao conectar. Por favor, tente novamente.');
+      setTimeout(() => setResult(''), 5000);
+      console.error('Erro:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -76,7 +94,7 @@ export default function ContactSection() {
         >
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -86,60 +104,56 @@ export default function ContactSection() {
             <TextField
               fullWidth
               label="Nome"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
+              {...register('name', { required: true })}
               variant="outlined"
+              disabled={loading}
             />
 
             <TextField
               fullWidth
               label="E-mail"
-              name="email"
               type="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
+              {...register('email', { required: true })}
               variant="outlined"
+              disabled={loading}
             />
 
             <TextField
               fullWidth
               label="Mensagem"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
+              {...register('message', { required: true })}
               multiline
               rows={5}
               variant="outlined"
+              disabled={loading}
             />
 
-            {status === 'success' && (
-              <Alert severity="success">
-                Mensagem enviada com sucesso! Entraremos em contato em breve.
+            {result && (
+              <Alert 
+                severity={result.includes('sucesso') ? 'success' : 'error'}
+              >
+                {result}
               </Alert>
             )}
 
-            {status === 'error' && (
-              <Alert severity="error">
-                Erro ao enviar mensagem. Por favor, tente novamente.
-              </Alert>
-            )}
+            <HCaptcha
+              sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+              onVerify={onHCaptchaChange}
+            />
 
             <Button
               type="submit"
               variant="contained"
               size="large"
               endIcon={<SendIcon />}
+              disabled={loading}
               sx={{
                 py: 1.5,
                 alignSelf: 'center',
                 minWidth: 200,
               }}
             >
-              Enviar Mensagem
+              {result === 'Enviando...' ? 'Enviando...' : 'Enviar Mensagem'}
             </Button>
           </Box>
 
