@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import {
@@ -10,58 +9,32 @@ import {
   TextField,
   Button,
   Alert,
+  CircularProgress,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import SendIcon from '@mui/icons-material/Send';
 import Section from '../common/Section';
 import PageTitle from '../common/PageTitle';
-import siteConfig, {gerarLinkWhatsApp} from '@/app/data/site.config';
+import siteConfig, { gerarLinkWhatsApp } from '@/app/data/site.config';
+import { useWeb3FormsSubmit } from '@/app/hooks/useWeb3FormsSubmit';
 
 /**
  * Seção Contato da página inicial
  * Integrado com Web3Forms para envio de formulário
  */
 export default function ContactSection() {
-  const { register, handleSubmit, setValue } = useForm();
-  const [result, setResult] = React.useState<string>('');
-  const [loading, setLoading] = React.useState(false);
-
-  const onHCaptchaChange = (token: string) => {
-    setValue('h-captcha-response', token);
-  };
-
-  const onSubmit = async (data: any) => {
-    setResult('Enviando...');
-    setLoading(true);
-    
-    const formData = new FormData();
-    Object.keys(data).forEach(key => formData.append(key, data[key]));
-    formData.append('access_key', '2ce8774d-0464-46a4-942b-8a1d8fba8571');
-
-    try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const responseData = await response.json();
-      
-      if (responseData.success) {
-        setResult('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-        // Limpar mensagem após 5 segundos
-        setTimeout(() => setResult(''), 5000);
-      } else {
-        setResult('Erro ao enviar mensagem. Por favor, tente novamente.');
-        setTimeout(() => setResult(''), 5000);
-      }
-    } catch (error) {
-      setResult('Erro ao conectar. Por favor, tente novamente.');
-      setTimeout(() => setResult(''), 5000);
-      console.error('Erro:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { register, handleSubmit, reset } = useForm();
+  const {
+    state,
+    isLoading,
+    submit,
+    clearMessage,
+    setHCaptchaToken,
+    hCaptchaSiteKey,
+  } = useWeb3FormsSubmit({
+    onSuccess: () => reset(),
+    successMessage: 'Mensagem enviada com sucesso! Entraremos em contato em breve.',
+  });
 
   return (
     <Section bgcolor="background.paper" py={10}>
@@ -94,7 +67,7 @@ export default function ContactSection() {
         >
           <Box
             component="form"
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(submit)}
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -106,7 +79,7 @@ export default function ContactSection() {
               label="Nome"
               {...register('name', { required: true })}
               variant="outlined"
-              disabled={loading}
+              disabled={isLoading}
             />
 
             <TextField
@@ -115,7 +88,7 @@ export default function ContactSection() {
               type="email"
               {...register('email', { required: true })}
               variant="outlined"
-              disabled={loading}
+              disabled={isLoading}
             />
 
             <TextField
@@ -125,35 +98,36 @@ export default function ContactSection() {
               multiline
               rows={5}
               variant="outlined"
-              disabled={loading}
+              disabled={isLoading}
             />
 
-            {result && (
+            {state.message && (
               <Alert 
-                severity={result.includes('sucesso') ? 'success' : 'error'}
+                severity={state.status === 'success' ? 'success' : 'error'}
+                onClose={clearMessage}
               >
-                {result}
+                {state.message}
               </Alert>
             )}
 
             <HCaptcha
-              sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
-              onVerify={onHCaptchaChange}
+              sitekey={hCaptchaSiteKey}
+              onVerify={setHCaptchaToken}
             />
 
             <Button
               type="submit"
               variant="contained"
               size="large"
-              endIcon={<SendIcon />}
-              disabled={loading}
+              endIcon={isLoading ? <CircularProgress size={20} /> : <SendIcon />}
+              disabled={isLoading}
               sx={{
                 py: 1.5,
                 alignSelf: 'center',
                 minWidth: 200,
               }}
             >
-              {result === 'Enviando...' ? 'Enviando...' : 'Enviar Mensagem'}
+              {isLoading ? 'Enviando...' : 'Enviar Mensagem'}
             </Button>
           </Box>
 
@@ -175,7 +149,9 @@ export default function ContactSection() {
               📧 {siteConfig.contato.email}
             </Typography>
             <Typography variant="body2" sx={{ mb: 1 }}>
-              📱 <a href={gerarLinkWhatsApp(siteConfig.contato.telefoneWhatsApp)}>{} (WhatsApp)</a>
+              📱 <a href={gerarLinkWhatsApp('Olá! Vim pelo site e gostaria de mais informações.')} style={{ color: 'inherit' }}>
+                {siteConfig.contato.telefone} (WhatsApp)
+              </a>
             </Typography>
             <Typography variant="body2">
               📍  {siteConfig.endereco.rua} - {siteConfig.endereco.numero}<br />

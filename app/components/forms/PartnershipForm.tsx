@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import {
@@ -12,15 +11,28 @@ import {
   MenuItem,
 } from '@mui/material'
 import { Send } from '@mui/icons-material'
+import { useWeb3FormsSubmit } from '@/app/hooks/useWeb3FormsSubmit'
 
 interface PartnershipFormProps {
   readonly onSuccess?: () => void
 }
 
 export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormProps>) {
-  const { register, handleSubmit, setValue } = useForm()
-  const [result, setResult] = useState('')
-  const [loading, setLoading] = useState(false)
+  const { register, handleSubmit, reset } = useForm()
+  const { 
+    state, 
+    isLoading, 
+    submit, 
+    clearMessage, 
+    setHCaptchaToken, 
+    hCaptchaSiteKey 
+  } = useWeb3FormsSubmit({
+    onSuccess: () => {
+      reset()
+      onSuccess?.()
+    },
+    successMessage: 'Formulário enviado com sucesso! Entraremos em contato em breve.',
+  })
 
   const tiposEmpresa = [
     'Empresa Privada',
@@ -40,57 +52,14 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
     'Outro',
   ]
 
-  const onHCaptchaChange = (token: string) => {
-    setValue('h-captcha-response', token)
-  }
-
-  const onSubmit = async (data: any) => {
-    setResult('Enviando...')
-    setLoading(true)
-
-    const formData = new FormData()
-    Object.keys(data).forEach(key => formData.append(key, data[key]))
-    formData.append('access_key', 'e8f7e662-b90d-48a4-9176-a563bcc0ba65')
-
-    try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData,
-      })
-
-      const responseData = await response.json()
-      
-      if (responseData.success) {
-        setResult('Formulário enviado com sucesso! Entraremos em contato em breve.')
-        
-        // Callback de sucesso
-        if (onSuccess) {
-          onSuccess()
-        }
-        
-        // Limpar mensagem após 5 segundos
-        setTimeout(() => setResult(''), 5000)
-      } else {
-        setResult('Erro ao enviar formulário. Por favor, tente novamente.')
-        setTimeout(() => setResult(''), 5000)
-      }
-    } catch (err) {
-      setResult('Erro ao conectar. Por favor, tente novamente.')
-      setTimeout(() => setResult(''), 5000)
-      console.error('Erro:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-      {result && (
+    <Box component="form" onSubmit={handleSubmit(submit)} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+      {state.message && (
         <Alert 
-          severity={result.includes('sucesso') ? 'success' : 'error'}
-          onClose={() => setResult('')}
+          severity={state.status === 'success' ? 'success' : 'error'}
+          onClose={clearMessage}
         >
-          {result}
+          {state.message}
         </Alert>
       )}
 
@@ -99,7 +68,7 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
         fullWidth
         label="Nome da Empresa/Organização"
         {...register('nomeEmpresa', { required: true })}
-        disabled={loading}
+        disabled={isLoading}
       />
 
       <Box sx={{ display: 'flex', gap: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
@@ -108,14 +77,14 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
           fullWidth
           label="Nome do Contato"
           {...register('nomeContato', { required: true })}
-          disabled={loading}
+          disabled={isLoading}
         />
 
         <TextField
           fullWidth
           label="Cargo"
           {...register('cargo')}
-          disabled={loading}
+          disabled={isLoading}
         />
       </Box>
 
@@ -126,7 +95,7 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
           type="email"
           label="E-mail"
           {...register('email', { required: true })}
-          disabled={loading}
+          disabled={isLoading}
         />
 
         <TextField
@@ -135,7 +104,7 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
           label="Telefone/WhatsApp"
           placeholder="(00) 00000-0000"
           {...register('telefone', { required: true })}
-          disabled={loading}
+          disabled={isLoading}
         />
       </Box>
 
@@ -145,7 +114,7 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
           fullWidth
           label="Tipo de Empresa/Organização"
           {...register('tipoEmpresa')}
-          disabled={loading}
+          disabled={isLoading}
           defaultValue=""
         >
           <MenuItem value="">Selecione...</MenuItem>
@@ -161,7 +130,7 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
           fullWidth
           label="Tipo de Parceria"
           {...register('tipoParceria')}
-          disabled={loading}
+          disabled={isLoading}
           defaultValue=""
         >
           <MenuItem value="">Selecione...</MenuItem>
@@ -180,23 +149,23 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
         label="Mensagem (opcional)"
         {...register('mensagem')}
         placeholder="Conte-nos mais sobre a proposta de parceria..."
-        disabled={loading}
+        disabled={isLoading}
       />
 
       <HCaptcha
-        sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
-        onVerify={onHCaptchaChange}
+        sitekey={hCaptchaSiteKey}
+        onVerify={setHCaptchaToken}
       />
 
       <Button
         type="submit"
         variant="contained"
         size="large"
-        endIcon={loading ? <CircularProgress size={20} /> : <Send />}
-        disabled={loading}
+        endIcon={isLoading ? <CircularProgress size={20} /> : <Send />}
+        disabled={isLoading}
         sx={{ alignSelf: 'flex-start' }}
       >
-        {loading ? 'Enviando...' : 'Enviar Formulário'}
+        {isLoading ? 'Enviando...' : 'Enviar Formulário'}
       </Button>
     </Box>
   )

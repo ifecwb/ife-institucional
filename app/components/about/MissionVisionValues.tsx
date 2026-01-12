@@ -62,6 +62,7 @@ export default function MissionVisionValues() {
             >
               <Card
                 sx={{
+                  bgcolor: 'white',
                   height: '100%',
                   textAlign: 'center',
                   transition: 'transform 0.3s ease',

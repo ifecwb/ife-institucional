@@ -12,6 +12,8 @@ import {
   TextField,
   Button,
   Avatar,
+  Alert,
+  CircularProgress,
 } from '@mui/material';
 import {
   Favorite,
@@ -19,16 +21,19 @@ import {
   WorkspacePremium,
   Schedule,
   FormatQuote,
+  Send,
 } from '@mui/icons-material';
 import Section from '../components/common/Section';
 import PageTitle from '../components/common/PageTitle';
 import FAQAccordion from '../components/common/FAQAccordion';
 import { motion } from 'framer-motion';
 import { benefits, steps, testimonials, volunteerFAQ } from '../data/volunteer';
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { useWeb3FormsSubmit } from '../hooks/useWeb3FormsSubmit';
 
 const iconMap: Record<string, any> = {
   favorite: Favorite,
@@ -38,18 +43,18 @@ const iconMap: Record<string, any> = {
 };
 
 export default function SejaVoluntarioClient() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
+  const { register, handleSubmit, reset } = useForm();
+  const {
+    state,
+    isLoading,
+    submit,
+    clearMessage,
+    setHCaptchaToken,
+    hCaptchaSiteKey,
+  } = useWeb3FormsSubmit({
+    onSuccess: () => reset(),
+    successMessage: 'Cadastro enviado com sucesso! Entraremos em contato em breve.',
   });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Implementar lógica de envio
-    console.log('Form submitted:', formData);
-  };
 
   const sliderSettings = {
     dots: true,
@@ -138,7 +143,7 @@ export default function SejaVoluntarioClient() {
                   viewport={{ once: true }}
                   transition={{ delay: benefits.indexOf(benefit) * 0.1 }}
                 >
-                  <Card sx={{ height: '100%', p: 2 }}>
+                  <Card sx={{ height: '100%', p: 2, bgcolor: 'white' }}>
                     <CardContent>
                       <Box
                         sx={{
@@ -307,13 +312,23 @@ export default function SejaVoluntarioClient() {
           </Typography>
 
           <Card sx={{ p: 4 }}>
-            <Box component="form" onSubmit={handleSubmit}>
+            <Box component="form" onSubmit={handleSubmit(submit)}>
+              {state.message && (
+                <Alert
+                  severity={state.status === 'success' ? 'success' : 'error'}
+                  onClose={clearMessage}
+                  sx={{ mb: 3 }}
+                >
+                  {state.message}
+                </Alert>
+              )}
+
               <TextField
                 fullWidth
                 label="Nome Completo"
                 required
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                {...register('nome', { required: true })}
+                disabled={isLoading}
                 sx={{ mb: 3 }}
               />
 
@@ -322,8 +337,8 @@ export default function SejaVoluntarioClient() {
                 label="E-mail"
                 type="email"
                 required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                {...register('email', { required: true })}
+                disabled={isLoading}
                 sx={{ mb: 3 }}
               />
 
@@ -331,8 +346,8 @@ export default function SejaVoluntarioClient() {
                 fullWidth
                 label="Telefone/WhatsApp"
                 required
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                {...register('telefone', { required: true })}
+                disabled={isLoading}
                 sx={{ mb: 3 }}
               />
 
@@ -342,19 +357,28 @@ export default function SejaVoluntarioClient() {
                 multiline
                 rows={4}
                 required
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                {...register('mensagem', { required: true })}
+                disabled={isLoading}
                 sx={{ mb: 3 }}
               />
+
+              <Box sx={{ mb: 3 }}>
+                <HCaptcha
+                  sitekey={hCaptchaSiteKey}
+                  onVerify={setHCaptchaToken}
+                />
+              </Box>
 
               <Button
                 type="submit"
                 variant="contained"
                 size="large"
                 fullWidth
+                endIcon={isLoading ? <CircularProgress size={20} /> : <Send />}
+                disabled={isLoading}
                 sx={{ py: 1.5, fontWeight: 700 }}
               >
-                Enviar Cadastro
+                {isLoading ? 'Enviando...' : 'Enviar Cadastro'}
               </Button>
             </Box>
           </Card>

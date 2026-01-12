@@ -15,9 +15,15 @@ export default async function TagsPage() {
   const tags = await getTags()
   const posts = await getPosts()
   
-  // Conta quantos posts cada tag tem
+  // Conta quantos posts cada tag tem (suporta tag como string ou array)
   const tagCounts = tags.reduce((acc: Record<string, number>, tag: string) => {
-    acc[tag] = posts.filter((post: any) => post.frontMatter?.tag === tag).length
+    acc[tag] = posts.filter((post: any) => {
+      const postTags = post.frontMatter?.tag
+      if (Array.isArray(postTags)) {
+        return postTags.includes(tag)
+      }
+      return postTags === tag
+    }).length
     return acc
   }, {})
 

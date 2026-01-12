@@ -210,6 +210,17 @@ export const siteConfig = {
     urlImagem: 'https://ifecwb.org.br/og-image.jpg',
   },
 
+  // ==================== INTEGRAÇÕES (APIs e serviços externos) ====================
+  integracoes: {
+    web3forms: {
+      accessKey: '2ce8774d-0464-46a4-942b-8a1d8fba8571',
+      endpoint: 'https://api.web3forms.com/submit',
+    },
+    hcaptcha: {
+      siteKey: '50b2fe65-b00b-4b9e-ad62-3ba471098be2',
+    },
+  },
+
   // ==================== FEATURES (ativar/desativar funcionalidades) ====================
   features: {
     blogAtivo: true,

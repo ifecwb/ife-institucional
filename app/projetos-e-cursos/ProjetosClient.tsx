@@ -86,7 +86,7 @@ export default function ProjetosClient() {
                 viewport={{ once: true }}
                 transition={{ delay: services.indexOf(service) * 0.2 }}
               >
-                <Card sx={{ height: '100%', p: 2 }}>
+                <Card sx={{ height: '100%', p: 2, bgcolor: 'white' }}>
                   <CardContent>
                     <Box
                       sx={{

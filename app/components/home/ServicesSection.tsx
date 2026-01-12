@@ -69,6 +69,7 @@ export default function ServicesSection() {
             >
               <Card
                 sx={{
+                  bgcolor: 'white',
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',

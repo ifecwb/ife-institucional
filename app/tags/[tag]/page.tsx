@@ -24,9 +24,13 @@ export default async function TagPage(props: any) {
   const params = await props.params
   const posts = await getPosts()
   const decodedTag = decodeURIComponent(params.tag)
-  const filteredPosts = posts.filter((post: any) => 
-    post.frontMatter?.tag.includes(decodedTag)
-  )
+  const filteredPosts = posts.filter((post: any) => {
+    const postTags = post.frontMatter?.tag
+    if (Array.isArray(postTags)) {
+      return postTags.includes(decodedTag)
+    }
+    return postTags === decodedTag
+  })
 
   if (filteredPosts.length === 0) {
     notFound()
