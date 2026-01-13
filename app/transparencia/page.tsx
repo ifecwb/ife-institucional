@@ -1,25 +1,17 @@
 import * as React from 'react';
 import { Metadata } from 'next';
 import {
-  Box,
   Container,
   Typography,
   Paper,
-  Grid,
-  Card,
-  CardContent,
-  Divider,
   Link as MuiLink,
 } from '@mui/material';
-import DescriptionIcon from '@mui/icons-material/Description';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import GavelIcon from '@mui/icons-material/Gavel';
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import VerifiedIcon from '@mui/icons-material/Verified';
+import Grid from '@mui/material/Grid';
 import MainLayout from '../components/layout/MainLayout';
 import PageHero from '../components/common/PageHero';
 import Section from '../components/common/Section';
 import siteConfig, { gerarLinkWhatsApp } from '@/app/data/site.config';
+import TransparenciaClient from './TransparenciaClient';
 
 export const metadata: Metadata = {
   title: 'Transparência | Instituto Futuro de Excelência',
@@ -71,6 +63,9 @@ export default function TransparenciaPage() {
         subtitle="Compromisso com a transparência e prestação de contas à sociedade"
         imageSrc="/images/emprego.jpeg"
       />
+
+      {/* Documentos - Componente Client com Tabs por Ano */}
+      <TransparenciaClient />
 
       {/* Informações Institucionais */}
       <Section py={8}>
@@ -137,248 +132,8 @@ export default function TransparenciaPage() {
         </Container>
       </Section>
 
-      {/* Reconhecimentos e Certificações */}
-      <Section bgcolor="background.default" py={8}>
-        <Container maxWidth="lg">
-          <Typography variant="h4" gutterBottom sx={{ fontWeight: 600, mb: 4 }}>
-            Reconhecimentos Oficiais
-          </Typography>
-
-          <Grid container spacing={3}>
-            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
-              <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'divider' }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <VerifiedIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      {siteConfig.institucional.reconhecimentos.comtiba.nome.split(' - ')[0]}
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary">
-                    {siteConfig.institucional.reconhecimentos.comtiba.descricao}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
-              <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'divider' }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <VerifiedIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      {siteConfig.institucional.reconhecimentos.cme.nome.split(' - ')[0]}
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary">
-                    {siteConfig.institucional.reconhecimentos.cme.descricao}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
-              <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'divider' }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <VerifiedIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      {siteConfig.institucional.reconhecimentos.cmdca.nome.split(' - ')[0]}
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary">
-                    {siteConfig.institucional.reconhecimentos.cmdca.descricao}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid size={{ xs: 12, md: 6, lg: 3 }}>
-              <Card elevation={0} sx={{ height: '100%', border: '1px solid', borderColor: 'divider' }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <GavelIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      {siteConfig.institucional.reconhecimentos.lei13019.nome}
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary">
-                    {siteConfig.institucional.reconhecimentos.lei13019.descricao}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-        </Container>
-      </Section>
-
-      {/* Parcerias Governamentais */}
-      <Section py={8}>
-        <Container maxWidth="lg">
-          <Typography variant="h4" gutterBottom sx={{ fontWeight: 600, mb: 2 }}>
-            Parcerias Governamentais Ativas
-          </Typography>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-            Termos de fomento vigentes com poder público municipal
-          </Typography>
-
-          <Paper elevation={0} sx={{ p: 3, border: '1px solid', borderColor: 'divider' }}>
-            <Grid container spacing={3}>
-              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                <Box sx={{ textAlign: 'center' }}>
-                  <Typography variant="h3" color="primary.main" sx={{ fontWeight: 700 }}>
-                    {siteConfig.institucional.parcerias.termosAtivos}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Termos de Fomento Ativos
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                <Box sx={{ textAlign: 'center' }}>
-                  <Typography variant="h3" color="primary.main" sx={{ fontWeight: 700 }}>
-                    R$ {siteConfig.institucional.parcerias.recursosCaptados.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Recursos Captados em 2025
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                <Box sx={{ textAlign: 'center' }}>
-                  <Typography variant="h3" color="primary.main" sx={{ fontWeight: 700 }}>
-                    100%
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Conformidade nas Prestações
-                  </Typography>
-                </Box>
-              </Grid>
-              <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-                <Box sx={{ textAlign: 'center' }}>
-                  <Typography variant="h3" color="primary.main" sx={{ fontWeight: 700 }}>
-                    2
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Órgãos Parceiros (FMCA/PMC)
-                  </Typography>
-                </Box>
-              </Grid>
-            </Grid>
-          </Paper>
-
-          <Box sx={{ mt: 4 }}>
-            <Typography variant="h6" gutterBottom sx={{ fontWeight: 600 }}>
-              Convênios Vigentes
-            </Typography>
-            <Divider sx={{ mb: 2 }} />
-            <Grid container spacing={2}>
-              {siteConfig.institucional.parcerias.convenios.map((convenio, index) => (
-                <Grid key={index} size={{ xs: 12, md: 6 }}>
-                  <Paper elevation={0} sx={{ p: 2, bgcolor: 'background.default' }}>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
-                      Termo de Fomento {convenio.numero}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Concedente: {convenio.concedente} | Vigência: até {convenio.vigenciaAte} | Valor: R$ {convenio.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-                    </Typography>
-                  </Paper>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </Container>
-      </Section>
-
-      {/* Documentos e Relatórios */}
-      <Section bgcolor="background.default" py={8}>
-        <Container maxWidth="lg">
-          <Typography variant="h4" gutterBottom sx={{ fontWeight: 600, mb: 4 }}>
-            Documentos e Relatórios
-          </Typography>
-
-          <Grid container spacing={3}>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <Card elevation={0} sx={{ border: '1px solid', borderColor: 'divider' }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <DescriptionIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      Estatuto Social
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                    Estatuto atualizado e vigente da instituição
-                  </Typography>
-                  <MuiLink href="#" sx={{ color: 'primary.main', fontWeight: 500 }}>
-                    Baixar documento →
-                  </MuiLink>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid size={{ xs: 12, md: 6 }}>
-              <Card elevation={0} sx={{ border: '1px solid', borderColor: 'divider' }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <AssessmentIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      Relatório de Atividades
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                    Relatório anual de atividades e impacto social
-                  </Typography>
-                  <MuiLink href="#" sx={{ color: 'primary.main', fontWeight: 500 }}>
-                    Baixar documento →
-                  </MuiLink>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid size={{ xs: 12, md: 6 }}>
-              <Card elevation={0} sx={{ border: '1px solid', borderColor: 'divider' }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <AccountBalanceIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      Prestação de Contas
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                    Demonstrativos financeiros e prestação de contas
-                  </Typography>
-                  <MuiLink href="#" sx={{ color: 'primary.main', fontWeight: 500 }}>
-                    Baixar documento →
-                  </MuiLink>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid size={{ xs: 12, md: 6 }}>
-              <Card elevation={0} sx={{ border: '1px solid', borderColor: 'divider' }}>
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <GavelIcon sx={{ fontSize: 40, color: 'primary.main', mr: 2 }} />
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
-                      Ata de Assembleia
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                    Atas de assembleias gerais e decisões institucionais
-                  </Typography>
-                  <MuiLink href="#" sx={{ color: 'primary.main', fontWeight: 500 }}>
-                    Baixar documento →
-                  </MuiLink>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-        </Container>
-      </Section>
-
       {/* Call to Action */}
-      <Section py={8}>
+      <Section bgcolor="background.default" py={8}>
         <Container maxWidth="md">
           <Paper
             elevation={0}
@@ -397,7 +152,7 @@ export default function TransparenciaPage() {
               Entre em contato conosco para solicitar informações adicionais ou esclarecimentos sobre nossa atuação institucional.
             </Typography>
             <MuiLink
-              href={gerarLinkWhatsApp(siteConfig.contato.telefoneWhatsApp)}
+              href={gerarLinkWhatsApp('Olá! Gostaria de mais informações sobre a transparência do IFE.')}
               underline="none"
               sx={{
                 display: 'inline-block',
