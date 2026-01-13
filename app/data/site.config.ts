@@ -78,7 +78,7 @@ export const siteConfig = {
 
   // ==================== INFORMAÇÕES INSTITUCIONAIS ====================
   institucional: {
-    cnpj: '37.695.827/0001-77',
+    cnpj: '36.942.850/0001-56',
     dataFundacao: '2020-01-01',
     razaoSocial: 'Instituto Futuro de Excelência',
     presidente: 'Emerson Rafael Baptista dos Anjos',
@@ -88,12 +88,17 @@ export const siteConfig = {
     reconhecimentos: {
       comtiba: {
         nome: 'COMTIBA - Conselho Municipal dos Direitos da Criança e do Adolescente',
-        descricao: 'Inscrição ativa no Conselho Municipal dos Direitos da Criança e do Adolescente de Curitiba',
+        descricao: 'Inscrição COMTIBA 166/2020 - Conselho Municipal dos Direitos da Criança e do Adolescente de Curitiba',
         ativo: true,
       },
       cme: {
         nome: 'CME - Conselho Municipal do Esporte',
-        descricao: 'Inscrição ativa no Conselho Municipal do Esporte conforme Resolução 03/2025',
+        descricao: 'Inscrição CME 008/2020 - Conselho Municipal do Esporte',
+        ativo: true,
+      },
+      cmdca: {
+        nome: 'CMDCA - Conselho Municipal dos Direitos da Criança e do Adolescente',
+        descricao: 'Inscrição CMDCA 083/2020 - Conselho Municipal dos Direitos da Criança e do Adolescente',
         ativo: true,
       },
       lei13019: {
@@ -174,6 +179,26 @@ export const siteConfig = {
       (dados.valor ? `*Valor:* R$ ${dados.valor}\n` : '') +
       (dados.tipo ? `*Tipo de Doação:* ${dados.tipo}\n` : '') +
       `\nGostaria de mais informações sobre como fazer uma doação.`,
+
+    parceria: (dados: { 
+      nomeEmpresa: string; 
+      nomeContato: string; 
+      cargo?: string;
+      email: string; 
+      telefone: string; 
+      tipoEmpresa?: string;
+      tipoParceria?: string;
+      mensagem?: string 
+    }) => 
+      `*Proposta de Parceria - Site IFE*\n\n` +
+      `*Empresa/Organização:* ${dados.nomeEmpresa}\n` +
+      `*Nome do Contato:* ${dados.nomeContato}\n` +
+      (dados.cargo ? `*Cargo:* ${dados.cargo}\n` : '') +
+      `*Email:* ${dados.email}\n` +
+      `*Telefone:* ${dados.telefone}\n` +
+      (dados.tipoEmpresa ? `*Tipo de Empresa:* ${dados.tipoEmpresa}\n` : '') +
+      (dados.tipoParceria ? `*Tipo de Parceria:* ${dados.tipoParceria}\n` : '') +
+      (dados.mensagem ? `\n*Mensagem:*\n${dados.mensagem}` : ''),
   },
 
   // ==================== SEO ====================
@@ -181,8 +206,19 @@ export const siteConfig = {
     titulo: 'Instituto Futuro de Excelência - Transformando Vidas',
     descricao: 'O IFE é uma organização sem fins lucrativos que promove educação, esporte e cultura para crianças e adolescentes em Curitiba.',
     palavrasChave: 'instituto, educação, esporte, cultura, voluntariado, doação, curitiba, crianças, adolescentes',
-    urlSite: 'https://ifecuritiba.org.br',
-    urlImagem: 'https://ifecuritiba.org.br/og-image.jpg',
+    urlSite: 'https://ifecwb.org.br',
+    urlImagem: 'https://ifecwb.org.br/og-image.jpg',
+  },
+
+  // ==================== INTEGRAÇÕES (APIs e serviços externos) ====================
+  integracoes: {
+    web3forms: {
+      accessKey: '2ce8774d-0464-46a4-942b-8a1d8fba8571',
+      endpoint: 'https://api.web3forms.com/submit',
+    },
+    hcaptcha: {
+      siteKey: '50b2fe65-b00b-4b9e-ad62-3ba471098be2',
+    },
   },
 
   // ==================== FEATURES (ativar/desativar funcionalidades) ====================

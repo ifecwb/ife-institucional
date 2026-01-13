@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 import {
   Box,
   TextField,
@@ -9,72 +10,37 @@ import {
   CircularProgress,
 } from '@mui/material'
 import { Send } from '@mui/icons-material'
-import { siteConfig, gerarLinkWhatsApp } from '@/config/site.config'
+import { useWeb3FormsSubmit } from '@/app/hooks/useWeb3FormsSubmit'
 
 interface ContactFormProps {
   readonly onSuccess?: () => void
 }
 
 export default function ContactForm({ onSuccess }: Readonly<ContactFormProps>) {
-  const [formData, setFormData] = useState({
-    nome: '',
-    email: '',
-    assunto: '',
-    mensagem: '',
+  const { register, handleSubmit, reset } = useForm()
+  const { 
+    state, 
+    isLoading, 
+    submit, 
+    clearMessage, 
+    setHCaptchaToken, 
+    hCaptchaSiteKey 
+  } = useWeb3FormsSubmit({
+    onSuccess: () => {
+      reset()
+      onSuccess?.()
+    },
+    successMessage: 'Formulário enviado com sucesso! Entraremos em contato em breve.',
   })
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-    setError('')
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError('')
-
-    // Validação básica
-    if (!formData.nome || !formData.email || !formData.assunto || !formData.mensagem) {
-      setError('Por favor, preencha todos os campos.')
-      setLoading(false)
-      return
-    }
-
-    try {
-      // Gera mensagem do WhatsApp usando o template
-      const mensagem = siteConfig.whatsappTemplates.contato(formData)
-      const linkWhatsApp = gerarLinkWhatsApp(mensagem)
-
-      // Abre o WhatsApp em nova aba
-      window.open(linkWhatsApp, '_blank', 'noopener,noreferrer')
-
-      // Callback de sucesso
-      if (onSuccess) {
-        onSuccess()
-      }
-
-      // Limpa o formulário
-      setFormData({
-        nome: '',
-        email: '',
-        assunto: '',
-        mensagem: '',
-      })
-    } catch (err) {
-      setError('Erro ao processar formulário. Tente novamente.')
-    } finally {
-      setLoading(false)
-    }
-  }
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-      {error && (
-        <Alert severity="error" onClose={() => setError('')}>
-          {error}
+    <Box component="form" onSubmit={handleSubmit(submit)} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+      {state.message && (
+        <Alert 
+          severity={state.status === 'success' ? 'success' : 'error'}
+          onClose={clearMessage}
+        >
+          {state.message}
         </Alert>
       )}
 
@@ -82,10 +48,8 @@ export default function ContactForm({ onSuccess }: Readonly<ContactFormProps>) {
         required
         fullWidth
         label="Nome Completo"
-        name="nome"
-        value={formData.nome}
-        onChange={handleChange}
-        disabled={loading}
+        {...register('nome', { required: true })}
+        disabled={isLoading}
       />
 
       <TextField
@@ -93,20 +57,16 @@ export default function ContactForm({ onSuccess }: Readonly<ContactFormProps>) {
         fullWidth
         type="email"
         label="E-mail"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        disabled={loading}
+        {...register('email', { required: true })}
+        disabled={isLoading}
       />
 
       <TextField
         required
         fullWidth
         label="Assunto"
-        name="assunto"
-        value={formData.assunto}
-        onChange={handleChange}
-        disabled={loading}
+        {...register('assunto', { required: true })}
+        disabled={isLoading}
       />
 
       <TextField
@@ -115,26 +75,30 @@ export default function ContactForm({ onSuccess }: Readonly<ContactFormProps>) {
         multiline
         rows={5}
         label="Mensagem"
-        name="mensagem"
         placeholder="Digite sua mensagem..."
-        value={formData.mensagem}
-        onChange={handleChange}
-        disabled={loading}
+        {...register('mensagem', { required: true })}
+        disabled={isLoading}
+      />
+
+      <HCaptcha
+        sitekey={hCaptchaSiteKey}
+        reCaptchaCompat={false}
+        onVerify={setHCaptchaToken}
       />
 
       <Button
         type="submit"
         variant="contained"
         size="large"
-        endIcon={loading ? <CircularProgress size={20} /> : <Send />}
-        disabled={loading}
+        endIcon={isLoading ? <CircularProgress size={20} /> : <Send />}
+        disabled={isLoading}
         sx={{ alignSelf: 'flex-start' }}
       >
-        {loading ? 'Processando...' : 'Enviar via WhatsApp'}
+        {isLoading ? 'Enviando...' : 'Enviar Formulário'}
       </Button>
 
       <Alert severity="info">
-        Ao clicar em "Enviar", você será redirecionado para o WhatsApp com sua mensagem pré-preenchida.
+        Seu formulário de contato será enviado para nossa equipe e entraremos em contato em breve.
       </Alert>
     </Box>
   )

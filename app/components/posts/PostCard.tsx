@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Card, CardContent, CardMedia, Typography, Chip, Box } from '@mui/material'
 
 interface PostCardProps {
-  post: {
+  readonly post: {
     route: string
     name: string
     frontMatter?: {
@@ -40,22 +40,21 @@ export default function PostCard({ post }: PostCardProps) {
           }
         }}
       >
-        {post.frontMatter?.image && (
-          <CardMedia
-            component="img"
-            height="200"
-            image={post.frontMatter.image || 'https://picsum.photos/800/400?random=' + post.route}
-            alt={post.frontMatter?.title || 'Post'}
-          />
-        )}
+        <CardMedia
+          component="img"
+          height="200"
+          image={post.frontMatter?.image || `/images/turma.jpeg`}
+          alt={post.frontMatter?.title || 'Post'}
+          sx={{ objectFit: 'cover' }}
+        />
         <CardContent sx={{ flexGrow: 1 }}>
           <Box sx={{ mb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 1 }}>
             {post.frontMatter?.tag && (
               <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
                 {Array.isArray(post.frontMatter.tag) ? (
-                  post.frontMatter.tag.map((tag: string, i: number) => (
+                  post.frontMatter.tag.map((tag: string) => (
                     <Chip 
-                      key={i}
+                      key={tag}
                       label={tag} 
                       size="small" 
                       color="primary"

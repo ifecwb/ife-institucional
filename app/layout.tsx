@@ -4,6 +4,7 @@ import ThemeRegistry from "./ThemeRegistry";
 import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,6 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+    <GoogleTagManager gtmId="G-7XE5ZSFWB8" />
       {/* Adicionar aqui os demais imports, links, tracks, adsense */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

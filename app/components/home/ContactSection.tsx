@@ -1,6 +1,7 @@
 'use client';
 
-import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import {
   Box,
   Container,
@@ -8,42 +9,32 @@ import {
   TextField,
   Button,
   Alert,
+  CircularProgress,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import SendIcon from '@mui/icons-material/Send';
 import Section from '../common/Section';
 import PageTitle from '../common/PageTitle';
-import siteConfig, {gerarLinkWhatsApp} from '@/config/site.config';
+import siteConfig, { gerarLinkWhatsApp } from '@/app/data/site.config';
+import { useWeb3FormsSubmit } from '@/app/hooks/useWeb3FormsSubmit';
 
 /**
  * Seção Contato da página inicial
- * Formulário simples (será integrado com react-hook-form em fase posterior)
+ * Integrado com Web3Forms para envio de formulário
  */
 export default function ContactSection() {
-  const [formData, setFormData] = React.useState({
-    name: '',
-    email: '',
-    message: '',
+  const { register, handleSubmit, reset } = useForm();
+  const {
+    state,
+    isLoading,
+    submit,
+    clearMessage,
+    setHCaptchaToken,
+    hCaptchaSiteKey,
+  } = useWeb3FormsSubmit({
+    onSuccess: () => reset(),
+    successMessage: 'Mensagem enviada com sucesso! Entraremos em contato em breve.',
   });
-  const [status, setStatus] = React.useState<'idle' | 'success' | 'error'>('idle');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simulação de envio (será implementado com react-hook-form + integração real)
-    console.log('Form data:', formData);
-    setStatus('success');
-    setTimeout(() => {
-      setStatus('idle');
-      setFormData({ name: '', email: '', message: '' });
-    }, 3000);
-  };
 
   return (
     <Section bgcolor="background.paper" py={10}>
@@ -76,7 +67,7 @@ export default function ContactSection() {
         >
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(submit)}
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -86,60 +77,57 @@ export default function ContactSection() {
             <TextField
               fullWidth
               label="Nome"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
+              {...register('name', { required: true })}
               variant="outlined"
+              disabled={isLoading}
             />
 
             <TextField
               fullWidth
               label="E-mail"
-              name="email"
               type="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
+              {...register('email', { required: true })}
               variant="outlined"
+              disabled={isLoading}
             />
 
             <TextField
               fullWidth
               label="Mensagem"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
+              {...register('message', { required: true })}
               multiline
               rows={5}
               variant="outlined"
+              disabled={isLoading}
             />
 
-            {status === 'success' && (
-              <Alert severity="success">
-                Mensagem enviada com sucesso! Entraremos em contato em breve.
+            {state.message && (
+              <Alert 
+                severity={state.status === 'success' ? 'success' : 'error'}
+                onClose={clearMessage}
+              >
+                {state.message}
               </Alert>
             )}
 
-            {status === 'error' && (
-              <Alert severity="error">
-                Erro ao enviar mensagem. Por favor, tente novamente.
-              </Alert>
-            )}
+            <HCaptcha
+              sitekey={hCaptchaSiteKey}
+              onVerify={setHCaptchaToken}
+            />
 
             <Button
               type="submit"
               variant="contained"
               size="large"
-              endIcon={<SendIcon />}
+              endIcon={isLoading ? <CircularProgress size={20} /> : <SendIcon />}
+              disabled={isLoading}
               sx={{
                 py: 1.5,
                 alignSelf: 'center',
                 minWidth: 200,
               }}
             >
-              Enviar Mensagem
+              {isLoading ? 'Enviando...' : 'Enviar Mensagem'}
             </Button>
           </Box>
 
@@ -161,7 +149,9 @@ export default function ContactSection() {
               📧 {siteConfig.contato.email}
             </Typography>
             <Typography variant="body2" sx={{ mb: 1 }}>
-              📱 <a href={gerarLinkWhatsApp(siteConfig.contato.telefoneWhatsApp)}>{} (WhatsApp)</a>
+              📱 <a href={gerarLinkWhatsApp('Olá! Vim pelo site e gostaria de mais informações.')} style={{ color: 'inherit' }}>
+                {siteConfig.contato.telefone} (WhatsApp)
+              </a>
             </Typography>
             <Typography variant="body2">
               📍  {siteConfig.endereco.rua} - {siteConfig.endereco.numero}<br />

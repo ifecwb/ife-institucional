@@ -47,10 +47,10 @@ export default function AboutSection() {
               variant="body1"
               sx={{ mb: 3, fontSize: '1.125rem', lineHeight: 1.8, color: 'text.secondary' }}
             >
-              Atendemos anualmente entre 110 e 150 crianças e adolescentes de 5 a 17 anos
+              Atendemos anualmente mais de 150 crianças e adolescentes de 5 a 17 anos
               em Xaxim, Bairro Novo, Ganchinho e Sítio Cercado, com atendimento aberto a toda Curitiba.
               Nossos eixos de atuação incluem Esporte e Convivência (Futebol, Judô e Vôlei),
-              Socioeducação, e Integração ao Mundo do Trabalho para maiores de 14 anos.
+              Socioedu cação, e Integração ao Mundo do Trabalho para maiores de 14 anos.
             </Typography>
 
             <Typography
