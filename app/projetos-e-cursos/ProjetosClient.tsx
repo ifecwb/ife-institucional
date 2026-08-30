@@ -4,7 +4,7 @@ import { useState, useMemo, useCallback } from 'react';
 import MainLayout from '../components/layout/MainLayout';
 import PageHero from '../components/common/PageHero';
 import { Box, Container, Typography, Card, CardContent, TextField, InputAdornment } from '@mui/material';
-import { School, SportsSoccer, Search, TheaterComedy, WorkspacePremium } from '@mui/icons-material';
+import { SportsSoccer, SportsMartialArts, Search, TheaterComedy, Pool } from '@mui/icons-material';
 import Section from '../components/common/Section';
 import PageTitle from '../components/common/PageTitle';
 import WorkshopCard from '../components/projects/WorkshopCard';
@@ -26,7 +26,9 @@ export default function ProjetosClient() {
       workshop.title.toLowerCase().includes(term) ||
       workshop.description.toLowerCase().includes(term) ||
       workshop.ageGroup.toLowerCase().includes(term) ||
-      workshop.instructor.toLowerCase().includes(term)
+      workshop.instructor.toLowerCase().includes(term) ||
+      workshop.location.toLowerCase().includes(term) ||
+      workshop.partners.toLowerCase().includes(term)
     );
   }, [searchTerm]);
 
@@ -37,8 +39,8 @@ export default function ProjetosClient() {
   return (
     <MainLayout>
       <PageHero
-        title="Projetos e Oficinas"
-        subtitle="Educação, esporte e cultura transformando vidas"
+        title="Esporte e Cultura"
+        subtitle="Inclusão, desenvolvimento e transformação social"
         imageSrc="/images/turma3.jpeg"
       />
 
@@ -54,9 +56,11 @@ export default function ProjetosClient() {
               color: 'text.secondary',
             }}
           >
-            Oferecemos uma variedade de atividades gratuitas que promovem o desenvolvimento
-            integral de crianças e adolescentes. Nossos programas combinam educação, esporte
-            e cultura para formar cidadãos preparados para os desafios do futuro.
+            O Instituto Futuro de Excelência utiliza o esporte e a cultura como ferramentas de
+            inclusão, desenvolvimento, disciplina, convivência e transformação social. Nossas
+            atividades atendem diferentes faixas etárias e são realizadas em parceria com
+            profissionais, instituições e órgãos que acreditam no poder do esporte e da cultura
+            para gerar oportunidades.
           </Typography>
         </Container>
       </Section>
@@ -101,9 +105,9 @@ export default function ProjetosClient() {
                       }}
                     >
                       {service.icon === 'sports_soccer' && <SportsSoccer sx={{ fontSize: 32, color: 'white' }} />}
-                      {service.icon === 'school' && <School sx={{ fontSize: 32, color: 'white' }} />}
+                      {service.icon === 'sports_martial_arts' && <SportsMartialArts sx={{ fontSize: 32, color: 'white' }} />}
                       {service.icon === 'theater_comedy' && <TheaterComedy sx={{ fontSize: 32, color: 'white' }} />}
-                      {service.icon === 'workspace_premium' && <WorkspacePremium sx={{ fontSize: 32, color: 'white' }} />}
+                      {service.icon === 'pool' && <Pool sx={{ fontSize: 32, color: 'white' }} />}
                     </Box>
 
                     <Typography variant="h5" gutterBottom sx={{ fontWeight: 700 }}>
@@ -125,7 +129,7 @@ export default function ProjetosClient() {
       <Section py={10}>
         <Container maxWidth="lg">
           <PageTitle variant="h3" align="center" gutterBottom sx={{ mb: 2 }}>
-            Nossas Oficinas e Cursos
+            Nossos Projetos
           </PageTitle>
           <Typography
             variant="body1"
@@ -133,7 +137,7 @@ export default function ProjetosClient() {
             align="center"
             sx={{ mb: 4, maxWidth: 700, mx: 'auto' }}
           >
-            Atividades gratuitas para crianças e adolescentes de 5 a 17 anos
+            Atividades gratuitas para crianças, adolescentes, jovens e adultos
           </Typography>
 
           {/* Campo de Pesquisa */}
@@ -141,7 +145,7 @@ export default function ProjetosClient() {
             <TextField
               fullWidth
               variant="outlined"
-              placeholder="Pesquisar por oficina, curso, idade ou instrutor..."
+              placeholder="Pesquisar por modalidade, idade, local ou professor..."
               value={searchTerm}
               onChange={handleSearchChange}
               InputProps={{
@@ -187,7 +191,7 @@ export default function ProjetosClient() {
             ) : (
               <Box sx={{ gridColumn: '1 / -1', textAlign: 'center', py: 8 }}>
                 <Typography variant="h6" color="text.secondary" gutterBottom>
-                  Nenhuma oficina encontrada
+                  Nenhuma atividade encontrada
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Tente ajustar sua pesquisa ou limpar o campo de busca
@@ -261,10 +265,11 @@ export default function ProjetosClient() {
       <Section bgcolor="secondary.main" py={8} sx={{ color: 'white', textAlign: 'center' }}>
         <Container maxWidth="md">
           <Typography variant="h3" gutterBottom sx={{ fontWeight: 700, mb: 3 }}>
-            Inscreva-se Agora!
+            Esporte e Cultura que Transformam
           </Typography>
           <Typography variant="h6" sx={{ mb: 4, opacity: 0.95 }}>
-            Garanta uma vaga nas nossas atividades. As turmas são limitadas!
+            Cada atividade representa uma oportunidade de desenvolvimento, convivência e
+            transformação. Garanta sua vaga: as turmas são limitadas!
           </Typography>
           <CTAButton
             href={gerarLinkWhatsApp('Olá! Gostaria de me inscrever nas atividades do IFE.')}

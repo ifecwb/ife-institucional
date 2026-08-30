@@ -3,18 +3,21 @@ import { siteConfig } from '@/app/data/site.config';
 import ProjetosClient from './ProjetosClient';
 
 export const metadata: Metadata = {
-  title: 'Projetos e Oficinas | Instituto Futuro de Excelência',
+  title: 'Esporte e Cultura | Instituto Futuro de Excelência',
   description:
-    'Conheça nossos projetos gratuitos de educação, esporte e cultura. Oferecemos judô, futebol, ballet, reforço escolar e muito mais para crianças e adolescentes.',
+    'Conheça nossos projetos gratuitos de esporte e cultura: futebol, vôlei, iniciação esportiva, judô, muay thai, balé, natação e hidroginástica em Curitiba.',
   keywords: [
     'projetos',
-    'oficinas',
-    'cursos',
+    'esporte',
+    'cultura',
     'atividades',
-    'judô',
     'futebol',
-    'ballet',
-    'reforço escolar',
+    'vôlei',
+    'judô',
+    'muay thai',
+    'balé',
+    'natação',
+    'hidroginástica',
     'gratuito',
     'curitiba',
     'IFE',
@@ -27,15 +30,15 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     url: `${siteConfig.seo.urlSite}/projetos-e-cursos`,
     siteName: siteConfig.sigla,
-    title: 'Projetos e Oficinas Gratuitas - IFE',
+    title: 'Esporte e Cultura que Transformam - IFE',
     description:
-      'Educação, esporte e cultura gratuitos! Conheça nossas oficinas de judô, futebol, ballet, reforço escolar e mais.',
+      'Atividades gratuitas de esporte e cultura: futebol, vôlei, iniciação esportiva, judô, muay thai, balé, natação e hidroginástica.',
     images: [
       {
         url: `${siteConfig.seo.urlSite}/images/turma3.jpeg`,
         width: 1200,
         height: 630,
-        alt: 'Instituto Futuro de Excelência (IFE) - Projetos e Oficinas',
+        alt: 'Instituto Futuro de Excelência (IFE) - Esporte e Cultura',
       },
     ],
   },

@@ -5,6 +5,9 @@ export interface Workshop {
   ageGroup: string;
   schedule: string;
   instructor: string;
+  location: string;
+  partners: string;
+  participants?: string;
   image: string;
   icon: string;
 }
@@ -31,215 +34,140 @@ export interface FAQItem {
 
 export const services: Service[] = [
   {
-    id: 'sports',
-    title: 'Oficinas Esportivas',
+    id: 'esportes-coletivos',
+    title: 'Esportes Coletivos',
     description:
-      'Desenvolvemos habilidades físicas e valores como disciplina, trabalho em equipe e superação através do judô, futsal e vôlei.',
+      'Futebol, vôlei e iniciação esportiva trabalham disciplina, respeito, cooperação, coordenação motora e espírito de equipe entre crianças e adolescentes.',
     icon: 'sports_soccer',
   },
   {
-    id: 'culture',
-    title: 'Atividades Culturais',
+    id: 'artes-marciais',
+    title: 'Artes Marciais',
     description:
-      'Expressão artística e desenvolvimento sociocultural através de dança de salão, ballet e danças urbanas.',
+      'Judô e Muay Thai utilizam os princípios das artes marciais como ferramenta de desenvolvimento pessoal e social: disciplina, respeito, concentração e autocontrole.',
+    icon: 'sports_martial_arts',
+  },
+  {
+    id: 'cultura',
+    title: 'Cultura e Dança',
+    description:
+      'O Balé utiliza a dança como ferramenta de desenvolvimento artístico, físico e social, trabalhando postura, musicalidade, expressão corporal e autoestima.',
     icon: 'theater_comedy',
   },
   {
-    id: 'courses',
-    title: 'Mundo do Trabalho',
+    id: 'aquaticas',
+    title: 'Atividades Aquáticas',
     description:
-      'Preparação para o mercado de trabalho através de tecnologia da informação, desenvolvimento socioemocional, orientação profissional e cidadania.',
-    icon: 'school',
-  },
-  {
-    id: 'senai',
-    title: 'Trilha SENAI/IFE',
-    description:
-      'Cursos profissionalizantes em parceria com SENAI: Assistente Administrativo, Operador de Computador, Atendimento ao Cliente e Auxiliar de Logística.',
-    icon: 'workspace_premium',
+      'Natação e hidroginástica promovem saúde, condicionamento físico, mobilidade, autonomia no meio aquático e qualidade de vida para todas as idades.',
+    icon: 'pool',
   },
 ];
 
 export const workshops: Workshop[] = [
-  // Esportes
   {
-    id: 'judo',
-    title: 'Judô',
+    id: 'futebol',
+    title: 'Futebol',
     description:
-      'Disciplina, respeito e autocontrole. O judô desenvolve não apenas o corpo, mas também a mente e o caráter dos nossos alunos.',
-    ageGroup: '6 a 17 anos',
-    schedule: 'Ter e Qui, 14h às 16h',
-    instructor: 'Sensei Carlos Silva',
-    image: 'https://picsum.photos/800/600?random=30',
-    icon: 'sports_martial_arts',
-  },
-  {
-    id: 'futsal',
-    title: 'Futsal',
-    description:
-      'Trabalho em equipe, estratégia e coordenação motora. O futsal é mais que um esporte, é uma escola de vida.',
-    ageGroup: '8 a 16 anos',
-    schedule: 'Seg e Qua, 16h às 18h',
-    instructor: 'Prof. Roberto Lima',
-    image: 'https://picsum.photos/800/600?random=32',
+      'Projeto voltado ao desenvolvimento esportivo de crianças e adolescentes, trabalhando disciplina, respeito, responsabilidade, trabalho em equipe e espírito esportivo.',
+    ageGroup: '11 a 17 anos',
+    schedule: 'Terça-feira, 19h',
+    instructor: 'Gerson Hudson Beithel',
+    location: 'Ginásio Bairro Novo',
+    partners: 'SMELJ',
+    image: '/images/futebol.jpeg',
     icon: 'sports_soccer',
   },
   {
     id: 'volei',
     title: 'Vôlei',
     description:
-      'Coordenação, agilidade e espírito de equipe. O vôlei promove o desenvolvimento integral através do esporte coletivo.',
+      'Projeto de iniciação e desenvolvimento esportivo que trabalha fundamentos do vôlei, coordenação motora, disciplina, cooperação e trabalho em equipe.',
     ageGroup: '10 a 17 anos',
-    schedule: 'Qua e Sex, 14h às 16h',
-    instructor: 'Prof. Marcos Oliveira',
-    image:'/images/volei1.jpeg',
-    icon: 'sports_volleyball',
-  },
-  // Cultura
-  {
-    id: 'danca-salao',
-    title: 'Dança de Salão',
-    description:
-      'Expressão corporal, ritmo e socialização. A dança de salão desenvolve a coordenação motora e o relacionamento interpessoal.',
-    ageGroup: '12 a 17 anos',
-    schedule: 'Ter e Qui, 15h às 17h',
-    instructor: 'Profª Juliana Costa',
-    image: 'https://picsum.photos/800/600?random=34',
-    icon: 'music_note',
-  },
-  {
-    id: 'ballet',
-    title: 'Ballet',
-    description:
-      'Postura, disciplina e expressão artística. O ballet clássico promove o desenvolvimento físico e emocional.',
-    ageGroup: '5 a 14 anos',
-    schedule: 'Seg e Qua, 14h às 15h30',
-    instructor: 'Profª Marina Santos',
-    image: 'https://picsum.photos/800/600?random=35',
-    icon: 'self_improvement',
-  },
-  {
-    id: 'dancas-urbanas',
-    title: 'Danças Urbanas',
-    description:
-      'Criatividade, autoexpressão e cultura urbana. As danças urbanas conectam os jovens com a cultura contemporânea.',
-    ageGroup: '10 a 17 anos',
-    schedule: 'Sex, 16h às 18h',
-    instructor: 'Prof. Diego Ferreira',
-    image: 'https://picsum.photos/800/600?random=36',
-    icon: 'music_note',
-  },
-  // Mundo do Trabalho
-  {
-    id: 'tecnologia-informacao',
-    title: 'Tecnologia da Informação',
-    description:
-      'Informática básica, internet e ferramentas digitais. Preparação para o mundo digital e oportunidades profissionais.',
-    ageGroup: '14 a 17 anos',
-    schedule: 'Ter e Qui, 9h às 11h',
-    instructor: 'Prof. André Martins',
-    image: 'https://picsum.photos/800/600?random=37',
-    icon: 'computer',
-  },
-  {
-    id: 'desenvolvimento-socioemocional',
-    title: 'Desenvolvimento Socioemocional',
-    description:
-      'Inteligência emocional, relacionamentos e autoconhecimento. Desenvolvimento de habilidades essenciais para a vida.',
-    ageGroup: '14 a 17 anos',
-    schedule: 'Qua, 14h às 16h',
-    instructor: 'Psicóloga Laura Mendes',
-    image: 'https://picsum.photos/800/600?random=38',
-    icon: 'psychology',
-  },
-  {
-    id: 'mundo-trabalho',
-    title: 'Orientação para o Mundo do Trabalho',
-    description:
-      'Orientação profissional, elaboração de currículo e preparação para entrevistas. Ponte para o primeiro emprego.',
-    ageGroup: '14 a 17 anos',
-    schedule: 'Sex, 14h às 16h',
-    instructor: 'Profª Carolina Souza',
-    image: 'https://picsum.photos/800/600?random=39',
-    icon: 'work',
-  },
-  {
-    id: 'cidadania-convivencia',
-    title: 'Cidadania e Convivência',
-    description:
-      'Valores, direitos e deveres, participação social. Formação de cidadãos conscientes e atuantes na sociedade.',
-    ageGroup: '12 a 17 anos',
-    schedule: 'Seg, 15h às 17h',
-    instructor: 'Prof. Ricardo Alves',
-    image: 'https://picsum.photos/800/600?random=40',
-    icon: 'groups',
-  },
-  // Trilha SENAI/IFE
-  {
-    id: 'assistente-administrativo',
-    title: 'Assistente Administrativo (SENAI)',
-    description:
-      'Curso profissionalizante em parceria com SENAI. Formação completa para atuar na área administrativa.',
-    ageGroup: '16 a 17 anos',
-    schedule: 'Seg a Sex, 8h às 12h',
-    instructor: 'SENAI Paraná',
-    image: 'https://picsum.photos/800/600?random=41',
-    icon: 'business_center',
-  },
-  {
-    id: 'operador-computador',
-    title: 'Operador de Computador (SENAI)',
-    description:
-      'Curso profissionalizante em parceria com SENAI. Capacitação técnica em informática e sistemas.',
-    ageGroup: '16 a 17 anos',
-    schedule: 'Seg a Sex, 13h às 17h',
-    instructor: 'SENAI Paraná',
-    image: 'https://picsum.photos/800/600?random=42',
-    icon: 'computer',
-  },
-  {
-    id: 'atendimento-cliente',
-    title: 'Atendimento ao Cliente (SENAI)',
-    description:
-      'Curso profissionalizante em parceria com SENAI. Técnicas de comunicação e excelência no atendimento.',
-    ageGroup: '16 a 17 anos',
-    schedule: 'Seg a Sex, 8h às 12h',
-    instructor: 'SENAI Paraná',
-    image: 'https://picsum.photos/800/600?random=43',
-    icon: 'support_agent',
-  },
-  {
-    id: 'auxiliar-logistica',
-    title: 'Auxiliar de Logística (SENAI)',
-    description:
-      'Curso profissionalizante em parceria com SENAI. Formação em processos logísticos e gestão de estoques.',
-    ageGroup: '16 a 17 anos',
-    schedule: 'Seg a Sex, 13h às 17h',
-    instructor: 'SENAI Paraná',
-    image: 'https://picsum.photos/800/600?random=44',
-    icon: 'local_shipping',
-  },
-  {
-    id: 'volleyball',
-    title: 'Vôlei',
-    description:
-      'Desenvolvemos agilidade, reflexos e espírito de equipe através do vôlei, sempre com foco no desenvolvimento integral.',
-    ageGroup: '10 a 17 anos',
-    schedule: 'Ter e Qui, 16h às 18h',
-    instructor: 'Profª Juliana Costa',
+    schedule: 'Terça e quinta-feira, 14h',
+    instructor: 'Profª Angeline Monteiro',
+    location: 'Vila Tecnológica',
+    partners: 'SMELJ e SMDH',
     image: '/images/volei1.jpeg',
     icon: 'sports_volleyball',
   },
   {
-    id: 'informatics',
-    title: 'Informática',
+    id: 'iniciacao-esportiva',
+    title: 'Iniciação Esportiva',
     description:
-      'Inclusão digital e preparação profissional. Ensinamos desde o básico até habilidades avançadas em tecnologia.',
-    ageGroup: '12 a 17 anos',
-    schedule: 'Ter e Qui, 13h às 15h',
-    instructor: 'Prof. Fernando Oliveira',
-    image: 'https://picsum.photos/800/600?random=35',
-    icon: 'computer',
+      'Atividade que proporciona às crianças e adolescentes contato com diferentes práticas esportivas, desenvolvendo coordenação motora, condicionamento físico, disciplina e convivência.',
+    ageGroup: '10 a 17 anos',
+    schedule: 'Quarta e sexta-feira, 9h às 11h',
+    instructor: 'Prof. Daniel Nascimento',
+    location: 'Vila Tecnológica',
+    partners: 'SMELJ e SMDH',
+    image: '/images/turma3.jpeg',
+    icon: 'directions_run',
+  },
+  {
+    id: 'judo',
+    title: 'Judô',
+    description:
+      'O Judô trabalha disciplina, respeito, concentração, autocontrole, condicionamento físico e convivência, utilizando os princípios da arte marcial como ferramenta de desenvolvimento pessoal e social.',
+    ageGroup: '6 a 17 anos',
+    schedule: 'Terça-feira, 19h',
+    instructor: 'Sensei Thiago Furtado',
+    location: 'Clube da Gente — Bairro Novo',
+    partners: 'Clube da Gente',
+    image: '/images/medalha.jpeg',
+    icon: 'sports_martial_arts',
+  },
+  {
+    id: 'muay-thai',
+    title: 'Muay Thai',
+    description:
+      'O Muay Thai utiliza o esporte como ferramenta de desenvolvimento físico e pessoal, trabalhando disciplina, concentração, respeito, autocontrole, condicionamento físico e autoconfiança.',
+    ageGroup: '6 a 17 anos',
+    schedule: 'Quinta-feira, 19h às 21h',
+    instructor: 'Prof. Felipe Forte',
+    location: 'Parque Iguaçu 1 — Ganchinho',
+    partners: 'Instituto Futuro de Excelência',
+    image: '/images/aula1.jpeg',
+    icon: 'sports_mma',
+  },
+  {
+    id: 'bale',
+    title: 'Balé',
+    description:
+      'O projeto de Balé utiliza a dança como ferramenta de desenvolvimento artístico, físico e social, trabalhando postura, coordenação motora, disciplina, musicalidade, expressão corporal e autoestima.',
+    ageGroup: '6 a 17 anos',
+    schedule: 'Quinta-feira, 19h',
+    instructor: 'Prof.ª Drica',
+    location: 'Vila Tecnológica — Sala de Ginástica',
+    partners: 'Incanto e SMELJ',
+    participants: '40 meninas em 2 turmas',
+    image: '/images/aula2.jpeg',
+    icon: 'theater_comedy',
+  },
+  {
+    id: 'natacao',
+    title: 'Natação',
+    description:
+      'A Natação promove saúde, condicionamento físico, coordenação motora, segurança e autonomia no meio aquático, contribuindo para qualidade de vida e bem-estar dos participantes.',
+    ageGroup: '12 a 60 anos',
+    schedule: 'Quarta-feira, 20h',
+    instructor: 'Profª Angeline Monteiro',
+    location: 'Clube da Gente',
+    partners: 'SMELJ',
+    image: '/images/aula3.jpeg',
+    icon: 'pool',
+  },
+  {
+    id: 'hidroginastica',
+    title: 'Hidroginástica',
+    description:
+      'A Hidroginástica promove atividade física, saúde, mobilidade, bem-estar e qualidade de vida, especialmente para o público adulto e da terceira idade.',
+    ageGroup: '60+',
+    schedule: 'Quarta-feira, 10h30',
+    instructor: 'Prof. Daniel',
+    location: 'Clube da Gente',
+    partners: 'SMELJ',
+    image: '/images/turma2.jpeg',
+    icon: 'pool',
   },
 ];
 
@@ -247,56 +175,56 @@ export const galleryImages: GalleryImage[] = [
   {
     id: '1',
     src: '/images/aula1.jpeg',
-    alt: 'Aula de Judô',
+    alt: 'Treino de Muay Thai',
     category: 'Esportes',
   },
   {
     id: '2',
     src: '/images/aula2.jpeg',
-    alt: 'Oficina de Empreendedorismo',
-    category: 'Cursos',
+    alt: 'Aula de Balé',
+    category: 'Cultura',
   },
   {
     id: '3',
-    src: '/images/aula3.jpeg',
-    alt: 'Treino de Futsal',
+    src: '/images/futebol.jpeg',
+    alt: 'Treino de Futebol',
     category: 'Esportes',
   },
   {
     id: '4',
-    src: '/images/biblioteca.jpeg',
-    alt: 'Aula de Ballet',
-    category: 'Cultura',
+    src: '/images/aula3.jpeg',
+    alt: 'Aula de Natação',
+    category: 'Esportes',
   },
   {
     id: '5',
-    src: '/images/certificado.jpeg',
-    alt: 'Curso de Informática',
-    category: 'Cursos',
+    src: '/images/medalha.jpeg',
+    alt: 'Competição de Judô',
+    category: 'Esportes',
   },
   {
     id: '6',
-    src: '/images/doacao.jpeg',
-    alt: 'Campeonato de Vôlei',
+    src: '/images/volei1.jpeg',
+    alt: 'Treino de Vôlei',
     category: 'Esportes',
   },
   {
     id: '7',
-    src: '/images/emprego.jpeg',
-    alt: 'Apresentação Cultural',
-    category: 'Cultura',
+    src: '/images/volei2.jpeg',
+    alt: 'Turma de Vôlei na Vila Tecnológica',
+    category: 'Esportes',
   },
   {
     id: '8',
-    src: '/images/turma.jpeg',
-    alt: 'Projeto Empreendedor',
-    category: 'Cursos',
+    src: '/images/turma3.jpeg',
+    alt: 'Iniciação Esportiva',
+    category: 'Esportes',
   },
   {
     id: '9',
     src: '/images/turma2.jpeg',
-    alt: 'Evento Esportivo',
-    category: 'Esportes',
+    alt: 'Turma de Hidroginástica',
+    category: 'Saúde e Bem-Estar',
   },
 ];
 
@@ -317,18 +245,30 @@ export const projectsFAQ: FAQItem[] = [
     id: 'faq-3',
     question: 'Qual é a faixa etária atendida?',
     answer:
-      'Atendemos crianças e adolescentes de 5 a 17 anos, com turmas organizadas por idade e nível de desenvolvimento em cada atividade.',
+      'Nossas atividades atendem diferentes faixas etárias, a partir dos 6 anos. Os projetos esportivos e culturais são voltados a crianças e adolescentes, enquanto a natação atende até 60 anos e a hidroginástica é dedicada ao público 60+.',
   },
   {
     id: 'faq-4',
     question: 'É necessário ter experiência prévia nas atividades?',
     answer:
-      'Não! Aceitamos alunos de todos os níveis, desde iniciantes até aqueles com experiência prévia. Nossos instrutores adaptam as aulas às necessidades de cada turma.',
+      'Não! Aceitamos alunos de todos os níveis, desde iniciantes até aqueles com experiência prévia. Nossos professores adaptam as aulas às necessidades de cada turma.',
   },
   {
     id: 'faq-5',
     question: 'Posso fazer mais de uma atividade?',
     answer:
-      'Sim! Incentivamos os alunos a experimentarem diferentes atividades. Basta verificar a compatibilidade de horários e fazer a inscrição em cada modalidade desejada.',
+      'Sim! Incentivamos os alunos a experimentarem diferentes atividades. Basta verificar a compatibilidade de horários e locais e fazer a inscrição em cada modalidade desejada.',
+  },
+  {
+    id: 'faq-6',
+    question: 'Onde as atividades acontecem?',
+    answer:
+      'Os projetos são realizados em diferentes espaços da cidade: Ginásio Bairro Novo, Vila Tecnológica, Clube da Gente e Parque Iguaçu 1 (Ganchinho). Cada oficina indica o local, o dia e o horário de suas aulas.',
+  },
+  {
+    id: 'faq-7',
+    question: 'Quem são os parceiros dos projetos?',
+    answer:
+      'As atividades são realizadas em parceria com SMELJ, SMDH, Clube da Gente e Incanto, além de profissionais e instituições que acreditam no poder do esporte e da cultura para gerar oportunidades.',
   },
 ];

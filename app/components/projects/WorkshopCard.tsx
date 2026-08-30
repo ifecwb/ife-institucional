@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
-import { AccessTime, Groups, Person } from '@mui/icons-material';
+import { AccessTime, Groups, Handshake, Person, Place } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import type { Workshop } from '@/app/data/projects';
 
@@ -85,9 +85,32 @@ export default function WorkshopCard({ workshop, index }: WorkshopCardProps) {
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <Person fontSize="small" color="primary" />
               <Typography variant="body2" color="text.secondary">
-                <strong>Instrutor(a):</strong> {workshop.instructor}
+                <strong>Professor(a):</strong> {workshop.instructor}
               </Typography>
             </Box>
+
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Place fontSize="small" color="primary" />
+              <Typography variant="body2" color="text.secondary">
+                <strong>Local:</strong> {workshop.location}
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Handshake fontSize="small" color="primary" />
+              <Typography variant="body2" color="text.secondary">
+                <strong>Parceiros:</strong> {workshop.partners}
+              </Typography>
+            </Box>
+
+            {workshop.participants && (
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Groups fontSize="small" color="primary" />
+                <Typography variant="body2" color="text.secondary">
+                  <strong>Participantes:</strong> {workshop.participants}
+                </Typography>
+              </Box>
+            )}
           </Box>
         </CardContent>
       </Card>
