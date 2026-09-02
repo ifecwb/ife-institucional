@@ -204,7 +204,7 @@ export default function Header({ onMenuClick }: Readonly<HeaderProps>) {
                             component={Link}
                             href={subItem.href}
                             onClick={handleMenuClose}
-                            selected={pathname.startsWith(subItem.href)}
+                            selected={pathname === subItem.href}
                             sx={{
                               '&.Mui-selected': {
                                 bgcolor: 'primary.main',

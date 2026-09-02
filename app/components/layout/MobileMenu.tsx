@@ -132,7 +132,7 @@ export default function MobileMenu({ open, onClose }: Readonly<MobileMenuProps>)
                   <Collapse in={openSubmenu === index} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                       {item.submenu?.map((subItem) => {
-                        const isSubActive = pathname.startsWith(subItem.href);
+                        const isSubActive = pathname === subItem.href;
                         return (
                           <ListItem key={subItem.href} disablePadding>
                             <ListItemButton

@@ -199,6 +199,26 @@ export const siteConfig = {
       (dados.tipoEmpresa ? `*Tipo de Empresa:* ${dados.tipoEmpresa}\n` : '') +
       (dados.tipoParceria ? `*Tipo de Parceria:* ${dados.tipoParceria}\n` : '') +
       (dados.mensagem ? `\n*Mensagem:*\n${dados.mensagem}` : ''),
+
+    impostoRenda: (dados: {
+      nome: string;
+      email: string;
+      telefone: string;
+      tipoContribuinte?: string;
+      valorDestinacao?: string;
+      comoConheceu?: string;
+      mensagem?: string
+    }) =>
+      `*Destinação de Imposto de Renda - Site IFE*\n\n` +
+      `*Nome:* ${dados.nome}\n` +
+      `*Email:* ${dados.email}\n` +
+      `*Telefone:* ${dados.telefone}\n` +
+      (dados.tipoContribuinte ? `*Tipo de contribuinte:* ${dados.tipoContribuinte}\n` : '') +
+      (dados.valorDestinacao ? `*Valor pretendido:* R$ ${dados.valorDestinacao}\n` : '') +
+      (dados.comoConheceu ? `*Como conheceu:* ${dados.comoConheceu}\n` : '') +
+      (dados.mensagem ? `\n*Mensagem:*\n${dados.mensagem}` : '') +
+      `\n\nGostaria de receber orientação para destinar parte do meu Imposto de Renda ao IFE.` +
+      `\n_Autorizo o contato do IFE conforme a Política de Privacidade do site._`,
   },
 
   // ==================== SEO ====================
@@ -210,6 +230,37 @@ export const siteConfig = {
     urlImagem: 'https://ifecwb.org.br/og-image.jpg',
   },
 
+  // ==================== INTEGRAÇÕES ====================
+  integracoes: {
+    // Site estático: os formulários são entregues por e-mail pelo Web3Forms.
+    web3forms: {
+      accessKey: '2ce8774d-0464-46a4-942b-8a1d8fba8571',
+      endpoint: 'https://api.web3forms.com/submit',
+    },
+    hcaptcha: {
+      siteKey: '50b2fe65-b00b-4b9e-ad62-3ba471098be2',
+    },
+    googleAnalytics: {
+      id: 'G-7XE5ZSFWB8',
+    },
+  },
+
+  // ==================== PRIVACIDADE / LGPD ====================
+  privacidade: {
+    /** Canal do encarregado pelo tratamento de dados (Art. 41 da LGPD) */
+    emailEncarregado: 'contato@ifecwb.org.br',
+    paginaPolitica: '/politica-de-privacidade',
+    /** Versão da política registrada junto com cada consentimento */
+    versaoPolitica: '2026-08-29',
+    /** Prazo de guarda dos dados de contato após o último contato do titular */
+    prazoRetencao: '2 anos',
+    cookies: {
+      chaveArmazenamento: 'ife:consentimento-cookies',
+      /** Incrementar quando as finalidades de cookies mudarem: invalida os aceites antigos */
+      versao: 1,
+    },
+  },
+
   // ==================== FEATURES (ativar/desativar funcionalidades) ====================
   features: {
     blogAtivo: true,
@@ -218,6 +269,7 @@ export const siteConfig = {
     contatoAtivo: true,
     newsletterAtivo: false,
     eventosAtivos: false,
+    impostoRendaAtivo: true,
   },
 }
 

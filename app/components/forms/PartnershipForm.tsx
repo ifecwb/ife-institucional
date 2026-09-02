@@ -11,6 +11,7 @@ import {
 } from '@mui/material'
 import { Send } from '@mui/icons-material'
 import { siteConfig, gerarLinkWhatsApp } from '@/app/data/site.config'
+import ConsentimentoLGPD from '@/app/components/common/ConsentimentoLGPD'
 
 interface PartnershipFormProps {
   readonly onSuccess?: () => void
@@ -27,6 +28,7 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
     tipoParceria: '',
     mensagem: '',
   })
+  const [consentimento, setConsentimento] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -90,6 +92,7 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
         tipoParceria: '',
         mensagem: '',
       })
+      setConsentimento(false)
     } catch (err) {
       setError('Erro ao processar formulário. Tente novamente.')
     } finally {
@@ -206,19 +209,27 @@ export default function PartnershipForm({ onSuccess }: Readonly<PartnershipFormP
         disabled={loading}
       />
 
+      <ConsentimentoLGPD
+        checked={consentimento}
+        onChange={setConsentimento}
+        disabled={loading}
+        finalidade="entrar em contato sobre a proposta de parceria"
+      />
+
       <Button
         type="submit"
         variant="contained"
         size="large"
         endIcon={loading ? <CircularProgress size={20} /> : <Send />}
-        disabled={loading}
+        disabled={loading || !consentimento}
         sx={{ alignSelf: 'flex-start' }}
       >
         {loading ? 'Processando...' : 'Enviar via WhatsApp'}
       </Button>
 
       <Alert severity="info">
-        Ao clicar em "Enviar", você será redirecionado para o WhatsApp com sua mensagem pré-preenchida.
+        Ao clicar em enviar, você será redirecionado para o WhatsApp com sua mensagem
+        pré-preenchida.
       </Alert>
     </Box>
   )

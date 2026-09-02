@@ -10,6 +10,7 @@ import {
 } from '@mui/material'
 import { Send } from '@mui/icons-material'
 import { siteConfig, gerarLinkWhatsApp } from '@/app/data/site.config'
+import ConsentimentoLGPD from '@/app/components/common/ConsentimentoLGPD'
 
 interface VolunteerFormProps {
   readonly onSuccess?: () => void
@@ -22,6 +23,7 @@ export default function VolunteerForm({ onSuccess }: Readonly<VolunteerFormProps
     telefone: '',
     mensagem: '',
   })
+  const [consentimento, setConsentimento] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -63,6 +65,7 @@ export default function VolunteerForm({ onSuccess }: Readonly<VolunteerFormProps
         telefone: '',
         mensagem: '',
       })
+      setConsentimento(false)
     } catch (err) {
       setError('Erro ao processar formulário. Tente novamente.')
     } finally {
@@ -122,19 +125,27 @@ export default function VolunteerForm({ onSuccess }: Readonly<VolunteerFormProps
         disabled={loading}
       />
 
+      <ConsentimentoLGPD
+        checked={consentimento}
+        onChange={setConsentimento}
+        disabled={loading}
+        finalidade="entrar em contato sobre a minha inscrição como voluntário"
+      />
+
       <Button
         type="submit"
         variant="contained"
         size="large"
         endIcon={loading ? <CircularProgress size={20} /> : <Send />}
-        disabled={loading}
+        disabled={loading || !consentimento}
         sx={{ alignSelf: 'flex-start' }}
       >
         {loading ? 'Processando...' : 'Enviar via WhatsApp'}
       </Button>
 
       <Alert severity="info">
-        Ao clicar em "Enviar", você será redirecionado para o WhatsApp com sua mensagem pré-preenchida.
+        Ao clicar em enviar, você será redirecionado para o WhatsApp com sua mensagem
+        pré-preenchida.
       </Alert>
     </Box>
   )

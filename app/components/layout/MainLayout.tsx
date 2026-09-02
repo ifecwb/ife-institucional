@@ -6,6 +6,7 @@ import Header from './Header';
 import MobileMenu from './MobileMenu';
 import Footer from './Footer';
 import FloatingWhatsApp from '../common/FloatingWhatsApp';
+import FloatingCookieSettings from '../common/FloatingCookieSettings';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -46,6 +47,7 @@ export default function MainLayout({ children }: Readonly<MainLayoutProps>) {
       
       <Footer />
       <FloatingWhatsApp />
+      <FloatingCookieSettings />
     </Box>
   );
 }
